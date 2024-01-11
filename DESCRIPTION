@@ -26,5 +26,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/Ed2uiz/dbSpatial, https://ed2uiz.github.io/dbSpatial/
+URL: https://github.com/Ed2uiz/dbSpatial, https://ed2uiz.github.io/dbSpatial/, https://dbverse-org.github.io/dbspatial-r/
 BugReports: https://github.com/Ed2uiz/dbSpatial/issues

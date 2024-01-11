@@ -1,17 +1,4 @@
 url: https://drieslab.github.io/dbSpatial/
 template:
   bootstrap: 5
-reference:
-- title: Geometry Construction
-  desc: Functions for manipulating data
-  contents: has_keyword("geo_construction")
-- title: Spatial Properties
-  desc: Functions for creating plots
-  contents: has_keyword("spatial_prop")
-- title: Constructors
-  desc: Functions for creating dbSpatial objects
-  contents: has_keyword("constructor")
-- title: DuckDB Spatial Extension
-  desc: Functions for interacting with DuckDB Spatial Extension
-  contents: has_keyword("duckdb-ext")
 
