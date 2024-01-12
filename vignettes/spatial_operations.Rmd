@@ -51,14 +51,10 @@ db_points = createDbSpatPoints(conn = duckdb_conn,
 # terra
 library(tictoc)
 
-tic()
 terra::ext(dummy_spatvector)
-toc()
 
 # dbSpatial
-tic()
 dbSpatial::ST_Extent(tbl = db_points)
-toc()
 ```
 
 ### Shift
@@ -66,19 +62,15 @@ toc()
 # terra
 terra::geom(dummy_spatvector)
 
-tic()
 shifted_spatVector = terra::shift(dummy_spatvector, dx = 10, dy = 10)
-toc()
 
 terra::geom(shifted_spatVector)
 
 # dbSpatial
-tic()
 dbSpatial::ST_Translate(tbl = db_points, dx = 10, dy = 10) %>%
   mutate(points = ST_AsText(geom)) %>%
   select(points) %>%
   compute(temporary = FALSE)
-toc()
 ```
 
 ### Flip
@@ -121,35 +113,25 @@ dbSpatial::ST_IsValid(tbl = db_points)
 # terra
 terra::geom(dummy_spatvector)
 
-tic()
 terra::ymax(dummy_spatvector)
-toc()
 
-tic()
 terra::xmax(dummy_spatvector)
-toc()
 
 # dbSpatial
-tic()
 dbSpatial::ST_YMax(db_points)
-toc()
 
-tic()
 dbSpatial::ST_XMax(db_points)
-toc()
+
 ```
 
 ### nrow
 ```{r}
 # terra
-tic()
 terra::nrow(dummy_spatvector)
-toc()
 
 # dbSpatial
-tic()
 dbSpatial::nrow(db_points)
-toc()
+
 ```
 
 ### centroids
