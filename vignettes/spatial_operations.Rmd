@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 library(dbSpatial)
 library(terra)
 library(dplyr)
-library(magrittr) # remove once import %>%
 ```
 
 ## Create test data
@@ -49,8 +48,6 @@ db_points = createDbSpatPoints(conn = duckdb_conn,
 ### Extent
 ```{r}
 # terra
-library(tictoc)
-
 terra::ext(dummy_spatvector)
 
 # dbSpatial
@@ -60,16 +57,16 @@ dbSpatial::ST_Extent(tbl = db_points)
 ### Shift
 ```{r}
 # terra
-terra::geom(dummy_spatvector)
+head(terra::geom(dummy_spatvector))
 
 shifted_spatVector = terra::shift(dummy_spatvector, dx = 10, dy = 10)
 
 terra::geom(shifted_spatVector)
 
 # dbSpatial
-dbSpatial::ST_Translate(tbl = db_points, dx = 10, dy = 10) %>%
-  mutate(points = ST_AsText(geom)) %>%
-  select(points) %>%
+dbSpatial::ST_Translate(tbl = db_points, dx = 10, dy = 10) |>
+  mutate(points = ST_AsText(geom)) |>
+  select(points) |>
   compute(temporary = FALSE)
 ```
 
@@ -84,10 +81,10 @@ terra::geom(flipped_spatVector)
 
 # <----- not equivalent to terra::flip ------>
 # dbSpatial
-# db_points %>%
+# db_points |>
 #   mutate(points = ST_AsText(geom))
 # 
-# db_points %>%
+# db_points |>
 #   mutate(flipped_points = ST_AsText(ST_FlipCoordinates(geom)))
 
 ```
@@ -100,8 +97,8 @@ terra::geom(dummy_spatvector)
 terra::is.valid(dummy_spatvector)
 
 # dbSpatial
-db_points %>%
-  mutate(points = ST_AsText(geom)) %>%
+db_points |>
+  mutate(points = ST_AsText(geom)) |>
   select(points)
 
 dbSpatial::ST_IsValid(tbl = db_points)
