@@ -30,9 +30,13 @@ For list of files supported see the documentation below.
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 
-value = system.file("data", "dummy_points.shp", package = "dbSpatial")
+coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 
-points <- ST_Read(conn = con, name = "points", value = value, overwrite = TRUE)
+# Combine the coordinates and attributes
+dummy_data <- cbind(coordinates, attributes)
+ 
+points <- ST_Read(conn = con, name = "points", value = dummy_data, overwrite = TRUE)
 
 points
 }
