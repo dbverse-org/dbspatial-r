@@ -1,3 +1,19 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# dbSpatial 0.0.0.9003 (2024-03-18)
+
+## Features
+
+- Update constructor function.
+
+- Update ST_ functions to use new constructor.
+
+## Chore
+
+- Update vignettes and class diagram for new constructor.
+
+- Add working examples to ST functions.
+
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
 # dbSpatial 0.0.0.9002 (2024-01-02)
