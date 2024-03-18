@@ -1,7 +1,7 @@
 #' Determine if geometry is valid
 #'
 #' @param tbl name of a table in a duckdb database
-#'
+#' @param limit maximum number of invalid geometries to return
 #' @return boolean vector of whether each geometry in tbl is valid
 #' @export
 #' @keywords spatial_prop
@@ -27,20 +27,22 @@
 #'                       
 #' # Get extent of the table
 #' ST_IsValid(db_points)
-ST_IsValid <- function(tbl){
+ST_IsValid <- function(tbl, limit = 10){
   # check inputs
-  if (missing(tbl)) {
-    stop("Please provide a table name")
+  con <- dbplyr::remote_con(tbl)
+  .check_con(conn = con)
+  .check_tbl(tbl = tbl)
+  
+  if (!is.numeric(limit) || limit < 1) {
+    stop("limit must be a positive integer")
   }
   
-  # check that tbl is from a duckdb connection
-  if (!inherits(tbl, "tbl_duckdb_connection")) {
-    stop("Please provide a duckdb table")
-  }
+  suppressMessages(loadSpatial(conn = con))
   
   res <- tbl |>
     dplyr::mutate(is_valid = ST_IsValid(geom)) |>
-    dplyr::pull(is_valid)
+    dplyr::pull(is_valid) |>
+    head(limit)
   
   res
 }
