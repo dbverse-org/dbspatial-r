@@ -11,11 +11,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/dbSpatial)](https://CRAN.R-project.org/package=dbSpatial)
 <!-- badges: end -->
 
-The goal of `{dbSpatial}` is to provide convenience functions in R for
-the [DuckDB spatial
-extension](https://duckdb.org/docs/extensions/spatial.html) as well as
-compatibility with [`{terra}`](https://github.com/rspatial/terra) and
-other R spatial objects with a DuckDB backend.
+The goal of `{dbSpatial}` is to provide larger-than-memory spatial
+operations for various spatial data sources. The package largely relies
+on the [DuckDB spatial
+extension](https://duckdb.org/docs/extensions/spatial.html).
 
 ## Installation
 
@@ -24,7 +23,7 @@ so:
 
 ``` r
 # install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::pak("ed2uiz/dbSpatial")
+pak::pak("drieslab/dbSpatial")
 ```
 
 ## Usage
@@ -36,25 +35,33 @@ functions, or SQL queries to a DuckDB database connection containing
 
 ``` r
 library(dbSpatial)
-#> 
-#> Attaching package: 'dbSpatial'
-#> The following object is masked from 'package:base':
-#> 
-#>     nrow
 
 # create duckdb db in memory
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 
-# install and load duckdb spatial extension
-loadSpatial(conn = duckdb_conn)
-#> Duckdb spatial extension installed and loaded
+# test data
+test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
-# use ST_*() functions directly in R
-# TODO
+points <- dbSpatial(conn = duckdb_conn,
+                    name = "test_points",
+                    value = test_data,
+                    x_colName = "x",
+                    y_colName = "y",
+                    overwrite = TRUE)
 
-# through dplyr verbs
-# TODO
-
-# through SQL queries
-# TODO
+points
+#> # Source:   table<test_points> [10 x 4]
+#> # Database: DuckDB v0.10.0 [user@Linux 6.5.0-25-generic:R 4.1.2/:memory:]
+#>        x     y    id geom      
+#>    <int> <int> <int> <list>    
+#>  1     1     1     1 <raw [32]>
+#>  2     2     2     2 <raw [32]>
+#>  3     3     3     3 <raw [32]>
+#>  4     4     4     4 <raw [32]>
+#>  5     5     5     5 <raw [32]>
+#>  6     6     6     6 <raw [32]>
+#>  7     7     7     7 <raw [32]>
+#>  8     8     8     8 <raw [32]>
+#>  9     9     9     9 <raw [32]>
+#> 10    10    10    10 <raw [32]>
 ```
