@@ -2,8 +2,10 @@ Package: dbSpatial
 Title: Wrappers for DuckDB Spatial Extension
 Version: 0.0.0.9003
 Authors@R: 
-    person("Edward", "Ruiz", , "ecr7407@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-9174-5387"))
+    c(person("Edward", "C. Ruiz", , "ecr7407@example.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9174-5387")),
+    person("Jiaji", "George Chen", email = "jiajic@bu.edu", role = c("aut")),
+    person("Ruben", "Dries", email = "rubendries@gmail.com",role = c("aut", "rev")))
 Description: Wrappers for DuckDB Spatial Extension
 License: GPLv3
 Encoding: UTF-8
