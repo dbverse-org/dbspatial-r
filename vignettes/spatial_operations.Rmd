@@ -26,8 +26,8 @@ library(dplyr)
 ## Create test data
 ```{r}
 # Create a data.frame with x and y coordinates and attributes
-coordinates <- data.frame(x = 1:1e6, y = 1:1e6)
-attributes <- data.frame(id = 1:1e6, name = paste("A", 1:1e6, sep = "_"))
+coordinates <- data.frame(x = 1:1e3, y = 1:1e3)
+attributes <- data.frame(id = 1:1e3, name = paste("A", 1:1e3, sep = "_"))
 
 # Combine the coordinates and attributes
 dummy_data <- cbind(coordinates, attributes)
@@ -38,10 +38,10 @@ dummy_spatvector <- terra::vect(dummy_data, geom = c("x", "y"))
 # DuckDB
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 
-db_points = createDbSpatPoints(conn = duckdb_conn,
-                               tbl = "spatVector_proxy",
-                               data = dummy_spatvector,
-                               overwrite = TRUE)
+db_points = dbSpatial(conn = duckdb_conn,
+                      name = "spatVector_proxy",
+                      value = dummy_spatvector,
+                      overwrite = TRUE)
 ```
 
 
@@ -71,7 +71,7 @@ dbSpatial::ST_Translate(tbl = db_points, dx = 10, dy = 10) |>
 ```
 
 ### Flip
-```{r}
+```{r, eval = FALSE}
 # terra
 terra::geom(dummy_spatvector)
 
@@ -98,8 +98,8 @@ terra::is.valid(dummy_spatvector)
 
 # dbSpatial
 db_points |>
-  mutate(points = ST_AsText(geom)) |>
-  select(points)
+  dplyr::mutate(points = ST_AsText(geom)) |>
+  dplyr::select(points)
 
 dbSpatial::ST_IsValid(tbl = db_points)
 ```
@@ -118,16 +118,6 @@ terra::xmax(dummy_spatvector)
 dbSpatial::ST_YMax(db_points)
 
 dbSpatial::ST_XMax(db_points)
-
-```
-
-### nrow
-```{r}
-# terra
-terra::nrow(dummy_spatvector)
-
-# dbSpatial
-dbSpatial::nrow(db_points)
 
 ```
 
