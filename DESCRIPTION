@@ -8,7 +8,7 @@ Description: Wrappers for DuckDB Spatial Extension
 License: GPLv3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Depends:
     R (>= 4.1.0)
 Imports:
@@ -18,7 +18,6 @@ Imports:
     dplyr,
     dbplyr,
     terra,
-    duckdbfs,
     tictoc
 Suggests: 
     knitr,
