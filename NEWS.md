@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# dbSpatial 0.0.0.9004 (2024-03-18)
+
+## Chore
+
+- Update README and DESCRIPTION.
+
 # dbSpatial 0.0.0.9003 (2024-03-18)
 
 ## Features
