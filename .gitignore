@@ -17,3 +17,4 @@ docs
 *.cpg
 *.prj
 *.csv
+docs/*
