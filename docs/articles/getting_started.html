@@ -8,8 +8,8 @@
 <meta name="description" content="dbSpatial">
 <title>Getting Started • dbSpatial</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started">
 <meta property="og:description" content="dbSpatial">
@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,19 +46,15 @@
     <a class="dropdown-item" href="../articles/spatial_operations.html">Spatial Operations</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/Ed2uiz/dbSpatial/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+      <ul class="navbar-nav"></ul>
 </div>
 
     
@@ -73,50 +69,50 @@
       <img src="" class="logo" alt=""><h1>Getting Started</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/Ed2uiz/dbSpatial/blob/HEAD/vignettes/getting_started.Rmd" class="external-link"><code>vignettes/getting_started.Rmd</code></a></small>
+      
       <div class="d-none name"><code>getting_started.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Ed2uiz/dbSpatial" class="external-link">dbSpatial</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dbSpatial'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     nrow</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://drieslab.github.io/dbSpatial/">dbSpatial</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This vignette demonstrates how to use the <a href="https://github.com/Ed2uiz/dbSpatial" class="external-link">dbSpatial</a>
-package to create a duckdb database with spatial points and polygons
+<p>This vignette demonstrates how to use the <a href="https://drieslab.github.io/dbSpatial/">dbSpatial</a>
+package to create a DuckDB database with spatial points and polygons
 starting from various data sources.</p>
 </div>
 <div class="section level2">
-<h2 id="creating-dbspatpoints">Creating dbSpatPoints<a class="anchor" aria-label="anchor" href="#creating-dbspatpoints"></a>
+<h2 id="creating-a-duckdb-connection">Creating a DuckDB connection<a class="anchor" aria-label="anchor" href="#creating-a-duckdb-connection"></a>
 </h2>
-<p>Few words about dbSpatPoints class</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create db connection in memory</span></span>
+<span><span class="va">duckdb_conn</span> <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="reading-in-spatial-data-from-various-sources">Reading in spatial data from various sources<a class="anchor" aria-label="anchor" href="#reading-in-spatial-data-from-various-sources"></a>
+</h2>
 <div class="section level3">
 <h3 id="from-data-frames">From data.frames<a class="anchor" aria-label="anchor" href="#from-data-frames"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># create db connection in memory</span></span>
-<span><span class="va">duckdb_conn</span> <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/duckdb/man/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># test data</span></span>
 <span><span class="va">test_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># df, tbl</span></span>
-<span><span class="fu"><a href="../reference/createDbSpatPoints.html">createDbSpatPoints</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
-<span>                   tbl <span class="op">=</span> <span class="st">"test_points"</span>,</span>
-<span>                   data <span class="op">=</span> <span class="va">test_data</span>,</span>
-<span>                   overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Duckdb spatial extension installed and loaded</span></span>
+<span><span class="co"># specify x and y column names to cast to a point geometry</span></span>
+<span><span class="fu"><a href="../reference/dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
+<span>          name <span class="op">=</span> <span class="st">"test_points"</span>,</span>
+<span>          value <span class="op">=</span> <span class="va">test_data</span>,</span>
+<span>          x_colName <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>          y_colName <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>          overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Source:   table&lt;test_points&gt; [10 x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 0.9.0 [root@Darwin 22.4.0:R 4.3.0/:memory:]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB v0.10.0 [user@Linux 6.5.0-25-generic:R 4.1.2/:memory:]</span></span></span>
 <span><span class="co">#&gt;        x     y    id geom      </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     1     1 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
@@ -133,7 +129,7 @@ starting from various data sources.</p>
 <div class="section level3">
 <h3 id="from--csv-file">From .csv file<a class="anchor" aria-label="anchor" href="#from--csv-file"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># test data</span></span>
 <span><span class="va">test_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
@@ -141,64 +137,41 @@ starting from various data sources.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">test_data</span>, <span class="st">"test_data.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># load file in db</span></span>
-<span><span class="fu"><a href="../reference/createDbSpatPoints.html">createDbSpatPoints</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
-<span>                   tbl <span class="op">=</span> <span class="st">"test_points"</span>,</span>
-<span>                   data <span class="op">=</span> <span class="st">'test_data.csv'</span>,</span>
-<span>                   overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Duckdb spatial extension installed and loaded</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Source:   table&lt;test_points&gt; [10 x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 0.9.0 [root@Darwin 22.4.0:R 4.3.0/:memory:]</span></span></span>
-<span><span class="co">#&gt;        x     y    id geom      </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     1     1 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2     2     2 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3     3     3 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4     4     4 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5     5     5 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6     6     6 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7     7     7 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8     8     8 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9     9     9 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10    10    10 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
+<span>          name <span class="op">=</span> <span class="st">"test_points"</span>,</span>
+<span>          value <span class="op">=</span> <span class="st">'test_data.csv'</span>,</span>
+<span>          overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Source:   table&lt;test_points&gt; [10 x 3]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB v0.10.0 [user@Linux 6.5.0-25-generic:R 4.1.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;    x     y     id   </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1     1     1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2     2     2    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 3     3     3    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 4     4     4    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 5     5     5    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 6     6     6    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 7     7     7    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8     8     8    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9     9     9    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10    10    10</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="from-terra-objects-spatvector">From {terra} objects: SpatVector<a class="anchor" aria-label="anchor" href="#from-terra-objects-spatvector"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load terra package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">duckdb_conn</span> <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/duckdb/man/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create a data.frame with x and y coordinates and attributes</span></span>
-<span><span class="va">coordinates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">200</span>, <span class="fl">300</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">600</span>, <span class="fl">700</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">attributes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Combine the coordinates and attributes</span></span>
-<span><span class="va">dummy_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">coordinates</span>, <span class="va">attributes</span><span class="op">)</span></span>
-<span></span>
 <span><span class="co"># Create a SpatVector from the data.frame</span></span>
-<span><span class="va">dummy_spatvector</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">dummy_data</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dummy_spatvector</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">test_data</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load SpatVector in db</span></span>
-<span><span class="fu"><a href="../reference/createDbSpatPoints.html">createDbSpatPoints</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
-<span>                   tbl <span class="op">=</span> <span class="st">"spatVector_proxy"</span>,</span>
-<span>                   data <span class="op">=</span> <span class="va">dummy_spatvector</span>,</span>
+<span><span class="fu">createDbSpatPoints</span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
+<span>                   name <span class="op">=</span> <span class="st">"spatVector_proxy"</span>,</span>
+<span>                   value <span class="op">=</span> <span class="va">dummy_spatvector</span>,</span>
 <span>                   overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="from-terra-objects-spatraster">From {terra} objects: SpatRaster<a class="anchor" aria-label="anchor" href="#from-terra-objects-spatraster"></a>
-</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># TODO</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="creating-dbspatpolygons">Creating dbSpatPolygons<a class="anchor" aria-label="anchor" href="#creating-dbspatpolygons"></a>
-</h2>
-<p>Few words about dbSpatPolygons class</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#TODO</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

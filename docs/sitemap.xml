@@ -1,57 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/404.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/404.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/LICENSE-text.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/articles/class_structure.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/articles/class_structure.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/articles/getting_started.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/articles/getting_started.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/articles/index.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/articles/spatial_operations.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/articles/spatial_operations.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/authors.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/authors.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/index.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/index.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/ST_Extent.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/news/index.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/ST_IsValid.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/ST_Extent.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/ST_Translate.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/ST_GeometryType.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/ST_XMax.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/ST_IsValid.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/ST_YMax.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/ST_Read.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/createDbSpatPoints.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/ST_Translate.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/createDbSpatPolygons.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/ST_XMax.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/index.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/ST_YMax.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/loadSpatial.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/createDbSpatPoints.html</loc>
   </url>
   <url>
-    <loc>https://ed2uiz.github.io/dbSpatial/reference/nrow.html</loc>
+    <loc>https://drieslab.github.io/dbSpatial/reference/createDbSpatPolygons.html</loc>
+  </url>
+  <url>
+    <loc>https://drieslab.github.io/dbSpatial/reference/dbSpatial.html</loc>
+  </url>
+  <url>
+    <loc>https://drieslab.github.io/dbSpatial/reference/dot-sim_dbSpatial.html</loc>
+  </url>
+  <url>
+    <loc>https://drieslab.github.io/dbSpatial/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://drieslab.github.io/dbSpatial/reference/loadSpatial.html</loc>
+  </url>
+  <url>
+    <loc>https://drieslab.github.io/dbSpatial/reference/nrow.html</loc>
   </url>
 </urlset>
