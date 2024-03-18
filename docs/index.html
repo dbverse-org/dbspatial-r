@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,14 +66,14 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of <a href="https://drieslab.github.io/dbSpatial/">dbSpatial</a> is to provide convenience functions in R for the <a href="https://duckdb.org/docs/extensions/spatial.html" class="external-link">DuckDB spatial extension</a> as well as compatibility with <a href="https://github.com/rspatial/terra" class="external-link"><code>{terra}</code></a> and other R spatial objects with a DuckDB backend.</p>
+<p>The goal of <a href="https://drieslab.github.io/dbSpatial/">dbSpatial</a> is to provide larger-than-memory spatial operations for various spatial data sources. The package largely relies on the <a href="https://duckdb.org/docs/extensions/spatial.html" class="external-link">DuckDB spatial extension</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of dbSpatial from Github like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"ed2uiz/dbSpatial"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"drieslab/dbSpatial"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -81,27 +81,35 @@
 <p>The DuckDB spatial extension can be used with wrapper functions in this package directly (<code>ST_*()</code>), through dplyr verbs containing <code>ST_*()</code> functions, or SQL queries to a DuckDB database connection containing <code>ST_*()</code> functions.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://drieslab.github.io/dbSpatial/">dbSpatial</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dbSpatial'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     nrow</span></span>
 <span></span>
 <span><span class="co"># create duckdb db in memory</span></span>
 <span><span class="va">duckdb_conn</span> <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># install and load duckdb spatial extension</span></span>
-<span><span class="fu"><a href="reference/loadSpatial.html">loadSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Duckdb spatial extension installed and loaded</span></span>
+<span><span class="co"># test data</span></span>
+<span><span class="va">test_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># use ST_*() functions directly in R</span></span>
-<span><span class="co"># TODO</span></span>
+<span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
+<span>                    name <span class="op">=</span> <span class="st">"test_points"</span>,</span>
+<span>                    value <span class="op">=</span> <span class="va">test_data</span>,</span>
+<span>                    x_colName <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>                    y_colName <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>                    overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># through dplyr verbs</span></span>
-<span><span class="co"># TODO</span></span>
-<span></span>
-<span><span class="co"># through SQL queries</span></span>
-<span><span class="co"># TODO</span></span></code></pre></div>
+<span><span class="va">points</span></span>
+<span><span class="co">#&gt; # Source:   table&lt;test_points&gt; [10 x 4]</span></span>
+<span><span class="co">#&gt; # Database: DuckDB v0.10.0 [user@Linux 6.5.0-25-generic:R 4.1.2/:memory:]</span></span>
+<span><span class="co">#&gt;        x     y    id geom      </span></span>
+<span><span class="co">#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;list&gt;    </span></span>
+<span><span class="co">#&gt;  1     1     1     1 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  2     2     2     2 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  3     3     3     3 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  4     4     4     4 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  5     5     5     5 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  6     6     6     6 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  7     7     7     7 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  8     8     8     8 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt;  9     9     9     9 &lt;raw [32]&gt;</span></span>
+<span><span class="co">#&gt; 10    10    10    10 &lt;raw [32]&gt;</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -129,7 +137,9 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Edward Ruiz <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9174-5387" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Edward C. Ruiz <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9174-5387" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Jiaji George Chen <br><small class="roles"> Author </small>  </li>
+<li>Ruben Dries <br><small class="roles"> Author, reviewer </small>  </li>
 </ul>
 </div>
 
@@ -147,7 +157,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Edward Ruiz.</p>
+<p>Developed by Edward C. Ruiz, Jiaji George Chen, Ruben Dries.</p>
 </div>
 
 <div class="pkgdown-footer-right">

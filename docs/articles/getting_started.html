@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,15 +162,30 @@ starting from various data sources.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load terra package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; terra 1.7.71</span></span>
 <span></span>
 <span><span class="co"># Create a SpatVector from the data.frame</span></span>
 <span><span class="va">dummy_spatvector</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">test_data</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load SpatVector in db</span></span>
-<span><span class="fu">createDbSpatPoints</span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
-<span>                   name <span class="op">=</span> <span class="st">"spatVector_proxy"</span>,</span>
-<span>                   value <span class="op">=</span> <span class="va">dummy_spatvector</span>,</span>
-<span>                   overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
+<span>          name <span class="op">=</span> <span class="st">"spatVector_proxy"</span>,</span>
+<span>          value <span class="op">=</span> <span class="va">dummy_spatvector</span>,</span>
+<span>          overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Source:   table&lt;spatVector_proxy&gt; [10 x 2]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB v0.10.0 [user@Linux 6.5.0-25-generic:R 4.1.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;       id geom      </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -181,7 +196,7 @@ starting from various data sources.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Edward Ruiz.</p>
+<p>Developed by Edward C. Ruiz, Jiaji George Chen, Ruben Dries.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -4,10 +4,12 @@
 \alias{ST_IsValid}
 \title{Determine if geometry is valid}
 \usage{
-ST_IsValid(tbl)
+ST_IsValid(tbl, limit = 10)
 }
 \arguments{
 \item{tbl}{name of a table in a duckdb database}
+
+\item{limit}{maximum number of invalid geometries to return}
 }
 \value{
 boolean vector of whether each geometry in tbl is valid
