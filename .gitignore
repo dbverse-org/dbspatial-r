@@ -8,3 +8,12 @@ inst/doc
 /doc/
 /Meta/
 docs
+*.db
+*.wal
+*.geojson
+*.shp
+*.shz
+*.dbf
+*.cpg
+*.prj
+*.csv
