@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  output.lines = 10
 )
 ```
 
@@ -63,7 +64,7 @@ dbSpatial(conn = duckdb_conn,
 
 
 ### From {terra} objects: SpatVector
-```{r, eval = FALSE}
+```{r}
 # load terra package
 library(terra)
 
@@ -71,10 +72,10 @@ library(terra)
 dummy_spatvector <- terra::vect(test_data, geom = c("x", "y"))
 
 # Load SpatVector in db
-createDbSpatPoints(conn = duckdb_conn,
-                   name = "spatVector_proxy",
-                   value = dummy_spatvector,
-                   overwrite = TRUE)
+dbSpatial(conn = duckdb_conn,
+          name = "spatVector_proxy",
+          value = dummy_spatvector,
+          overwrite = TRUE)
 ```
 
 

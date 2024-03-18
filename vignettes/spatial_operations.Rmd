@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
-) 
+)
 ```
 
 # Spatial Operations with {terra} Comparisons
@@ -42,6 +42,10 @@ db_points = dbSpatial(conn = duckdb_conn,
                       name = "spatVector_proxy",
                       value = dummy_spatvector,
                       overwrite = TRUE)
+
+# Preview points table
+db_points |>
+  dplyr::mutate(geom_text = ST_AsText(geom))
 ```
 
 
@@ -55,23 +59,22 @@ dbSpatial::ST_Extent(tbl = db_points)
 ```
 
 ### Shift
-```{r}
+```{r, max.print=10}
 # terra
 head(terra::geom(dummy_spatvector))
 
 shifted_spatVector = terra::shift(dummy_spatvector, dx = 10, dy = 10)
 
-terra::geom(shifted_spatVector)
+head(terra::geom(shifted_spatVector))
 
 # dbSpatial
 dbSpatial::ST_Translate(tbl = db_points, dx = 10, dy = 10) |>
-  mutate(points = ST_AsText(geom)) |>
-  select(points) |>
-  compute(temporary = FALSE)
+  mutate(geom_text = ST_AsText(geom))
 ```
 
+```{r, eval = FALSE, echo = FALSE}
 ### Flip
-```{r, eval = FALSE}
+
 # terra
 terra::geom(dummy_spatvector)
 
@@ -92,14 +95,9 @@ terra::geom(flipped_spatVector)
 ### Is.Valid
 ```{r}
 # terra
-terra::geom(dummy_spatvector)
+head(terra::geom(dummy_spatvector))
 
-terra::is.valid(dummy_spatvector)
-
-# dbSpatial
-db_points |>
-  dplyr::mutate(points = ST_AsText(geom)) |>
-  dplyr::select(points)
+head(terra::is.valid(dummy_spatvector))
 
 dbSpatial::ST_IsValid(tbl = db_points)
 ```
@@ -108,7 +106,7 @@ dbSpatial::ST_IsValid(tbl = db_points)
 ### Y, X Max
 ```{r}
 # terra
-terra::geom(dummy_spatvector)
+head(terra::geom(dummy_spatvector))
 
 terra::ymax(dummy_spatvector)
 
@@ -121,8 +119,9 @@ dbSpatial::ST_XMax(db_points)
 
 ```
 
+```{r, echo = FALSE}
 ### centroids
-```{r}
+
 # # terra
 # terra::geom(dummy_spatvector)
 # 
