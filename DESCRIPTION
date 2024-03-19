@@ -17,6 +17,7 @@ Imports:
     tools,
     DBI,
     duckdb,
+    data.table,
     dplyr,
     dbplyr,
     terra,
