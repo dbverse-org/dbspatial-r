@@ -2,38 +2,54 @@
 % Please edit documentation in R/dbSpatial.R
 \name{dbSpatial}
 \alias{dbSpatial}
-\title{Create a \code{dbSpatial} object with geometry value.}
+\title{Create a \code{dbSpatial} object with geometry}
 \usage{
-dbSpatial(conn, name, value, x_colName, y_colName, overwrite = FALSE, ...)
+dbSpatial(
+  conn,
+  name,
+  value,
+  x_colName,
+  y_colName,
+  geomName = "geom",
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
-\item{conn}{Connection to \link{DuckDB} database. \link{duckdb_connection}.}
+\item{conn}{\link{\code{duckdb_connection}}. A connection object to a DuckDB database.}
 
-\item{name}{Name of table to set in the database. Character.}
+\item{name}{\code{character}. Name of table to add to the database.}
 
 \item{value}{value to be added to database. Can be a data.frame, tbl,
-file path, or \link{terra} object. See details for more information.}
+file path, \link{\code{sf}} object, or \link{\code{terra}} object.
+See details for more information.}
 
-\item{x_colName}{Name of column containing X coordinates. Numeric.}
+\item{x_colName}{\code{character}. Name of column containing numerical X coordinates.}
 
-\item{y_colName}{Name of column containing Y coordinates. Numeric.}
+\item{y_colName}{\code{character}. Name of column containing numerical Y coordinates.}
 
-\item{overwrite}{Overwrite existing table (default = FALSE).}
+\item{geomName}{\code{character}. Name of the column containing the geometry. Must start with a character. default = "geom".}
+
+\item{overwrite}{\code{logical}. Overwrite existing table. default = FALSE.}
 
 \item{...}{Additional arguments to be passed}
 }
 \value{
-A \code{dbSpatial} object with geometry value.
+A \code{dbSpatial} object with geometry
 }
 \description{
-This function reads in a variety of input value types containing spatial value
-and creates a \link{dbSpatial} object which contains a \code{geometry} value type.
-If \code{x_colName} and \code{y_colName} are specified, a point geometry will be constructed.
+Constructor function to ingest a variety of spatial data inputs and create
+a \link{dbSpatial} object containing a \code{geometry} data type based
+on the \href{https://en.wikipedia.org/wiki/Simple_Features}{Simple Features}
+standard.
+
+If \code{x_colName} and \code{y_colName} are specified, a point geometry
+will be constructed based on these columns.
 }
 \details{
 For list of files supported see \link{ST_Read}.
 
-TODO: Support for an existing 'geom' column in DT or DF. e.g. SDF, sf, terra.
+TODO: Support for SDF, sf.
 }
 \examples{
 # create in-memory DuckDB db
