@@ -145,12 +145,20 @@ dbSpatial <- function(value,
 .handle_terra <- function(conn, name, value, overwrite) {
   tmp_shp = tempfile(fileext = ".shp")
   
-  terra::writeRaster(value, 
-                     tmp_shp, 
-                     filetype = "ESRI Shapefile",
-                     overwrite = TRUE)
+
+  if(inherits(value, "SpatVector")){
+    terra::writeVector(value, 
+                       tmp_shp, 
+                       filetype = "ESRI Shapefile",
+                       overwrite = TRUE)
+  } else if(inherits(value, "SpatRaster")){
+    terra::writeRaster(value, 
+                       tmp_shp, 
+                       filetype = "ESRI Shapefile",
+                       overwrite = TRUE)
+  }
   
-  ST_Read(conn = conn, name = name, value = value, overwrite = overwrite)
+  ST_Read(conn = conn, name = name, value = tmp_shp, overwrite = overwrite)
 
 }
 

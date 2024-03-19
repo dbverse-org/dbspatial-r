@@ -32,8 +32,6 @@ duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 
 ### From data.frames
 ```{r}
-library(DBI)
-
 # test data
 test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
