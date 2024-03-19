@@ -107,6 +107,10 @@
 #' @keywords internal
 #' @noRd
 .check_overwrite <- function(conn, overwrite, name){
+  if(overwrite == 'PASS') {
+    return()
+  }
+  
   if(!is.logical(overwrite)) {
     stop("overwrite must be logical")
   }
