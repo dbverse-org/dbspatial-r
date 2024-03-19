@@ -2,12 +2,23 @@
 % Please edit documentation in R/dbSpatial.R
 \name{dbSpatial}
 \alias{dbSpatial}
-\title{Create a \code{dbSpatial} object with geometry}
+\title{S4 dbSpatial class}
 \usage{
 dbSpatial(
-  conn,
-  name,
   value,
+  name,
+  conn,
+  x_colName = NULL,
+  y_colName = NULL,
+  geomName = "geom",
+  overwrite = FALSE,
+  ...
+)
+
+dbSpatial(
+  value,
+  name,
+  conn,
   x_colName = NULL,
   y_colName = NULL,
   geomName = "geom",
@@ -16,13 +27,13 @@ dbSpatial(
 )
 }
 \arguments{
-\item{conn}{\link{\code{duckdb_connection}}. A connection object to a DuckDB database.}
+\item{value}{value to be added to database. Can be a data.frame, tbl_duckdb_connection,
+file path, \link{\code{sf}} object, or \link{\code{terra}} object.
+See details for more information.}
 
 \item{name}{\code{character}. Name of table to add to the database.}
 
-\item{value}{value to be added to database. Can be a data.frame, tbl,
-file path, \link{\code{sf}} object, or \link{\code{terra}} object.
-See details for more information.}
+\item{conn}{\link{\code{duckdb_connection}}. A connection object to a DuckDB database.}
 
 \item{x_colName}{\code{character}. Name of column containing numerical X coordinates. default = NULL.}
 
@@ -38,6 +49,9 @@ See details for more information.}
 A \code{dbSpatial} object with geometry
 }
 \description{
+Representation of spatial geometries in a database. Each object
+is used as a connection to a single table that exists within a DuckDB database.
+
 Constructor function to ingest a variety of spatial data inputs and create
 a \link{dbSpatial} object containing a \code{geometry} data type based
 on the \href{https://en.wikipedia.org/wiki/Simple_Features}{Simple Features}
@@ -51,6 +65,20 @@ For list of files supported see \link{ST_Read}.
 
 TODO: Support for SDF, sf.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{conn}}{\link{\code{duckdb_connection}}. A connection object to a DuckDB database.}
+
+\item{\code{name}}{\code{character}. Name of table in the database.}
+
+\item{\code{geomName}}{\code{character}. Name of the column containing the geometry value in the db table.}
+
+\item{\code{value}}{value representing the table in the database.}
+
+\item{\code{geometry}}{\code{character}. Type of geometry in the dbSpatial object.}
+}}
+
 \examples{
 # create in-memory DuckDB db
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
