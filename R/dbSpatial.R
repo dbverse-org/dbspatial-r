@@ -1,11 +1,52 @@
+## S4 Class Specification ####
+#' @name dbData
+#' @title dbData
+#' @description Base class for all db objects
+#' @noRd
+setClass(
+  Class = 'dbData',
+  contains = c('VIRTUAL')
+)
+
+#' @title S4 dbSpatial class
+#' @description
+#' Representation of spatial geometries in a database. Each object
+#' is used as a connection to a single table that exists within a DuckDB database.
+#' @slot conn \link{\code{duckdb_connection}}. A connection object to a DuckDB database.
+#' @slot name \code{character}. Name of table in the database.
+#' @slot geomName \code{character}. Name of the column containing the geometry value in the db table.
+#' @slot value value representing the table in the database.
+#' @slot geometry \code{character}. Type of geometry in the dbSpatial object.
+#' @export
+dbSpatial = setClass(
+  Class = 'dbSpatial',
+  contains = c('dbData'),
+  slots = list(
+    conn = 'duckdb_connection',
+    name = 'character',
+    geomName = 'character',
+    value = 'ANY',
+    geometry = 'character'
+  ),
+  prototype = list(
+    conn = NULL,
+    name = NA_character_,
+    geomName = NA_character_,
+    value = NULL,
+    geometry = NA_character_
+  )
+)
+
+
+## Constructor ####
 #' Create a \code{dbSpatial} object with geometry
 #' @param conn \link{\code{duckdb_connection}}. A connection object to a DuckDB database.
 #' @param name \code{character}. Name of table to add to the database.
-#' @param value value to be added to database. Can be a data.frame, tbl,
+#' @param value value to be added to database. Can be a data.frame, tbl_duckdb_connection,
 #' file path, \link{\code{sf}} object, or \link{\code{terra}} object. 
 #' See details for more information.
-#' @param x_colName \code{character}. Name of column containing numerical X coordinates. 
-#' @param y_colName \code{character}. Name of column containing numerical Y coordinates.
+#' @param x_colName \code{character}. Name of column containing numerical X coordinates. default = NULL.
+#' @param y_colName \code{character}. Name of column containing numerical Y coordinates. default = NULL.
 #' @param geomName \code{character}. Name of the column containing the geometry. Must start with a character. default = "geom".
 #' @param overwrite \code{logical}. Overwrite existing table. default = FALSE.
 #' @param ... Additional arguments to be passed
@@ -51,92 +92,53 @@
 #'           name = "test_points",
 #'           value = 'test_data.csv',
 #'           overwrite = TRUE)
-dbSpatial <- function(conn,
+dbSpatial <- function(value,
                       name,
-                      value,
-                      x_colName,
-                      y_colName,
+                      conn,
+                      x_colName = NULL,
+                      y_colName = NULL,
                       geomName = "geom",
                       overwrite = FALSE,
                       ...) {
+  if(inherits(value, "tbl_duckdb_connection")){
+    conn <- dbplyr::remote_con(value)
+    name <- dbplyr::remote_name(value)
+    overwrite <- 'PASS'
+  }
+  
   # Input validation
   .check_con(conn)
   .check_name(name)
   .check_value(value)
   .check_overwrite(conn, overwrite, name)
   
-  if(!missing(x_colName) & !missing(y_colName)) {
-    if(!is.character(x_colName) | !is.character(y_colName)) {
-      stop("x_colName and y_colName must be character strings")
-    }
-    
-    if(!x_colName %in% names(value) | !y_colName %in% names(value)) {
-      stop("x_colName and y_colName must be columns in value")
-    }
-  }
-  
   suppressMessages(loadSpatial(conn = conn))
   
-  # Ingest value into DB
-  if(inherits(value, "data.frame")) { # write to db
-    # TODO: how do in-memory geometry columns get written to DuckDB? see sdf
-    DBI::dbWriteTable(conn, name, value)
-  } else if(is.character(value)) { # read spatial file
-    
-    file_extension <- tools::file_ext(value)
-    
-    #TODO check geometry type of parquet. usually BLOB, need to convert to WKB
-    if(file_extension == "parquet"){
-      if(overwrite){
-        sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
-                           SELECT * FROM read_parquet('{value}');")
-      } else {
-        sql <- glue::glue("CREATE TABLE {name} AS
-                           SELECT * FROM read_parquet('{value}')")
-      }
-      DBI::dbSendQuery(con, sql)
-    } else{
-      
-      ST_Read(conn = conn,
-              name = name,
-              value = value,
-              overwrite = overwrite)
+  # Handle 'value' inputs
+  if (is.data.frame(value) | data.table::is.data.table(value)) {
+    if(is.null(x_colName) | is.null(y_colName)){
+      stop(paste("x_colName and y_colName must be specified for data.frame",
+                 "or data.table inputs to construct a geometry."))
     }
-    
-  } else if(inherits(value, "SpatVector") | inherits(value, "SpatRaster")){
-    # TODO: implement geoarrow integration
-    tmp_shp = tempfile(fileext = ".shp")
-    
-    terra::writeRaster(value, 
-                       tmp_shp, 
-                       filetype = "ESRI Shapefile",
-                       overwrite = TRUE)
-    
-    ST_Read(conn = conn,
-            name = name,
-            value = value,
-            overwrite = overwrite)    
-  } else if(inherits(value, "sf")){
-    stop('TODO. sf is not yet supported.')
-    
-  } else if(inherits(value, "sdf")){
-    stop('TODO. sdf is not yet supported.')
-  } else{
-    stop("Invalid value.")
+    DBI::dbWriteTable(conn = conn, name = name, value = value, overwrite = overwrite)
+    .create_pointGeom(conn, name, x_colName, y_colName, geomName)
+  } else if (is.character(value)) {
+    .handle_file(conn, name, value, overwrite)
+  } else if (inherits(value, c("SpatVector", "SpatRaster"))) {
+    .handle_terra(conn, name, value, overwrite)
+  } else if (inherits(value, "tbl_duckdb_connection")){
+    .handle_tbl(conn, value)
+  } else if (inherits(value, "sf")) {
+    stop("Support for 'sf' objects is not yet implemented.")
+  } else if (inherits(value, "sdf")) {
+    stop("Support for 'sdf' objects is not yet implemented.")
+  } else {
+    stop("Invalid 'value' paramater.")
   }
   
-  # create point geometry if x_colName and y_colName are specified
-  if(!missing(x_colName) & !missing(y_colName)) {
-    
-    sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
-                       SELECT *, ST_Point({x_colName}, {y_colName}) AS {geomName}
-                       FROM {name};")
-    
-    invisible(DBI::dbExecute(conn, sql))
-  }
+  tbl <- dplyr::tbl(conn, name)
   
-  res <- dplyr::tbl(conn, name)
-  
+  # s3 object construction
   # res <- structure(
   #   list(
   #     value = value,
@@ -147,7 +149,64 @@ dbSpatial <- function(conn,
   #   class = "dbSpatial"
   # )
   
+  # S4 object creation
+  res <- new("dbSpatial", 
+             conn = conn, 
+             name = name,
+             geomName = geomName,
+             value = tbl, 
+             geometry = "POINT")
+  
   return(res)
 }
 
+#' @description internal func to ingest spatial file
+#' @noRd
+.handle_file <- function(conn, name, value, overwrite) {
+  file_extension <- tools::file_ext(value)
+  
+  #TODO check geometry type of parquet. usually BLOB, need to convert to WKB
+  if(file_extension == "parquet"){
+    if(overwrite){
+      sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
+                         SELECT * FROM read_parquet('{value}')")
+    } else {
+      sql <- glue::glue("CREATE TABLE {name} AS
+                         SELECT * FROM read_parquet('{value}')")
+    }
+    DBI::dbSendQuery(conn, sql)
+  } else{
+    ST_Read(conn = conn, name = name, value = value, overwrite = overwrite)
+  }
+}
 
+#' @description internal func to ingest terra object
+#' @noRd
+.handle_terra <- function(conn, name, value, overwrite) {
+  tmp_shp = tempfile(fileext = ".shp")
+  
+  terra::writeRaster(value, 
+                     tmp_shp, 
+                     filetype = "ESRI Shapefile",
+                     overwrite = TRUE)
+  
+  ST_Read(conn = conn, name = name, value = value, overwrite = overwrite)
+
+}
+
+#' @description internal func to ingest tbl_duckdb_connection
+#' @noRd
+.handle_tbl <- function(conn, value) {
+  # empty control logic for now
+  return()
+}
+
+#' @description internal func to point geometry in table with specified geomName
+#' @noRd
+.create_pointGeom <- function(conn, name, x_colName, y_colName, geomName) {
+  sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
+                     SELECT *, ST_Point({x_colName}, {y_colName}) AS {geomName}
+                     FROM {name}")
+  
+  invisible(DBI::dbExecute(conn, sql))
+}

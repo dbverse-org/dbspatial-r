@@ -8,8 +8,8 @@ dbSpatial(
   conn,
   name,
   value,
-  x_colName,
-  y_colName,
+  x_colName = NULL,
+  y_colName = NULL,
   geomName = "geom",
   overwrite = FALSE,
   ...
@@ -24,9 +24,9 @@ dbSpatial(
 file path, \link{\code{sf}} object, or \link{\code{terra}} object.
 See details for more information.}
 
-\item{x_colName}{\code{character}. Name of column containing numerical X coordinates.}
+\item{x_colName}{\code{character}. Name of column containing numerical X coordinates. default = NULL.}
 
-\item{y_colName}{\code{character}. Name of column containing numerical Y coordinates.}
+\item{y_colName}{\code{character}. Name of column containing numerical Y coordinates. default = NULL.}
 
 \item{geomName}{\code{character}. Name of the column containing the geometry. Must start with a character. default = "geom".}
 
