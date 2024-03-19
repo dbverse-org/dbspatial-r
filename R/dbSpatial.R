@@ -110,14 +110,14 @@ dbSpatial <- function(value,
   # )
   
   # S4 object creation
-  res <- new("dbSpatial", 
-             conn = conn, 
-             name = name,
-             geomName = geomName,
-             value = tbl, 
-             geometry = "POINT")
+  # res <- new("dbSpatial", 
+  #            conn = conn, 
+  #            name = name,
+  #            geomName = geomName,
+  #            value = tbl, 
+  #            geometry = "POINT")
   
-  return(res)
+  return(tbl)
 }
 
 #' @description internal func to ingest spatial file
