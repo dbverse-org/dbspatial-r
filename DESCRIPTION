@@ -1,5 +1,5 @@
 Package: dbSpatial
-Title: Wrappers for DuckDB Spatial Extension
+Title: OOM spatial analysis via DuckDB Spatial Extension
 Version: 0.0.0.9004
 Authors@R: 
     c(person("Edward", "C. Ruiz", , "ecr7407@example.com", role = c("aut", "cre"),
@@ -20,7 +20,8 @@ Imports:
     dplyr,
     dbplyr,
     terra,
-    tictoc
+    tictoc,
+    crayon
 Suggests: 
     knitr,
     rmarkdown
