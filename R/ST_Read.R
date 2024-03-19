@@ -38,10 +38,10 @@ ST_Read <- function(conn, name, value, overwrite = FALSE, ...){
   
   if(overwrite){
     sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
-                SELECT * FROM ST_Read('{value}')")
+                       SELECT * FROM ST_Read('{value}')")
   } else{
     sql <- glue::glue("CREATE TABLE {name} AS
-                SELECT * FROM ST_Read('{value}')")
+                       SELECT * FROM ST_Read('{value}')")
   }
 
   DBI::dbExecute(conn, sql)
