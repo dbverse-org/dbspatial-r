@@ -45,6 +45,11 @@ st_translate <- function(tbl, geomName = "geom", dx, dy) {
     stop("dx and dy must be numeric")
   }
   
+  # check to see what geometry type, if polygon then stop
+  if(st_geometrytype(tbl = tbl, geomName = geomName) != "POINT"){
+    stop("Only POINT geometry is  currently supported for st_translate.")
+  }
+  
   # TODO: native translate, no casting
   res <- tbl |>
     dplyr::mutate(!!geomName := st_point(st_x(geom) + dx, st_y(geom) + dy))
