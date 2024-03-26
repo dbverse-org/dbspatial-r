@@ -1,12 +1,17 @@
-#' Get maximum y coordinate
+#' Return geometry type
 #'
 #' @param tbl name of a table in a duckdb database
-#' @param geomName name of the column containing the geometry value in the tbl
+#' @param geomName name of the column containing the geometry value in the tbl.
 #' default = "geom".
 #'
-#' @return maximum y coordinate
+#' @description 
+#' This function returns the geometry type of the specified geometry column in 
+#' the specified table.
+#' @return single column tbl_dbi
+#' 
 #' @export
-#' @keywords spatial_prop
+#' 
+#' @keywords geom_solo
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
@@ -26,20 +31,15 @@
 #'                       name = "foo",
 #'                       overwrite = TRUE)
 #'                       
-#' ST_YMax(tbl = db_points)
-ST_YMax <- function(tbl, geomName = "geom") {
-  # check inputs
-  con <- dbplyr::remote_con(tbl)
-  .check_con(conn = con)
+#' st_geometrytype(tbl = db_points)
+st_geometrytype <- function(tbl, geomName = "geom"){
+  # input validation
   .check_tbl(tbl = tbl)
   .check_geomName(tbl = tbl, geomName = geomName)
   
-  suppressMessages(loadSpatial(conn = con))
-  
   res <- tbl |>
-    dplyr::mutate(x = ST_Y(geom)) |>
-    dplyr::pull(x) |>
-    max()
+    dplyr::mutate(!!geomName := st_geometrytype(rlang::sym(!!geomName))) |>
+    dplyr::select(!!geomName)
   
-  res
+  return(res)
 }

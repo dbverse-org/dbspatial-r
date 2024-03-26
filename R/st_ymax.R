@@ -1,11 +1,12 @@
-#' Get extent of a geometry
+#' Get maximum y coordinate
 #'
-#' @param tbl name of a table in a duckdb database containing geometry column
+#' @param tbl name of a table in a duckdb database
 #' @param geomName name of the column containing the geometry value in the tbl
+#' default = "geom".
 #'
-#' @return data.frame of extent of geom column in tbl
+#' @return maximum y coordinate
 #' @export
-#' @keywords geo_construction
+#' @keywords geom_solo
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
@@ -25,27 +26,15 @@
 #'                       name = "foo",
 #'                       overwrite = TRUE)
 #'                       
-#' # Get extent of the table
-#' ST_Extent(db_points)
-ST_Extent <- function(tbl, geomName = "geom"){
-  con <- dbplyr::remote_con(tbl)
-  name <- dbplyr::remote_name(tbl)
-  .check_con(conn = con)
-  .check_name(name = name)
+#' st_ymax(tbl = db_points)
+st_ymax <- function(tbl, geomName = "geom") {
+  # check inputs
   .check_tbl(tbl = tbl)
   .check_geomName(tbl = tbl, geomName = geomName)
   
-  suppressMessages(loadSpatial(conn = con))
-  
   res <- tbl |>
-    dplyr::mutate(extent = ST_Extent(geom)) |>
-    dplyr::pull(extent) |>
-    dplyr::summarize(
-      min_x = min(min_x),
-      max_x = max(max_x),
-      min_y = min(min_y),
-      max_y = max(max_y)
-    )
+    dplyr::mutate(st_ymax := st_ymax(rlang::sym(!!geomName))) |>
+    dplyr::select(st_ymax)
   
-  res
+  return(res)
 }

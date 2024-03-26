@@ -55,7 +55,7 @@ db_points |>
 terra::ext(dummy_spatvector)
 
 # dbSpatial
-dbSpatial::ST_Extent(tbl = db_points)
+dbSpatial::st_extent(tbl = db_points)
 ```
 
 ### Shift
@@ -68,7 +68,7 @@ shifted_spatVector = terra::shift(dummy_spatvector, dx = 10, dy = 10)
 head(terra::geom(shifted_spatVector))
 
 # dbSpatial
-dbSpatial::ST_Translate(tbl = db_points, dx = 10, dy = 10) |>
+dbSpatial::st_translate(tbl = db_points, dx = 10, dy = 10) |>
   mutate(geom_text = ST_AsText(geom))
 ```
 
@@ -99,7 +99,7 @@ head(terra::geom(dummy_spatvector))
 
 head(terra::is.valid(dummy_spatvector))
 
-dbSpatial::ST_IsValid(tbl = db_points)
+dbSpatial::st_isvalid(tbl = db_points)
 ```
 
 
@@ -113,9 +113,9 @@ terra::ymax(dummy_spatvector)
 terra::xmax(dummy_spatvector)
 
 # dbSpatial
-dbSpatial::ST_YMax(db_points)
+dbSpatial::st_ymax(db_points)
 
-dbSpatial::ST_XMax(db_points)
+dbSpatial::st_xmax(db_points)
 
 ```
 

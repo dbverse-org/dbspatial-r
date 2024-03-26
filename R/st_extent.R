@@ -1,18 +1,11 @@
-#' Return geometry type
+#' Get extent of a geometry
 #'
-#' @param tbl name of a table in a duckdb database
-#' @param geomName name of the column containing the geometry value in the tbl.
-#' default = "geom".
-#' @param limit number of rows to return. default = 10.
+#' @param tbl name of a table in a duckdb database containing geometry column
+#' @param geomName name of the column containing the geometry value in the tbl
 #'
-#' @description 
-#' This function returns the geometry type of the specified geometry column in 
-#' the specified table.
-#' @return tbl_dbi
-#' 
+#' @return data.frame of extent of geom column in tbl
 #' @export
-#' 
-#' @keywords geo_properties
+#' @keywords geom_summary
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
@@ -32,20 +25,27 @@
 #'                       name = "foo",
 #'                       overwrite = TRUE)
 #'                       
-#' ST_GeometryType(tbl = db_points)
-ST_GeometryType <- function(tbl, geomName = "geom", limit = 10){
-  # input validation
+#' # Get extent of the table
+#' st_extent(db_points)
+st_extent <- function(tbl, geomName = "geom"){
   con <- dbplyr::remote_con(tbl)
   name <- dbplyr::remote_name(tbl)
   .check_con(conn = con)
   .check_name(name = name)
+  .check_tbl(tbl = tbl)
   .check_geomName(tbl = tbl, geomName = geomName)
-
+  
   suppressMessages(loadSpatial(conn = con))
   
-  sql <- glue::glue("SELECT ST_GeometryType({geomName}) AS geom_type
-                     FROM {name} LIMIT {limit}")
+  res <- tbl |>
+    dplyr::mutate(extent = ST_Extent(geom)) |>
+    dplyr::pull(extent) |>
+    dplyr::summarize(
+      min_x = min(min_x),
+      max_x = max(max_x),
+      min_y = min(min_y),
+      max_y = max(max_y)
+    )
   
-  DBI::dbGetQuery(con, sql)
-  
+  res
 }

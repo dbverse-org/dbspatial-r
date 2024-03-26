@@ -6,7 +6,7 @@
 #'
 #' @return maximum x coordinate
 #' @export
-#' @keywords spatial_prop
+#' @keywords geom_solo
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
@@ -26,20 +26,15 @@
 #'                       name = "foo",
 #'                       overwrite = TRUE)
 #'                       
-#' ST_XMax(tbl = db_points)
-ST_XMax <- function(tbl, geomName = "geom") {
+#' st_xmax(tbl = db_points)
+st_xmax <- function(tbl, geomName = "geom") {
   # check inputs
-  con <- dbplyr::remote_con(tbl)
-  .check_con(conn = con)
   .check_tbl(tbl = tbl)
   .check_geomName(tbl = tbl, geomName = geomName)
   
-  suppressMessages(loadSpatial(conn = con))
-  
   res <- tbl |>
-    dplyr::mutate(x = ST_X(geom)) |>
-    dplyr::pull(x) |>
-    max()
+    dplyr::mutate(st_xmax := st_xmax(rlang::sym(!!geomName))) |>
+    dplyr::select(st_xmax)
   
-  res
+  return(res)
 }

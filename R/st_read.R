@@ -4,7 +4,7 @@
 #' @param name name of the table to be created
 #' @param value a data.frame or a file path
 #' @param overwrite logical; if TRUE, overwrite the table if it already exists
-#' @param ... additional arguments to pass to ST_Read
+#' @param ... additional arguments to pass to st_read
 #'
 #' @details
 #' For list of files supported see the documentation below.
@@ -14,7 +14,7 @@
 #' 
 #' @export
 #' 
-#' @keywords geo_construction
+#' @keywords geom_construction
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #' 
@@ -23,11 +23,16 @@
 #'
 #' # Combine the coordinates and attributes
 #' dummy_data <- cbind(coordinates, attributes)
-#'  
-#' points <- ST_Read(conn = con, name = "points", value = dummy_data, overwrite = TRUE)
 #' 
-#' points
-ST_Read <- function(conn, name, value, overwrite = FALSE, ...){
+#' write.csv(dummy_data, "dummy_data.csv", row.names = FALSE)
+#'  
+#' data <- st_read(conn = con, 
+#'                 name = "points", 
+#'                 value = "dummy_data.csv", 
+#'                 overwrite = TRUE)
+#' 
+#' data
+st_read <- function(conn, name, value, overwrite = FALSE, ...){
   # input validation
   .check_con(conn)
   .check_name(name)

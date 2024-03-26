@@ -1,10 +1,16 @@
 #' Determine if geometry is valid
 #'
 #' @param tbl name of a table in a duckdb database
-#' @param limit maximum number of invalid geometries to return
-#' @return boolean vector of whether each geometry in tbl is valid
+#' @param geomName name of the column containing the geometry value in the tbl.
+#' default = "geom".
+#' 
+#' @description 
+#' This function returns whether the specified geometry column in the specified
+#' table is valid or not. 
+#' @return single column tbl_dbi
+#' 
 #' @export
-#' @keywords spatial_prop
+#' @keywords geom_solo
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
@@ -26,23 +32,15 @@
 #'                       overwrite = TRUE)
 #'                       
 #' # Get extent of the table
-#' ST_IsValid(db_points)
-ST_IsValid <- function(tbl, limit = 10){
+#' st_isvalid(db_points)
+st_isvalid <- function(tbl, geomName = "geom"){
   # check inputs
-  con <- dbplyr::remote_con(tbl)
-  .check_con(conn = con)
   .check_tbl(tbl = tbl)
-  
-  if (!is.numeric(limit) || limit < 1) {
-    stop("limit must be a positive integer")
-  }
-  
-  suppressMessages(loadSpatial(conn = con))
+  .check_geomName(tbl = tbl, geomName = geomName)
   
   res <- tbl |>
-    dplyr::mutate(is_valid = ST_IsValid(geom)) |>
-    dplyr::pull(is_valid) |>
-    head(limit)
+    dplyr::mutate(st_isvalid := st_isvalid(rlang::sym(!!geomName))) |>
+    dplyr::select(st_isvalid)
   
-  res
+  return(res)
 }

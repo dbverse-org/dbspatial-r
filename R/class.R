@@ -12,11 +12,12 @@ setClass(
 #' @description
 #' Representation of spatial geometries in a database. Each object
 #' is used as a connection to a single table that exists within a DuckDB database.
-#' @slot conn \link{\code{duckdb_connection}}. A connection object to a DuckDB database.
+#' @slot conn \code{\link{duckdb_connection}}. A connection object to a DuckDB database.
 #' @slot name \code{character}. Name of table in the database.
 #' @slot geomName \code{character}. Name of the column containing the geometry value in the db table.
 #' @slot value value representing the table in the database.
 #' @slot geometry \code{character}. Type of geometry in the dbSpatial object.
+#' @noRd
 #' @export
 dbSpatial = setClass(
   Class = 'dbSpatial',

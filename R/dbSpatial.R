@@ -1,9 +1,9 @@
 ## Constructor ####
 #' Create a \code{dbSpatial} object with geometry
-#' @param conn \link{\code{duckdb_connection}}. A connection object to a DuckDB database.
+#' @param conn \code{\link{duckdb_connection}}. A connection object to a DuckDB database.
 #' @param name \code{character}. Name of table to add to the database.
 #' @param value value to be added to database. Can be a data.frame, tbl_duckdb_connection,
-#' file path, \link{\code{sf}} object, or \link{\code{terra}} object. 
+#' file path, \code{\link{sf}} object, or \code{\link{terra}} object. 
 #' See details for more information.
 #' @param x_colName \code{character}. Name of column containing numerical X coordinates. default = NULL.
 #' @param y_colName \code{character}. Name of column containing numerical Y coordinates. default = NULL.
@@ -21,7 +21,7 @@
 #' will be constructed based on these columns.
 #'
 #' @details
-#' For list of files supported see \link{ST_Read}.
+#' For list of files supported see \link{st_read}.
 #'
 #' TODO: Support for SDF, sf.
 #'
@@ -136,7 +136,7 @@ dbSpatial <- function(value,
     }
     DBI::dbSendQuery(conn, sql)
   } else{
-    ST_Read(conn = conn, name = name, value = value, overwrite = overwrite)
+    st_read(conn = conn, name = name, value = value, overwrite = overwrite)
   }
 }
 
@@ -158,7 +158,7 @@ dbSpatial <- function(value,
                        overwrite = TRUE)
   }
   
-  ST_Read(conn = conn, name = name, value = tmp_shp, overwrite = overwrite)
+  st_read(conn = conn, name = name, value = tmp_shp, overwrite = overwrite)
 
 }
 
