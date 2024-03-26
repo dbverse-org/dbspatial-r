@@ -1,5 +1,5 @@
 ## Constructor ####
-#' Create a \code{dbSpatial} object with geometry
+#' Create a \code{\link{dbSpatial}} object with geometry
 #' @param conn \code{\link{duckdb_connection}}. A connection object to a DuckDB database.
 #' @param name \code{character}. Name of table to add to the database.
 #' @param value value to be added to database. Can be a data.frame, tbl_duckdb_connection,

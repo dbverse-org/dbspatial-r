@@ -13,7 +13,7 @@ st_geometrytype(tbl, geomName = "geom")
 default = "geom".}
 }
 \value{
-single column tbl_dbi
+character vector in database
 }
 \description{
 This function returns the geometry type of the specified geometry column in

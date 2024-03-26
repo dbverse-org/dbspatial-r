@@ -13,7 +13,7 @@ st_isvalid(tbl, geomName = "geom")
 default = "geom".}
 }
 \value{
-single column tbl_dbi
+boolean vector in database
 }
 \description{
 This function returns whether the specified geometry column in the specified

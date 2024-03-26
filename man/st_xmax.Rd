@@ -13,10 +13,11 @@ st_xmax(tbl, geomName = "geom")
 default = "geom".}
 }
 \value{
-maximum x coordinate
+numerical vector in database
 }
 \description{
-Get maximum x coordinate
+This function returns the maximum x coordinate in each \code{geometry} in
+the specified \code{\link{dbSpatial}} object.
 }
 \examples{
 # Create a data.frame with x and y coordinates and attributes

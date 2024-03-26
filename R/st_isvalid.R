@@ -7,7 +7,7 @@
 #' @description 
 #' This function returns whether the specified geometry column in the specified
 #' table is valid or not. 
-#' @return single column tbl_dbi
+#' @return boolean vector in database
 #' 
 #' @export
 #' @keywords geom_solo
@@ -39,8 +39,8 @@ st_isvalid <- function(tbl, geomName = "geom"){
   .check_geomName(tbl = tbl, geomName = geomName)
   
   res <- tbl |>
-    dplyr::mutate(st_isvalid := st_isvalid(rlang::sym(!!geomName))) |>
-    dplyr::select(st_isvalid)
+    dplyr::mutate(!!geomName := st_isvalid(rlang::sym(!!geomName))) |>
+    dplyr::select(!!geomName)
   
   return(res)
 }

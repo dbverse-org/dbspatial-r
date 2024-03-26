@@ -2,7 +2,7 @@
 % Please edit documentation in R/dbSpatial.R
 \name{dbSpatial}
 \alias{dbSpatial}
-\title{Create a \code{dbSpatial} object with geometry}
+\title{Create a \code{\link{dbSpatial}} object with geometry}
 \usage{
 dbSpatial(
   value,

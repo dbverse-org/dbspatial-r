@@ -4,7 +4,7 @@
 #' @param geomName name of the column containing the geometry value in the tbl
 #' default = "geom".
 #'
-#' @return maximum y coordinate
+#' @return numerical vector in database
 #' @export
 #' @keywords geom_solo
 #' @examples
@@ -33,8 +33,8 @@ st_ymax <- function(tbl, geomName = "geom") {
   .check_geomName(tbl = tbl, geomName = geomName)
   
   res <- tbl |>
-    dplyr::mutate(st_ymax := st_ymax(rlang::sym(!!geomName))) |>
-    dplyr::select(st_ymax)
+    dplyr::mutate(!!geomName := st_ymax(rlang::sym(!!geomName))) |>
+    dplyr::select(!!geomName)
   
   return(res)
 }

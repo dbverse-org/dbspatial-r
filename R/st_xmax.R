@@ -3,8 +3,12 @@
 #' @param tbl name of a table in a duckdb database
 #' @param geomName name of the column containing the geometry value in the tbl
 #' default = "geom".
-#'
-#' @return maximum x coordinate
+#' 
+#' @description 
+#' This function returns the maximum x coordinate in each `geometry` in 
+#' the specified \code{\link{dbSpatial}} object.
+#'  
+#' @return numerical vector in database
 #' @export
 #' @keywords geom_solo
 #' @examples
@@ -33,8 +37,8 @@ st_xmax <- function(tbl, geomName = "geom") {
   .check_geomName(tbl = tbl, geomName = geomName)
   
   res <- tbl |>
-    dplyr::mutate(st_xmax := st_xmax(rlang::sym(!!geomName))) |>
-    dplyr::select(st_xmax)
+    dplyr::mutate(!!geomName := st_xmax(rlang::sym(!!geomName))) |>
+    dplyr::select(!!geomName)
   
   return(res)
 }

@@ -13,7 +13,7 @@ st_ymax(tbl, geomName = "geom")
 default = "geom".}
 }
 \value{
-maximum y coordinate
+numerical vector in database
 }
 \description{
 Get maximum y coordinate

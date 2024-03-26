@@ -7,7 +7,7 @@
 #' @description 
 #' This function returns the geometry type of the specified geometry column in 
 #' the specified table.
-#' @return single column tbl_dbi
+#' @return character vector in database
 #' 
 #' @export
 #' 
