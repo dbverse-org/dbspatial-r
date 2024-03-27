@@ -74,4 +74,4 @@ dbSpatial(conn = duckdb_conn,
           value = 'test_data.csv',
           overwrite = TRUE)
 }
-\keyword{constructor}
+\concept{constructor}

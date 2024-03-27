@@ -39,4 +39,4 @@ db_points = dbSpatial(conn = con,
 # Get extent of the table
 st_extent(db_points)
 }
-\keyword{geom_summary}
+\concept{geom_summary}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_translate.R
 \name{st_translate}
 \alias{st_translate}
-\title{Translate x, y coordinates by delta x, delta y}
+\title{Translate x, y coordinates by delta x, delta y for point geometries}
 \usage{
 st_translate(tbl, geomName = "geom", dx, dy)
 }
@@ -20,7 +20,7 @@ default = "geom".}
 a duckdb table with translated geometries
 }
 \description{
-Translate x, y coordinates by delta x, delta y
+Translate x, y coordinates by delta x, delta y for point geometries
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -46,4 +46,8 @@ points_translated <- st_translate(tbl = points, dx = 100, dy = -20)
 points_translated |>
   dplyr::mutate(geom_text = ST_AsText(geom))
 }
-\keyword{geom_mod}
+\seealso{
+Other geom_construction: 
+\code{\link{st_read}()}
+}
+\concept{geom_construction}

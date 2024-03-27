@@ -10,7 +10,7 @@
 #' @return boolean vector in database
 #' 
 #' @export
-#' @keywords geom_solo
+#' @family geom_solo
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))

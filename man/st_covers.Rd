@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_covers.R
 \name{st_covers}
 \alias{st_covers}
-\title{Find spatial relationship between two dbSpatial objects}
+\title{#' Determine if \code{geometries} in two dbSpatial objects are covering each other}
 \usage{
 st_covers(
   g1,
@@ -86,4 +86,16 @@ res <- st_covers(g1 = points,
 
 res
 }
-\keyword{spatial_relationships}
+\seealso{
+Other spatial_relationships: 
+\code{\link{st_contains}()},
+\code{\link{st_coveredby}()},
+\code{\link{st_crosses}()},
+\code{\link{st_difference}()},
+\code{\link{st_disjoint}()},
+\code{\link{st_distance}()},
+\code{\link{st_equals}()},
+\code{\link{st_intersects}()},
+\code{\link{st_touches}()}
+}
+\concept{spatial_relationships}

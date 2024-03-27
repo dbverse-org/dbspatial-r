@@ -5,7 +5,7 @@
 #'
 #' @return data.frame of extent of geom column in tbl
 #' @export
-#' @keywords geom_summary
+#' @family geom_summary
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))

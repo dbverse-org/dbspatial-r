@@ -28,7 +28,7 @@
 #' @return \code{\link{dbSpatial}} object.
 #' @export
 #'
-#' @keywords constructor
+#' @family constructor
 #'
 #' @examples
 #' # create in-memory DuckDB db

@@ -16,4 +16,4 @@ Install and/or load DuckDB spatial extension
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 loadSpatial(conn = duckdb_conn)
 }
-\keyword{duckdb-ext}
+\concept{duckdb-ext}

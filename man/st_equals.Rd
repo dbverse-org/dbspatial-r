@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_equals.R
 \name{st_equals}
 \alias{st_equals}
-\title{Find spatial relationship between two dbSpatial objects}
+\title{Determine if two dbSpatial objects are equal}
 \usage{
 st_equals(
   g1,
@@ -86,4 +86,16 @@ res <- st_equals(g1 = points,
 
 res
 }
-\keyword{spatial_relationships}
+\seealso{
+Other spatial_relationships: 
+\code{\link{st_contains}()},
+\code{\link{st_coveredby}()},
+\code{\link{st_covers}()},
+\code{\link{st_crosses}()},
+\code{\link{st_difference}()},
+\code{\link{st_disjoint}()},
+\code{\link{st_distance}()},
+\code{\link{st_intersects}()},
+\code{\link{st_touches}()}
+}
+\concept{spatial_relationships}

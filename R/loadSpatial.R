@@ -4,7 +4,7 @@
 #'
 #' @return NULL
 #' @export
-#' @keywords duckdb-ext
+#' @family duckdb-ext
 #' @examples
 #' duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #' loadSpatial(conn = duckdb_conn)

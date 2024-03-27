@@ -14,7 +14,7 @@
 #' 
 #' @export
 #' 
-#' @keywords geom_construction
+#' @family geom_construction
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #' 

@@ -42,4 +42,10 @@ db_points = dbSpatial(conn = duckdb_conn,
 # Get extent of the table
 st_isvalid(db_points)
 }
-\keyword{geom_solo}
+\seealso{
+Other geom_solo: 
+\code{\link{st_geometrytype}()},
+\code{\link{st_xmax}()},
+\code{\link{st_ymax}()}
+}
+\concept{geom_solo}

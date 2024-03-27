@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_intersects.R
 \name{st_intersects}
 \alias{st_intersects}
-\title{Find spatial relationship between two dbSpatial objects}
+\title{Determine if two dbSpatial objects are intersecting}
 \usage{
 st_intersects(
   g1,
@@ -86,4 +86,16 @@ res <- st_intersects(g1 = points,
 
 res
 }
-\keyword{spatial_relationships}
+\seealso{
+Other spatial_relationships: 
+\code{\link{st_contains}()},
+\code{\link{st_coveredby}()},
+\code{\link{st_covers}()},
+\code{\link{st_crosses}()},
+\code{\link{st_difference}()},
+\code{\link{st_disjoint}()},
+\code{\link{st_distance}()},
+\code{\link{st_equals}()},
+\code{\link{st_touches}()}
+}
+\concept{spatial_relationships}

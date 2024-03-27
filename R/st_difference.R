@@ -1,4 +1,4 @@
-#' Find spatial relationship between two dbSpatial objects
+#' Find difference in `geometries` between two dbSpatial objects
 #'
 #' @param g1 A \code{\link{dbSpatial}} object.
 #' @param g1_geom_colName \code{character}. The `geometry` column name in `g1`. 
@@ -14,7 +14,7 @@
 #' same `output_tblName`. default: FALSE
 #' @param output_tblName \code{character}. The name of the table to store the 
 #' resulting data. default: "difference_geom"
-#' @keywords spatial_relationships
+#' @family spatial_relationships
 #'
 #' @description
 #' https://postgis.net/docs/ST_Difference.html

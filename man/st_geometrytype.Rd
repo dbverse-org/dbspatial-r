@@ -40,4 +40,10 @@ db_points = dbSpatial(conn = con,
                       
 st_geometrytype(tbl = db_points)
 }
-\keyword{geom_solo}
+\seealso{
+Other geom_solo: 
+\code{\link{st_isvalid}()},
+\code{\link{st_xmax}()},
+\code{\link{st_ymax}()}
+}
+\concept{geom_solo}

@@ -1,4 +1,4 @@
-#' Translate x, y coordinates by delta x, delta y
+#' Translate x, y coordinates by delta x, delta y for point geometries
 #'
 #' @param tbl name of a table in a duckdb database
 #' @param geomName name of the column containing the geometry value in the tbl.
@@ -8,7 +8,7 @@
 #'
 #' @return a duckdb table with translated geometries
 #' @export
-#' @keywords geom_mod
+#' @family geom_construction
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #' 
@@ -46,7 +46,11 @@ st_translate <- function(tbl, geomName = "geom", dx, dy) {
   }
   
   # check to see what geometry type, if polygon then stop
-  if(st_geometrytype(tbl = tbl, geomName = geomName) != "POINT"){
+  geomType <- st_geometrytype(tbl = tbl, geomName = geomName) |> 
+    head(1) |> 
+    dplyr::pull()
+  
+  if(geomType != "POINT"){
     stop("Only POINT geometry is  currently supported for st_translate.")
   }
   

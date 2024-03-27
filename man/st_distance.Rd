@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_distance.R
 \name{st_distance}
 \alias{st_distance}
-\title{Find spatial relationship between two dbSpatial objects}
+\title{Find distance between \code{geometries} in two dbSpatial objects}
 \usage{
 st_distance(
   g1,
@@ -88,5 +88,16 @@ res <- st_distance(g1 = points,
 
 res
 }
-\keyword{geom_solo}
-\keyword{spatial_relationships}
+\seealso{
+Other spatial_relationships: 
+\code{\link{st_contains}()},
+\code{\link{st_coveredby}()},
+\code{\link{st_covers}()},
+\code{\link{st_crosses}()},
+\code{\link{st_difference}()},
+\code{\link{st_disjoint}()},
+\code{\link{st_equals}()},
+\code{\link{st_intersects}()},
+\code{\link{st_touches}()}
+}
+\concept{spatial_relationships}

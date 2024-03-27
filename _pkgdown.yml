@@ -2,3 +2,28 @@ url: https://drieslab.github.io/dbSpatial/
 template:
   bootstrap: 5
 
+reference:
+  - title: "dbSpatial Package"
+    desc: "Functions for constructing dbSpatial objects"
+    contents:
+      - has_concept("constructor")
+  - title: "Spatial Relationships"
+    desc: "Functions that calculate spatial relationships between two dbSpatial objects."
+    contents:
+      - has_concept("spatial_relationships")
+  - title: "Spatial Summary"
+    desc: "Functions that summarize geometry data in a dbSpatial object."
+    contents:
+      - has_concept("geom_summary")
+  - title: "Spatial Properties"
+    desc: "Functions that return a single vector about a geometry in a dbSpatial object."
+    contents:
+      - has_concept("geom_solo")
+  - title: "Geometry construction"
+    desc: "Functions for constructing or modifying geometry in a dbSpatial object."
+    contents:
+      - has_concept("geom_construction")
+  - title: "DuckDB Spatial Extension"
+    desc: "Functions specific for DuckDB spatial extension."
+    contents:
+      - has_concept("duckdb-ext")

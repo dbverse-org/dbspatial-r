@@ -45,4 +45,8 @@ data <- st_read(conn = con,
 
 data
 }
-\keyword{geom_construction}
+\seealso{
+Other geom_construction: 
+\code{\link{st_translate}()}
+}
+\concept{geom_construction}
