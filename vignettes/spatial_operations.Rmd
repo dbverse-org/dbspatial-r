@@ -58,8 +58,9 @@ terra::ext(dummy_spatvector)
 dbSpatial::st_extent(tbl = db_points)
 ```
 
+```{r, eval = FALSE, echo = FALSE}
 ### Shift
-```{r, max.print=10}
+
 # terra
 head(terra::geom(dummy_spatvector))
 
