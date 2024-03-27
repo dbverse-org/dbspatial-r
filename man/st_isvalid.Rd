@@ -38,7 +38,7 @@ db_points = dbSpatial(conn = duckdb_conn,
                       name = "spatVector_proxy",
                       value = dummy_spatvector,
                       overwrite = TRUE)
-                      
+
 # Get extent of the table
 st_isvalid(db_points)
 }
