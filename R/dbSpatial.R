@@ -25,7 +25,7 @@
 #'
 #' TODO: Support for SDF, sf.
 #'
-#' @return A \code{dbSpatial} object with geometry
+#' @return \code{\link{dbSpatial}} object.
 #' @export
 #'
 #' @keywords constructor

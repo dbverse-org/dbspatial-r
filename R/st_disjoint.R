@@ -13,11 +13,11 @@
 #' @param overwrite \code{logical}. If TRUE, overwrite an existing table with the
 #' same `output_tblName`. default: FALSE
 #' @param output_tblName \code{character}. The name of the table to store the 
-#' resulting data. default: "intersect_geom"
+#' resulting data. default: "disjoint_geom"
 #' @keywords spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Intersects.html
+#' https://postgis.net/docs/ST_Disjoint.html
 #'
 #' @return tbl_dbi
 #' @export
@@ -57,20 +57,20 @@
 #' points2 |> 
 #'   dplyr::mutate(geom_text = ST_AsText(geom))
 #' 
-#' res <- st_intersects(g1 = points, 
-#'                      g1_cols_keep = c("name"), 
-#'                      g2 = points2,
-#'                      overwrite = TRUE)
+#' res <- st_disjoint(g1 = points, 
+#'                    g1_cols_keep = c("name"), 
+#'                    g2 = points2,
+#'                    overwrite = TRUE)
 #' 
 #' res
-st_intersects <- function(g1,
-                          g1_geom_colName = "geom",
-                          g1_cols_keep = "all",
-                          g2,
-                          g2_geom_colName = "geom",
-                          g2_cols_keep = "all",
-                          overwrite = FALSE,
-                          output_tblName = "intersect_geom"){
+st_disjoint <- function(g1,
+                        g1_geom_colName = "geom",
+                        g1_cols_keep = "all",
+                        g2,
+                        g2_geom_colName = "geom",
+                        g2_cols_keep = "all",
+                        overwrite = FALSE,
+                        output_tblName = "disjoint_geom"){
   # Check inputs
   .check_con(conn = g1$src$con)
   .check_con(conn = g2$src$con)
@@ -88,7 +88,7 @@ st_intersects <- function(g1,
   
   # Load the DuckDB Spatial extension
   suppressMessages(loadSpatial(con = g1$src$con))
-
+  
   # Update SQL statement depending on g1_cols_keep and g2_cols_keep
   tblName_g1 <- dbplyr::remote_name(g1)
   tblName_g2 <- dbplyr::remote_name(g2)
@@ -99,9 +99,9 @@ st_intersects <- function(g1,
                         g2_geom_colName = g2_geom_colName,
                         g1_cols_keep = g1_cols_keep,
                         g2_cols_keep = g2_cols_keep,
-                        st_name = "st_intersects",
+                        st_name = "st_disjoint",
                         overwrite = overwrite)
-
+  
   duckdb::dbSendQuery(g1$src$con, sql)
   
   res <- dplyr::tbl(g1$src$con, output_tblName)

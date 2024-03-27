@@ -35,7 +35,7 @@ See details for more information.}
 \item{...}{Additional arguments to be passed}
 }
 \value{
-A \code{dbSpatial} object with geometry
+\code{\link{dbSpatial}} object.
 }
 \description{
 Constructor function to ingest a variety of spatial data inputs and create

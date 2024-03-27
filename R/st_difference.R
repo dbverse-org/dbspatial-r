@@ -13,11 +13,13 @@
 #' @param overwrite \code{logical}. If TRUE, overwrite an existing table with the
 #' same `output_tblName`. default: FALSE
 #' @param output_tblName \code{character}. The name of the table to store the 
-#' resulting data. default: "intersect_geom"
+#' resulting data. default: "difference_geom"
 #' @keywords spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Intersects.html
+#' https://postgis.net/docs/ST_Difference.html
+#' Adds column 'st_difference' to the resulting table containing the difference
+#' between the geometries in g1 and g2.
 #'
 #' @return tbl_dbi
 #' @export
@@ -25,52 +27,33 @@
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #' 
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A1", "B1", "C1"))
+#' polys <- dbSpatial(conn = con,
+#'                    name = "polys",
+#'                    value = system.file("data", "dummy_polygons.geojson", package = "dbSpatial"),
+#'                    overwrite = TRUE,
+#'                    x_colName = "x",
+#'                    y_colName = "y")
 #'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
-#'  
-#' points <- dbSpatial(conn = con,
-#'                     name = "points", 
-#'                     value = dummy_data, 
-#'                     overwrite = TRUE, 
-#'                     x_colName = "x", 
-#'                     y_colName = "y")
-#'
-#' # preview                     
-#' points |> 
-#'   dplyr::mutate(geom_text = ST_AsText(geom))
-#'                     
-#' # Create a second set of points, with B1 and C1 translated by + 100
-#' dummy_data2 <- dummy_data
-#' dummy_data2[c(2,3),c(1,2)] <- dummy_data2[c(2,3),c(1,2)] + 150
-#' dummy_data2$name <- c('A2', 'B2', 'C2')
+#' polys2 <- dbSpatial(conn = con,
+#'                    name = "polys2",
+#'                    value = system.file("data", "dummy_polygons.geojson", package = "dbSpatial"),
+#'                    overwrite = TRUE,
+#'                    x_colName = "x",
+#'                    y_colName = "y")
 #' 
-#' points2 <- dbSpatial(conn = con,
-#'                     name = "points2", 
-#'                     value = dummy_data2, 
-#'                     overwrite = TRUE, 
-#'                     x_colName = "x", 
-#'                     y_colName = "y")
-#' # preview                     
-#' points2 |> 
-#'   dplyr::mutate(geom_text = ST_AsText(geom))
-#' 
-#' res <- st_intersects(g1 = points, 
-#'                      g1_cols_keep = c("name"), 
-#'                      g2 = points2,
+#' res <- st_difference(g1 = polys, 
+#'                      g2 = polys2,
 #'                      overwrite = TRUE)
 #' 
 #' res
-st_intersects <- function(g1,
+st_difference <- function(g1,
                           g1_geom_colName = "geom",
                           g1_cols_keep = "all",
                           g2,
                           g2_geom_colName = "geom",
                           g2_cols_keep = "all",
                           overwrite = FALSE,
-                          output_tblName = "intersect_geom"){
+                          output_tblName = "difference_geom"){
   # Check inputs
   .check_con(conn = g1$src$con)
   .check_con(conn = g2$src$con)
@@ -88,7 +71,7 @@ st_intersects <- function(g1,
   
   # Load the DuckDB Spatial extension
   suppressMessages(loadSpatial(con = g1$src$con))
-
+  
   # Update SQL statement depending on g1_cols_keep and g2_cols_keep
   tblName_g1 <- dbplyr::remote_name(g1)
   tblName_g2 <- dbplyr::remote_name(g2)
@@ -99,9 +82,17 @@ st_intersects <- function(g1,
                         g2_geom_colName = g2_geom_colName,
                         g1_cols_keep = g1_cols_keep,
                         g2_cols_keep = g2_cols_keep,
-                        st_name = "st_intersects",
+                        st_name = "st_difference",
                         overwrite = overwrite)
-
+  
+  # add 'st_distance' col logic to sql string
+  lines <- strsplit(sql, "\n")[[1]]
+  lines[2] <- paste0(lines[2], 
+                     ", ",
+                     glue::glue("st_difference(g1.{g1_geom_colName}, g2.{g2_geom_colName}) AS st_difference"))
+  lines <- head(lines, -1) # remove where clause
+  sql <- paste(lines, collapse = " ")
+  
   duckdb::dbSendQuery(g1$src$con, sql)
   
   res <- dplyr::tbl(g1$src$con, output_tblName)
