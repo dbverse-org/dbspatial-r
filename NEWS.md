@@ -1,5 +1,23 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# dbSpatial 0.0.0.9005 (2024-03-27)
+
+## Features
+
+- Add `spatial_relationship` functions.
+
+- Add new internal functions for `spatial_relationship` functions.
+
+- Use lowercase func names.
+
+## Chore
+
+- Update roxygen and pkgdown reference section.
+
+## Chore
+
+- Same as previous version.
+
 # dbSpatial 0.0.0.9004 (2024-03-18)
 
 ## Chore
