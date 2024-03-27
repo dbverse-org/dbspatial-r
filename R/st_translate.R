@@ -56,8 +56,8 @@ st_translate <- function(tbl, geomName = "geom", dx, dy) {
   
   # TODO: native translate, no casting
   res <- tbl |>
-    dplyr::mutate(!!geomName := st_point(st_x(rlang::sym(!!geomName)) + dx, 
-                                         st_y(rlang::sym(!!geomName)) + dy))
+    dplyr::mutate(!!geomName := st_point(st_x(!!rlang::sym(geomName)) + dx, 
+                                         st_y(!!rlang::sym(geomName)) + dy))
   
   return(res)
 }

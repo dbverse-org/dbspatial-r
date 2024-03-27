@@ -38,7 +38,7 @@ st_geometrytype <- function(tbl, geomName = "geom"){
   .check_geomName(tbl = tbl, geomName = geomName)
   
   res <- tbl |>
-    dplyr::mutate(!!geomName := st_geometrytype(rlang::sym(!!geomName))) |>
+    dplyr::mutate(!!geomName := st_geometrytype(!!rlang::sym(geomName))) |>
     dplyr::select(!!geomName)
   
   return(res)
