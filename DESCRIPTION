@@ -16,13 +16,14 @@ Depends:
 Imports:
     tools,
     DBI,
-    duckdb,
+    duckdb (>= 0.9.2),
     data.table,
     dplyr,
     dbplyr,
     terra,
     tictoc,
-    crayon
+    crayon,
+    rlang
 Suggests: 
     knitr,
     rmarkdown
