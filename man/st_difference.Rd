@@ -42,9 +42,11 @@ resulting data. default: "difference_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_Difference.html
 Adds column 'st_difference' to the resulting table containing the difference
 between the geometries in g1 and g2.
+}
+\details{
+\url{https://postgis.net/docs/ST_Difference.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

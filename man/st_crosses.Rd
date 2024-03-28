@@ -42,7 +42,7 @@ resulting data. default: "crosses_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_Crosses.html
+\url{https://postgis.net/docs/ST_Crosses.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

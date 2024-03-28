@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_disjoint.R
 \name{st_disjoint}
 \alias{st_disjoint}
-\title{Determine if two dbSpatial objects are disjoint}
+\title{Determine if \code{geometries} between two dbSpatial objects are disjoint}
 \usage{
 st_disjoint(
   g1,
@@ -42,7 +42,7 @@ resulting data. default: "disjoint_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_Disjoint.html
+\url{https://postgis.net/docs/ST_Disjoint.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

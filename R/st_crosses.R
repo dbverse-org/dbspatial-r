@@ -17,7 +17,7 @@
 #' @family spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Crosses.html
+#' <https://postgis.net/docs/ST_Crosses.html>
 #'
 #' @return tbl_dbi
 #' @export

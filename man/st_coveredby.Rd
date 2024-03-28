@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_coveredby.R
 \name{st_coveredby}
 \alias{st_coveredby}
-\title{#' Determine if \code{geometries} in two dbSpatial objects are covered by each other}
+\title{Determine if \code{geometries} in two dbSpatial objects are covered by each other}
 \usage{
 st_coveredby(
   g1,
@@ -42,7 +42,7 @@ resulting data. default: "coveredby_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_CoveredBy.html
+\url{https://postgis.net/docs/ST_CoveredBy.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

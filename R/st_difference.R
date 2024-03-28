@@ -17,9 +17,11 @@
 #' @family spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Difference.html
 #' Adds column 'st_difference' to the resulting table containing the difference
 #' between the geometries in g1 and g2.
+#' 
+#' @details
+#' <https://postgis.net/docs/ST_Difference.html>
 #'
 #' @return tbl_dbi
 #' @export

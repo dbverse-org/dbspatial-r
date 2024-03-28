@@ -17,7 +17,7 @@
 #' @family spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Distance.html
+#' <https://postgis.net/docs/ST_Distance.html>
 #' Adds column 'st_distance' to the resulting table containing the distance
 #' between the geometries in g1 and g2.
 #'

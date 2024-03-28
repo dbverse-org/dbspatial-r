@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_equals.R
 \name{st_equals}
 \alias{st_equals}
-\title{Determine if two dbSpatial objects are equal}
+\title{Determine if \code{geometries} between two dbSpatial objects are equal}
 \usage{
 st_equals(
   g1,
@@ -42,7 +42,7 @@ resulting data. default: "equals_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_Equals.html
+\url{https://postgis.net/docs/ST_Equals.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_covers.R
 \name{st_covers}
 \alias{st_covers}
-\title{#' Determine if \code{geometries} in two dbSpatial objects are covering each other}
+\title{Determine if \code{geometries} in two dbSpatial objects are covering each other}
 \usage{
 st_covers(
   g1,
@@ -42,7 +42,7 @@ resulting data. default: "covers_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_Covers.html
+\url{https://postgis.net/docs/ST_Covers.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

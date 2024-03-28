@@ -1,4 +1,4 @@
-#' Determine if two dbSpatial objects are intersecting
+#' Determine if `geometries` between two dbSpatial objects are intersecting
 #'
 #' @param g1 A \code{\link{dbSpatial}} object.
 #' @param g1_geom_colName \code{character}. The `geometry` column name in `g1`. 
@@ -17,7 +17,7 @@
 #' @family spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Intersects.html
+#' <https://postgis.net/docs/ST_Intersects.html>
 #'
 #' @return tbl_dbi
 #' @export

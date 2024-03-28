@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_intersects.R
 \name{st_intersects}
 \alias{st_intersects}
-\title{Determine if two dbSpatial objects are intersecting}
+\title{Determine if \code{geometries} between two dbSpatial objects are intersecting}
 \usage{
 st_intersects(
   g1,
@@ -42,7 +42,7 @@ resulting data. default: "intersect_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_Intersects.html
+\url{https://postgis.net/docs/ST_Intersects.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

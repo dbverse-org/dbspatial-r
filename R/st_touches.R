@@ -1,4 +1,4 @@
-#' Determine if two dbSpatial objects are touching
+#' Determine if `geometries` between two dbSpatial objects are touching
 #'
 #' @param g1 A \code{\link{dbSpatial}} object.
 #' @param g1_geom_colName \code{character}. The `geometry` column name in `g1`. 
@@ -17,7 +17,7 @@
 #' @family spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Touches.html
+#' <https://postgis.net/docs/ST_Touches.html>
 #'
 #' @return tbl_dbi
 #' @export

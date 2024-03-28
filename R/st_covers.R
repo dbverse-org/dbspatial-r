@@ -1,4 +1,4 @@
-#' #' Determine if `geometries` in two dbSpatial objects are covering each other
+#' Determine if `geometries` in two dbSpatial objects are covering each other
 #'
 #' @param g1 A \code{\link{dbSpatial}} object.
 #' @param g1_geom_colName \code{character}. The `geometry` column name in `g1`. 
@@ -17,7 +17,7 @@
 #' @family spatial_relationships
 #'
 #' @description
-#' https://postgis.net/docs/ST_Covers.html
+#' <https://postgis.net/docs/ST_Covers.html>
 #'
 #' @return tbl_dbi
 #' @export

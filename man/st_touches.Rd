@@ -2,7 +2,7 @@
 % Please edit documentation in R/st_touches.R
 \name{st_touches}
 \alias{st_touches}
-\title{Determine if two dbSpatial objects are touching}
+\title{Determine if \code{geometries} between two dbSpatial objects are touching}
 \usage{
 st_touches(
   g1,
@@ -42,7 +42,7 @@ resulting data. default: "touches_geom"}
 tbl_dbi
 }
 \description{
-https://postgis.net/docs/ST_Touches.html
+\url{https://postgis.net/docs/ST_Touches.html}
 }
 \examples{
 con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
