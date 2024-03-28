@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# dbSpatial 0.0.0.9006 (2024-03-28)
+
+## Docs
+
+- Update function descriptions.
+
 # dbSpatial 0.0.0.9005 (2024-03-27)
 
 ## Features
@@ -13,10 +19,6 @@
 ## Chore
 
 - Update roxygen and pkgdown reference section.
-
-## Chore
-
-- Same as previous version.
 
 # dbSpatial 0.0.0.9004 (2024-03-18)
 
