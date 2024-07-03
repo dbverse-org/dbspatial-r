@@ -43,7 +43,7 @@
   g2_cols <- generate_cols_selection("g2", g2_cols_keep)
   
   # Construct the SQL query
-  sql_template <- "CREATE {replace} TABLE {output_tblName} AS
+  sql_template <- "CREATE {replace} VIEW {output_tblName} AS
                    SELECT {g1_cols}, {g2_cols}
                    FROM {tblName_g1} g1, {tblName_g2} g2
                    WHERE {st_name}(g1.{g1_geom_colName}, g2.{g2_geom_colName});"
