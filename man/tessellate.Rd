@@ -6,6 +6,7 @@
 \usage{
 tessellate(
   dbSpatial,
+  geomName = "geom",
   name = "tessellation",
   shape = c("hexagon", "square"),
   shape_size = NULL,
@@ -16,7 +17,9 @@ tessellate(
 )
 }
 \arguments{
-\item{dbSpatial}{A \code{dbSpatial} object representing the spatial database.}
+\item{dbSpatial}{A \code{dbSpatial} object representing the spatial table.}
+
+\item{geomName}{A character string specifying the name of the geometry column in the database.}
 
 \item{name}{A character string specifying the name of the tessellation.}
 
@@ -65,3 +68,9 @@ db_points = dbSpatial(conn = con,
 tessellate(db_points, name = "my_tessellation", shape = "hexagon", shape_size = 60)
 
 }
+\seealso{
+Other geom_construction: 
+\code{\link{st_read}()},
+\code{\link{st_translate}()}
+}
+\concept{geom_construction}

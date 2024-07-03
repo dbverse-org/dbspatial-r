@@ -47,6 +47,7 @@ data
 }
 \seealso{
 Other geom_construction: 
-\code{\link{st_translate}()}
+\code{\link{st_translate}()},
+\code{\link{tessellate}()}
 }
 \concept{geom_construction}

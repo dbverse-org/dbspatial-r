@@ -48,6 +48,7 @@ points_translated |>
 }
 \seealso{
 Other geom_construction: 
-\code{\link{st_read}()}
+\code{\link{st_read}()},
+\code{\link{tessellate}()}
 }
 \concept{geom_construction}

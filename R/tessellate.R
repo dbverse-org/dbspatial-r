@@ -19,7 +19,7 @@
 #'
 #' @return The function writes the tessellation to the database connected to `dbSpatial` and 
 #'   returns invisibly.
-#'
+#' @family geom_construction
 #' @examples
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
 #' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
