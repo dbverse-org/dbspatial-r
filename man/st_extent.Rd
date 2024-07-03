@@ -12,7 +12,7 @@ st_extent(tbl, geomName = "geom")
 \item{geomName}{name of the column containing the geometry value in the tbl}
 }
 \value{
-data.frame of extent of geom column in tbl
+numeric vector of extent of geom column in tbl
 }
 \description{
 Get extent of a geometry

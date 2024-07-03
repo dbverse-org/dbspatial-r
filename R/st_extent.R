@@ -3,7 +3,7 @@
 #' @param tbl name of a table in a duckdb database containing geometry column
 #' @param geomName name of the column containing the geometry value in the tbl
 #'
-#' @return data.frame of extent of geom column in tbl
+#' @return numeric vector of extent of geom column in tbl
 #' @export
 #' @family geom_summary
 #' @examples
@@ -41,11 +41,15 @@ st_extent <- function(tbl, geomName = "geom"){
     dplyr::mutate(extent = ST_Extent(geom)) |>
     dplyr::pull(extent) |>
     dplyr::summarize(
-      min_x = min(min_x),
-      max_x = max(max_x),
-      min_y = min(min_y),
-      max_y = max(max_y)
-    )
+      xmin = min(min_x),
+      xmax = max(max_x),
+      ymin = min(min_y),
+      ymax = max(max_y)
+    ) |>
+    as.numeric()
+  
+  names(res) <- c("xmin", "xmax", "ymin", "ymax")
   
   res
+  
 }
