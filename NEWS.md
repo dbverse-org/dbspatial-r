@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# dbSpatial 0.0.0.9007 (2024-07-03)
+
+## Features
+
+- Add new `tessellate` function (WIP)
+
+- Update `st_extent` to return named character vector
+
+- Change default sql gen to VIEW creation instead of table
+
+
 # dbSpatial 0.0.0.9006 (2024-03-28)
 
 ## Docs
