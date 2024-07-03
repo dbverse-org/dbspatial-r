@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# dbSpatial 0.0.0.9008 (2024-07-03)
+
+## Docs
+
+- Update docs for `tessellate`
+
+
 # dbSpatial 0.0.0.9007 (2024-07-03)
 
 ## Features
