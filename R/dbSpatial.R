@@ -120,6 +120,7 @@ dbSpatial <- function(value,
   return(tbl)
 }
 
+## Internal functions ####
 #' @description internal func to ingest spatial file
 #' @noRd
 .handle_file <- function(conn, name, value, overwrite) {
