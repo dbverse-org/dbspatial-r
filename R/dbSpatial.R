@@ -75,12 +75,21 @@ dbSpatial <- function(value,
   suppressMessages(loadSpatial(conn = conn))
   
   # Handle 'value' inputs
-  if (is.data.frame(value) | data.table::is.data.table(value)) {
-    if(is.null(x_colName) | is.null(y_colName)){
-      stop(paste("x_colName and y_colName must be specified for data.frame",
-                 "or data.table inputs to construct a geometry."))
+  if (!is.null(x_colName) && !is.null(y_colName)) {
+    if(inherits(value, c("SpatVector", "SpatRaster", "sf", "sdf"))){
+      stop(paste("Support for point construction only supported for 
+                 files, data.frames, data.tables, or tbl_duckdb_connection."))
     }
-    DBI::dbWriteTable(conn = conn, name = name, value = value, overwrite = overwrite)
+    if(inherits(value, c("data.frame", "data.table"))){
+      DBI::dbWriteTable(
+        conn = conn,
+        name = name,
+        value = value,
+        overwrite = overwrite
+      )
+    } else if (inherits(value, "character")){
+      .handle_file(conn, name, value, overwrite)
+    }
     .create_pointGeom(conn, name, x_colName, y_colName, geomName)
   } else if (is.character(value)) {
     .handle_file(conn, name, value, overwrite)
