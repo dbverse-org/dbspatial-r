@@ -42,10 +42,10 @@ st_read <- function(conn, name, value, overwrite = FALSE, ...){
   suppressMessages(loadSpatial(conn = conn))
   
   if(overwrite){
-    sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
+    sql <- glue::glue("CREATE OR REPLACE VIEW {name} AS
                        SELECT * FROM ST_Read('{value}')")
   } else{
-    sql <- glue::glue("CREATE TABLE {name} AS
+    sql <- glue::glue("CREATE VIEW {name} AS
                        SELECT * FROM ST_Read('{value}')")
   }
 
