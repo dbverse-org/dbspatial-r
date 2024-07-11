@@ -4,12 +4,12 @@
 #' @param g1_geom_colName \code{character}. The `geometry` column name in `g1`. 
 #' default: "geom"
 #' @param g1_cols_keep \code{character vector}. The column names in `g1` to keep
-#' after the operation. default: 'all' for all columns
+#' after the operation. select "none" for no cols. default: 'all' for all columns
 #' @param g2 \code{\link{dbSpatial}} object. 
 #' @param g2_geom_colName \code{character}. The `geometry` column name in `g2`. 
 #' default: "geom"
 #' @param g2_cols_keep \code{character vector}. The column names in `g2` to keep
-#' after the operation. default: 'all' for all columns
+#' after the operation. select "none" for no cols. default: 'all' for all columns
 #' @param overwrite \code{logical}. If TRUE, overwrite an existing table with the
 #' same `output_tblName`. default: FALSE
 #' @param output_tblName \code{character}. The name of the table to store the 
@@ -92,6 +92,10 @@ st_intersects <- function(g1,
   # Update SQL statement depending on g1_cols_keep and g2_cols_keep
   tblName_g1 <- dbplyr::remote_name(g1)
   tblName_g2 <- dbplyr::remote_name(g2)
+  if(is.null(tblName_g1) || is.null(tblName_g2)){
+    stop("Unable to determine table names.")
+  }
+  
   sql <- .gen_sql_query(output_tblName = output_tblName,
                         tblName_g1 = tblName_g1,
                         tblName_g2 = tblName_g2,
