@@ -146,12 +146,16 @@
 #' @noRd
 .check_cols_keep <- function(tbl, cols_keep){
   # check that cols_keep is a valid character vector
-  if(cols_keep != "all"){
-    if(!is.character(cols_keep)){
-      stop("cols_keep must be a character vector.")
+  if(!identical(cols_keep, "all")) {
+    if(!is.character(cols_keep)) {
+      stop("cols_keep must be a character or character vector.")
     }
     
-    if(!all(cols_keep %in% colnames(tbl))){
+    if(all(cols_keep == "none")){
+      return()
+    }
+    
+    if(!all(cols_keep %in% colnames(tbl))) {
       stop("cols_keep must be a subset of column names in tbl.")
     }
   }
