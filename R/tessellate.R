@@ -88,6 +88,7 @@ tessellate <- function(dbSpatial,
   gpolys <- GiottoClass::tessellate(extent = ext, shape = shape, shape_size)
   
   # convert terra geoms to wkt polygons via sf
+  # TODO: implement sf::st_make_grid to avoid this step
   wkt_polys <- gpolys[] |>
     sf::st_as_sf() |>
     sf::st_geometry() |>
@@ -95,13 +96,11 @@ tessellate <- function(dbSpatial,
     dplyr::as_tibble() 
   
   # write to database ----------------------------------------------------------
-  DBI::dbWriteTable(con, name, wkt_polys, overwrite = TRUE)
-  
-  # return dbSpatial object with tessellated polygons --------------------------
-  res = dplyr::tbl(con, name) |>
+  res <- dplyr::copy_to(dest = con, df = wkt_polys, temporary = TRUE) |>
     dplyr::mutate(geom = st_geomfromtext(value)) |>
     # drop the value column
-    dplyr::select(-value)
+    dplyr::select(-value) |>
+    dplyr::compute(name = name, overwrite = TRUE)
   
   return(res)
 }
