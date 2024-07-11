@@ -31,9 +31,12 @@
   
   # Helper function to construct col strings
   generate_cols_selection <- function(prefix, cols_keep) {
-    if (cols_keep == "all") {
+    if (identical(cols_keep, "all")) {
       return(paste0(prefix, ".*"))
-    } else {
+    } else if(all(cols_keep == "none")){
+      return(paste0(""))
+    } 
+    else {
       return(paste0(prefix, ".", cols_keep, collapse = ", "))
     }
   }
@@ -51,14 +54,14 @@
   replace_clause <- ifelse(overwrite, "OR REPLACE", "")
   sql <- glue::glue(sql_template,
                     replace = replace_clause,
-                    output_tblName = output_tblName,
-                    g1_cols = g1_cols,
-                    g2_cols = g2_cols,
-                    tblName_g1 = tblName_g1,
-                    tblName_g2 = tblName_g2,
-                    st_name = st_name,
-                    g1_geom_colName = g1_geom_colName,
-                    g2_geom_colName = g2_geom_colName)
+                    output_tblName = output_tblName %||% "DEFAULT_TABLE",
+                    g1_cols = g1_cols %||% "DEFAULT_COLS",
+                    g2_cols = g2_cols %||% "DEFAULT_COLS",
+                    tblName_g1 = tblName_g1 %||% "DEFAULT_G1_TABLE",
+                    tblName_g2 = tblName_g2 %||% "DEFAULT_G2_TABLE",
+                    st_name = st_name %||% "DEFAULT_st",
+                    g1_geom_colName = g1_geom_colName %||% "geom",
+                    g2_geom_colName = g2_geom_colName %||% "geom")
   
   return(sql)
 }
