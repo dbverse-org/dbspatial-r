@@ -122,6 +122,25 @@
   if(!overwrite & DBI::dbExistsTable(conn, name)){
     stop("Table already exists. Set overwrite = TRUE to overwrite the table.")
   }
+  
+  object_exists <- DBI::dbExistsTable(conn, name)
+  
+  if (overwrite && object_exists) {
+    # Determine if the object is a view
+    is_view <- DBI::dbGetQuery(conn, glue::glue("
+      SELECT COUNT(*) > 0 AS is_view
+      FROM duckdb_views()
+      WHERE view_name = '{name}'
+    "))$is_view
+    
+    if (is_view) {
+      # Drop the view
+      DBI::dbExecute(conn, glue::glue("DROP VIEW IF EXISTS {name}"))
+    } else {
+      # Drop the table
+      DBI::dbRemoveTable(conn, name)
+    }
+  }
 }
 
 #' Input validation for spatial_relationships functions
