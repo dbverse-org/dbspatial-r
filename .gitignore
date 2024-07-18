@@ -17,4 +17,5 @@ docs
 *.cpg
 *.prj
 *.csv
+*.tmp
 docs/*
