@@ -96,7 +96,12 @@ tessellate <- function(dbSpatial,
     dplyr::as_tibble() 
   
   # write to database ----------------------------------------------------------
-  res <- dplyr::copy_to(dest = con, df = wkt_polys, temporary = TRUE) |>
+  res <- dplyr::copy_to(
+    dest = con,
+    df = wkt_polys,
+    temporary = TRUE,
+    overwrite = overwrite
+  ) |>
     dplyr::mutate(geom = st_geomfromtext(value)) |>
     # drop the value column
     dplyr::select(-value) |>
