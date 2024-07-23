@@ -138,10 +138,10 @@ dbSpatial <- function(value,
   #TODO check geometry type of parquet. usually BLOB, need to convert to WKB
   if(file_extension == "parquet"){
     if(overwrite){
-      sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
+      sql <- glue::glue("CREATE OR REPLACE VIEW {name} AS
                          SELECT * FROM read_parquet('{value}')")
     } else {
-      sql <- glue::glue("CREATE TABLE {name} AS
+      sql <- glue::glue("CREATE VIEW {name} AS
                          SELECT * FROM read_parquet('{value}')")
     }
     DBI::dbSendQuery(conn, sql)
@@ -182,7 +182,7 @@ dbSpatial <- function(value,
 #' @description internal func to point geometry in table with specified geomName
 #' @noRd
 .create_pointGeom <- function(conn, name, x_colName, y_colName, geomName) {
-  sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
+  sql <- glue::glue("CREATE OR REPLACE VIEW {name} AS
                      SELECT *, ST_Point({x_colName}, {y_colName}) AS {geomName}
                      FROM {name}")
   
