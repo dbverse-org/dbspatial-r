@@ -2,7 +2,7 @@ Package: dbSpatial
 Title: dbSpatial
 Version: 0.0.0.9008
 Authors@R: 
-    c(person("Edward", "C. Ruiz", , "ecr7407@example.com", role = c("aut", "cre"),
+    c(person("Edward", "C. Ruiz", , "ecr7407@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9174-5387")),
     person("Jiaji", "George Chen", email = "jiajic@bu.edu", role = c("aut")),
     person("Ruben", "Dries", email = "rubendries@gmail.com",role = c("aut", "rev")))
@@ -22,11 +22,14 @@ Imports:
     dbplyr,
     terra,
     sf,
+    GiottoClass,
     crayon,
     rlang
 Suggests: 
     knitr,
     rmarkdown
+Remotes:
+    drieslab/GiottoClass@db
 VignetteBuilder: knitr
 URL: https://dbverse-org.github.io/dbspatial-r/
 BugReports: https://dbverse-org.github.io/dbspatial-r//issues
