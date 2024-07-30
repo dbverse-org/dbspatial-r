@@ -38,18 +38,15 @@ st_extent <- function(tbl, geomName = "geom"){
   suppressMessages(loadSpatial(conn = con))
   
   res <- tbl |>
-    dplyr::mutate(extent = ST_Extent(geom)) |>
-    dplyr::pull(extent) |>
-    dplyr::summarize(
-      xmin = min(min_x),
-      xmax = max(max_x),
-      ymin = min(min_y),
-      ymax = max(max_y)
+    dplyr::summarise(
+      xmin = min(st_xmin(geom)),
+      xmax = max(st_xmax(geom)),
+      ymin = min(st_ymin(geom)),
+      ymax = max(st_ymax(geom))
     ) |>
-    as.numeric()
+    dplyr::collect() |>
+    unlist() # conversion to named numeric vector
   
-  names(res) <- c("xmin", "xmax", "ymin", "ymax")
-  
-  res
+  return(res)
   
 }
