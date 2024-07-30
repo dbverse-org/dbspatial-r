@@ -24,7 +24,8 @@ Imports:
     sf,
     GiottoClass,
     crayon,
-    rlang
+    rlang,
+    glue
 Suggests: 
     knitr,
     rmarkdown
