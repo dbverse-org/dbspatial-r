@@ -22,7 +22,7 @@ st_intersects(
 default: "geom"}
 
 \item{g1_cols_keep}{\code{character vector}. The column names in \code{g1} to keep
-after the operation. default: 'all' for all columns}
+after the operation. select "none" for no cols. default: 'all' for all columns}
 
 \item{g2}{\code{\link{dbSpatial}} object.}
 
@@ -30,7 +30,7 @@ after the operation. default: 'all' for all columns}
 default: "geom"}
 
 \item{g2_cols_keep}{\code{character vector}. The column names in \code{g2} to keep
-after the operation. default: 'all' for all columns}
+after the operation. select "none" for no cols. default: 'all' for all columns}
 
 \item{overwrite}{\code{logical}. If TRUE, overwrite an existing table with the
 same \code{output_tblName}. default: FALSE}
