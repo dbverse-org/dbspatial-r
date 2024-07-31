@@ -133,14 +133,19 @@
       WHERE view_name = '{name}'
     "))$is_view
     
+    arrow_tables <- duckdb::duckdb_list_arrow(conn=con)
+    is_arrow_table <- name %in% arrow_tables
+    
     if (is_view) {
-      # Drop the view
       DBI::dbExecute(conn, glue::glue("DROP VIEW IF EXISTS {name}"))
+    } else if (is_arrow_table) {
+      duckdb::duckdb_unregister_arrow(conn = con, name = name)
     } else {
-      # Drop the table
       DBI::dbRemoveTable(conn, name)
     }
   }
+  
+  return()
 }
 
 #' Input validation for spatial_relationships functions
