@@ -55,7 +55,10 @@ to_dbSpatial <- function(rSpatial,
   }
   
   tbl <- arrow::open_dataset(temp_file) |> 
-    arrow::to_duckdb(con = con, table_name = name)
+    arrow::to_duckdb(con = con) |>
+    dplyr::mutate(geom = st_geomfromwkb(geometry)) |>
+    dplyr::select(-geometry) |>
+    dplyr::compute(name = name, overwrite = TRUE)
   
   res <- dbSpatial(
     conn = conn,
