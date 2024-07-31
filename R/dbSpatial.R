@@ -94,11 +94,11 @@ dbSpatial <- function(value,
   } else if (is.character(value)) {
     .handle_file(conn, name, value, overwrite)
   } else if (inherits(value, c("SpatVector", "SpatRaster"))) {
-    .handle_terra(conn, name, value, overwrite)
+    to_dbSpatial(conn, name, value, overwrite)
   } else if (inherits(value, "tbl_duckdb_connection")){
     .handle_tbl(conn, value)
   } else if (inherits(value, "sf")) {
-    stop("Support for 'sf' objects is not yet implemented.")
+    to_dbSpatial(conn, name, value, overwrite)
   } else if (inherits(value, "sdf")) {
     stop("Support for 'sdf' objects is not yet implemented.")
   } else {
