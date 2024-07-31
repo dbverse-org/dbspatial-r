@@ -10,7 +10,7 @@ Description: Database spatial operations via DuckDB Spatial Extension
 License: GPLv3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Depends:
     R (>= 4.1.0)
 Imports:
