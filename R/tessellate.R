@@ -11,7 +11,6 @@
 #' @param shape_size A numeric value specifying the size of the shapes in the tessellation.
 #'   If `NULL`, a default size is calculated. See `GiottoClass::tessellate` for details.
 #' @param gap A numeric value indicating the gap between tessellation shapes. Defaults to 0.
-#' @param index A logical value indicating whether to create an index on each geometry.Default: 'FALSE'
 #' @param radius A numeric value specifying the radius for hexagonal tessellation. 
 #'   This parameter is ignored for square tessellations.
 #' @param overwrite A logical value indicating whether to overwrite an 
@@ -48,7 +47,6 @@ tessellate <- function(dbSpatial,
                        shape = c("hexagon", "square"),
                        shape_size = NULL,
                        gap = 0,
-                       index = FALSE,
                        radius = NULL,
                        overwrite = FALSE,
                        ...) {
@@ -88,31 +86,18 @@ tessellate <- function(dbSpatial,
   
   # retrieve tessellations
   gpolys <- GiottoClass::tessellate(extent = ext, shape = shape, shape_size)
+  sv <- slot(gpolys, 'spatVector')
   
   # convert terra geoms to wkt polygons via sf
   # TODO: implement sf::st_make_grid to avoid this step
-  wkt_polys <- gpolys[] |>
-    sf::st_as_sf() |>
-    sf::st_geometry() |>
-    sf::st_as_text() |>
-    dplyr::as_tibble()
+  res <- gpolys[] |>
+    to_dbSpatial(conn = con, overwrite = overwrite, name = name)
   
-  # write to database ----------------------------------------------------------
-  res <- dplyr::copy_to(
-    dest = con,
-    df = wkt_polys,
-    temporary = TRUE,
-    overwrite = overwrite
-  ) |>
-    dplyr::mutate(geom = st_geomfromtext(value)) |>
-    # drop the value column
-    dplyr::select(-value)
-  
-  if(index){
-    res <- res |> dplyr::mutate(index = dplyr::row_number())
-  }
-  
-   res <- res |> dplyr::compute(name = name, overwrite = TRUE)
+   # Note: Cannot compute with the same name if it's an arrow table in the db
+   # DBI::dbExistsTable(con, name) wil show true but
+   # DBI::dbListTables(con, name) will show false;
+   # see .check_overwrite() for catching arrow tables
+   # res <- res |> dplyr::compute(name = name, overwrite = TRUE)
   
   return(res)
 }
