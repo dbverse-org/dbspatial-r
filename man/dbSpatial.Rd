@@ -2,7 +2,7 @@
 % Please edit documentation in R/dbSpatial.R
 \name{dbSpatial}
 \alias{dbSpatial}
-\title{Create a \code{\link{dbSpatial}} object with geometry}
+\title{Create a \code{\link{dbSpatial}} object with geometry data type}
 \usage{
 dbSpatial(
   value,
@@ -16,21 +16,31 @@ dbSpatial(
 )
 }
 \arguments{
-\item{value}{value to be added to database. Can be a data.frame, tbl_duckdb_connection,
-file path, \code{\link{sf}} object, or \code{\link{terra}} object.
+\item{value}{\code{\link{data.frame}}, \code{tbl_duckdb_connection},
+\code{character} (valid file path), \code{\link{sf}} object, or \code{\link{terra}} object.
+Data to construct \code{\link{dbSpatial}} object with geometry data type.
 See details for more information.}
 
-\item{name}{\code{character}. Name of table to add to the database.}
+\item{name}{The table name, passed on to \code{\link[DBI:dbQuoteIdentifier]{dbQuoteIdentifier()}}. Options are:
+\itemize{
+\item a character string with the unquoted DBMS table name,
+e.g. \code{"table_name"},
+\item a call to \code{\link[DBI:Id]{Id()}} with components to the fully qualified table name,
+e.g. \code{Id(schema = "my_schema", table = "table_name")}
+\item a call to \code{\link[DBI:SQL]{SQL()}} with the quoted and fully qualified table name
+given verbatim, e.g. \code{SQL('"my_schema"."table_name"')}
+}}
 
-\item{conn}{\code{\link{duckdb_connection}}. A connection object to a DuckDB database.}
+\item{conn}{A \linkS4class{DBIConnection} object, as returned by
+\code{\link[DBI:dbConnect]{dbConnect()}}.}
 
-\item{x_colName}{\code{character}. Name of column containing numerical X coordinates. default = NULL.}
+\item{x_colName}{\code{character}. Name of column containing numerical X coordinates. default = \code{NULL}.}
 
-\item{y_colName}{\code{character}. Name of column containing numerical Y coordinates. default = NULL.}
+\item{y_colName}{\code{character}. Name of column containing numerical Y coordinates. default = \code{NULL}.}
 
-\item{geomName}{\code{character}. Name of the column containing the geometry. Must start with a character. default = "geom".}
+\item{geomName}{\code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: \code{"geom"}.}
 
-\item{overwrite}{\code{logical}. Overwrite existing table. default = FALSE.}
+\item{overwrite}{\code{logical}. Overwrite existing table. default = \code{FALSE}.}
 
 \item{...}{Additional arguments to be passed}
 }
@@ -38,18 +48,17 @@ See details for more information.}
 \code{\link{dbSpatial}} object.
 }
 \description{
-Constructor function to ingest a variety of spatial data inputs and create
-a \link{dbSpatial} object containing a \code{geometry} data type based
+Constructor function to ingest diverse spatial data sources and create
+a \code{\link{dbSpatial}} object containing a \code{geometry} data type based
 on the \href{https://en.wikipedia.org/wiki/Simple_Features}{Simple Features}
 standard.
 
-If \code{x_colName} and \code{y_colName} are specified, a point geometry
+If \code{x_colName} and \code{y_colName} are both provided, a \code{POINT} geometry
 will be constructed based on these columns.
 }
 \details{
-For list of files supported see \link{st_read}.
-
-TODO: Support for SDF, sf.
+For list of files supported see link below.
+\url{https://DuckDB.org/docs/extensions/spatial.html#st_read---read-spatial-value-from-files}
 }
 \examples{
 # create in-memory DuckDB db
@@ -72,6 +81,13 @@ dbSpatial(conn = duckdb_conn,
 dbSpatial(conn = duckdb_conn,
           name = "test_points",
           value = 'test_data.csv',
+          x_colName = "x",
+          y_colName = "y",
           overwrite = TRUE)
 }
-\concept{constructor}
+\seealso{
+Other dbSpatial: 
+\code{\link{as_dbSpatial}()},
+\code{\link{show}()}
+}
+\concept{dbSpatial}

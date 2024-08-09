@@ -1,6 +1,15 @@
+#' @title Convert an {sf} or {terra} object to a `dbSpatial` object
+#' @description
+#' Create a \code{\link{dbSpatial}} object from an \code{sf} or \code{terra} object.
+#' 
+#' @details
+#' Writes out the `rSpatial` object to temporary .parquet file and
+#' computes the VIEW in the database with the specified `name` and the geometry
+#' column as `geom`.
+#' 
 #' @param rSpatial \code{sf} or \code{terra} object.
-#' @param conn \code{\link{duckdb_connection}}. A connection object to a DuckDB database.
-#' @param name \code{character}. Name of table to add to the database.
+#' @param conn A \code{\link{DBIConnection}} object, as returned by \code{\link{DBI::dbConnect}}.
+#' @param name \code{a character string} with the unquoted DBMS table name, e.g. "table_name"
 #' @param overwrite \code{logical}. Overwrite existing table. default = FALSE.
 #' @param ... Additional arguments to be passed
 #' @family dbSpatial
@@ -18,11 +27,12 @@
 #' # Set db connection
 #' duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #' 
-#' dbSpatial <- to_dbSpatial(rSpatial = dummy_spatvector,
+#' dbSpatial <- as_dbSpatial(rSpatial = dummy_spatvector,
 #'                          conn = duckdb_conn,
 #'                          name = "dummy_spatvector",
 #'                          overwrite = TRUE)
-to_dbSpatial <- function(rSpatial,
+#' dbSpatial
+as_dbSpatial <- function(rSpatial,
                          conn,
                          name,
                          overwrite = FALSE,
@@ -30,13 +40,19 @@ to_dbSpatial <- function(rSpatial,
   # input validation
   .check_con(conn = conn)
   .check_name(name = name)
-  .check_overwrite(conn = con, name = name, overwrite = overwrite)
+  .check_overwrite(conn = conn, name = name, overwrite = overwrite)
+  
+  # Load spatial extension
+  suppressMessages(loadSpatial(conn = conn))
   
   
   # check that rSpatial is of class sf or terra
-  if(!(inherits(rSpatial, "sf") || inherits(rSpatial, "SpatVector") || 
-       inherits(rSpatial, "SpatRaster"))){
+  if(!(inherits(rSpatial, "sf") || inherits(rSpatial, "SpatVector"))){
     stop("rSpatial must be an {sf} or {terra} object.")
+  }
+  
+  if(inherits(rSpatial, "SpatRaster")) {
+    stop("Support for {terra} SpatRaster objects not yet implemented.")
   }
   
   temp_file <- tempfile(tmpdir = getwd(), fileext = ".parquet")
@@ -46,7 +62,6 @@ to_dbSpatial <- function(rSpatial,
   }
   
   if (inherits(rSpatial, "sf")) {
-    # convert to terra
     to_parquet(rSpatial)
   } else if(inherits(rSpatial, "SpatVector") || inherits(rSpatial, "SpatRaster")) {
     rSpatial |>
@@ -55,20 +70,13 @@ to_dbSpatial <- function(rSpatial,
   }
   
   tbl <- arrow::open_dataset(temp_file) |> 
-    arrow::to_duckdb(con = con) |>
+    arrow::to_duckdb(con = conn) |>
     dplyr::mutate(geom = st_geomfromwkb(geometry)) |>
-    dplyr::select(-geometry) |>
-    dplyr::compute(name = name, overwrite = TRUE)
+    dplyr::compute(overwrite = overwrite, name = name)
   
-  res <- dbSpatial(
-    conn = conn,
-    name = name,
-    value = tbl,
-    geomName = 'geometry',
-    overwrite = FALSE
-  )
+  res <- dbSpatial(value = tbl, name = name)
   
-  unlink(temp_file) # delete temp file
+  unlink(temp_file, recursive = TRUE, force = TRUE) # delete temp file
   
   return(res)
   

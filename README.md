@@ -50,8 +50,9 @@ points <- dbSpatial(conn = duckdb_conn,
                     overwrite = TRUE)
 
 points
+#> # Class:    dbSpatial 
 #> # Source:   table<test_points> [10 x 4]
-#> # Database: DuckDB v0.10.0 [user@Linux 6.5.0-25-generic:R 4.1.2/:memory:]
+#> # Database: DuckDB v1.0.0 [root@Darwin 23.5.0:R 4.4.1/:memory:]
 #>        x     y    id geom      
 #>    <int> <int> <int> <list>    
 #>  1     1     1     1 <raw [32]>

@@ -14,9 +14,7 @@ setClass(
 #' is used as a connection to a single table that exists within a DuckDB database.
 #' @slot conn \code{\link{duckdb_connection}}. A connection object to a DuckDB database.
 #' @slot name \code{character}. Name of table in the database.
-#' @slot geomName \code{character}. Name of the column containing the geometry value in the db table.
 #' @slot value value representing the table in the database.
-#' @slot geometry \code{character}. Type of geometry in the dbSpatial object.
 #' @noRd
 #' @export
 dbSpatial = setClass(
@@ -25,16 +23,11 @@ dbSpatial = setClass(
   slots = list(
     conn = 'duckdb_connection',
     name = 'character',
-    geomName = 'character',
-    value = 'ANY',
-    geometry = 'character'
-  ),
+    value = "ANY"
+    ),
   prototype = list(
     conn = NULL,
     name = NA_character_,
-    geomName = NA_character_,
-    value = NULL,
-    geometry = NA_character_
+    value = NULL
   )
 )
-
