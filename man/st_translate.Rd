@@ -55,8 +55,4 @@ points_translated <- st_translate(dbSpatial = points, dx = 100, dy = -20)
 
 points_translated
 }
-\seealso{
-Other geom_construction: 
-\code{\link{tessellate}()}
-}
 \concept{geom_construction}
