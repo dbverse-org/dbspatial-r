@@ -20,8 +20,9 @@ Imports:
     data.table,
     dplyr,
     dbplyr,
-    terra,
+    terra (>= 1.7-39),
     sf,
+    GiottoUtils (>= 0.1.10),
     GiottoClass,
     crayon,
     rlang,
@@ -31,6 +32,7 @@ Suggests:
     knitr,
     rmarkdown
 Remotes:
+    drieslab/GiottoUtils
     drieslab/GiottoClass@db
 VignetteBuilder: knitr
 URL: https://dbverse-org.github.io/dbspatial-r/
