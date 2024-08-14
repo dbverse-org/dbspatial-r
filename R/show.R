@@ -1,44 +1,34 @@
-setMethod('show', signature(object = 'dbSpatial'), function(object) {
-  # use proper getters
-  dbdir <- object@value[[1]]$con@driver@dbdir
-  numrow <- object@value |> dplyr::tally() |> dplyr::pull(n)
-  geomName <- object@geomName
-  isComputed <- ifelse(is.null(dbplyr::remote_name(object@value)), 'FALSE', 'TRUE')
+#' Show method for dbSpatial
+#' @title show method for dbSpatial
+#' @name show
+#' @family dbSpatial
+setMethod('show',
+          signature(object = 'dbSpatial'),
+          function(object) {
+  # prepare show
+  # preview <- object[] |> head(1) |> dplyr::collect()
   
+  # geom_name <- .get_geomName(preview)
+  
+  # in cases where reading in spatial data and no geom
+  # is present. e.g. parquet file
+  # if(is.null(geom_name)){
+  #   grey_color <- crayon::make_style("grey70")
+  #   cat(grey_color("# Class:    dbSpatial \n"))
+  #   cat(grey_color("# Extent:   NA\n"))
+  #   return(show(object[]))
+  # }
+  
+  # extent <- object |>
+  #   st_extent(geomName = geom_name) |>
+  #   unname() |>
+  #   round(2) |> # round to 2 decimal places
+  #   as.character()
+  # labels_str <- paste(paste(extent, collapse = " "), "(xmin xmax ymin ymax)")
+
   # print metadata
-  cat(crayon::bold('# dbSpatial object\n'))
-  cat('# connection: \t', dbdir, '\n')
-  cat('# table name: \t ', object@name, '\n', sep = '')
-  cat('# computed: \t ', isComputed, '\n', sep = '')
-
-  # preview print #
-  # ------------- #
-  preview_dt <- object@value |>
-    dplyr::select(-!!geomName, !!geomName) |> # geomName printed last
-    dplyr::mutate(!!geomName := ST_AsText(!!sym(geomName))) |>
-  head(10) |>
-  data.table::as.data.table()
-  
-  preview_dt[,geomName] <- crayon::bold(preview_dt[,geomName])
-  
-  if(numrow > 10 ){
-    output <- as.matrix(preview_dt)
-    ellipsis_row = crayon::silver(rep('...', ncol(output)))
-    output <- rbind(output, ellipsis_row)
-    
-    rownames(output) <- c(crayon::blue(rownames(preview_dt)), crayon::silver("..."))
-    colnames(output) <- crayon::blue(colnames(preview_dt))
-  } else {
-    output <- as.matrix(preview_dt)
-    rownames(output) <- crayon::blue(rownames(preview_dt))
-    colnames(output) <- crayon::blue(colnames(preview_dt))
-  }
-  
-  write.table(output,
-              quote = FALSE,
-              row.names = TRUE,
-              col.names = NA,
-              sep = "\t",
-              file = "") 
-
+  grey_color <- crayon::make_style("grey60")
+  cat(grey_color("# Class:    dbSpatial \n"))
+  # cat(grey_color("# Extent: ", labels_str, paste0("[", geom_name, "]"), "\n"))
+  return(show(object[]))
 })

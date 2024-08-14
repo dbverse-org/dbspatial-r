@@ -1,38 +1,28 @@
-#' Read spatial data from a file and create a table in a duckdb database
-#'
+#' Ingest spatial data from a file as a `VIEW` and create a `dbSpatial` object
 #' @param conn a duckdb connection
 #' @param name name of the table to be created
 #' @param value a data.frame or a file path
+#' @param x_colName name of the column containing x coordinates. default: 'NULL'
+#' @param y_colName name of the column containing y coordinates. default: 'NULL'
+#' @param geomName name of the geometry column to be created. default: 'geom'
 #' @param overwrite logical; if TRUE, overwrite the table if it already exists
+#' default: 'FALSE'
+#' @param return return dbSpatial object. default: 'FALSE'
 #' @param ... additional arguments to pass to st_read
-#'
 #' @details
 #' For list of files supported see the documentation below.
 #' <https://DuckDB.org/docs/extensions/spatial.html#st_read---read-spatial-value-from-files>
-#'
-#' @return tbl_dbi
-#' 
-#' @export
-#' 
-#' @family geom_construction
-#' @examples
-#' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
-#' 
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
-#'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
-#' 
-#' write.csv(dummy_data, "dummy_data.csv", row.names = FALSE)
-#'  
-#' data <- st_read(conn = con, 
-#'                 name = "points", 
-#'                 value = "dummy_data.csv", 
-#'                 overwrite = TRUE)
-#' 
-#' data
-st_read <- function(conn, name, value, overwrite = FALSE, ...){
+#' @return `dbSpatial` object if `return = TRUE` else `NULL`
+#' @keywords internal
+.st_read <- function(conn,
+                     name,
+                     value,
+                     x_colName = NULL,
+                     y_colName = NULL,
+                     geomName = "geom",
+                     overwrite = FALSE,
+                     return = TRUE,
+                     ...) {
   # input validation
   .check_con(conn)
   .check_name(name)
@@ -41,17 +31,43 @@ st_read <- function(conn, name, value, overwrite = FALSE, ...){
   
   suppressMessages(loadSpatial(conn = conn))
   
-  if(overwrite){
-    sql <- glue::glue("CREATE OR REPLACE VIEW {name} AS
-                       SELECT * FROM ST_Read('{value}')")
-  } else{
-    sql <- glue::glue("CREATE VIEW {name} AS
-                       SELECT * FROM ST_Read('{value}')")
+  file_extension <- tools::file_ext(value)
+  
+  # Determine if we should use OR REPLACE
+  replace_check <- if (overwrite) "OR REPLACE" else ""
+  
+  # Determine which read function to use based on file extension
+  file_extension <- tools::file_ext(value)
+  read_function <- if (tolower(file_extension) == "parquet") "read_parquet" else "ST_Read"
+  
+  # Add ST_Point column if x_colName and y_colName are provided
+  point_column <- if (!is.null(x_colName) && !is.null(y_colName)) {
+    #.check_geomName(value = value, geomName = geomName)
+    glue::glue(", ST_Point(CAST({x_colName} AS DOUBLE), 
+               CAST({y_colName} AS DOUBLE)) AS {geomName}")
+  } else {
+    ""
   }
-
+  
+  sql <- glue::glue("
+  CREATE {replace_check} VIEW {name} AS
+  SELECT *{point_column}
+  FROM {read_function}('{value}')
+  ")
+  
+  # Execute the SQL command
   DBI::dbExecute(conn, sql)
   
-  res <- dplyr::tbl(conn, name)
-  
-  return(res)
+  if (return) {
+    out_tbl <- dplyr::tbl(conn, name)
+    
+    res <- dbSpatial(
+      conn = conn,
+      name = name,
+      value = out_tbl
+    )
+    
+    return(res) 
+  }
+  return()
 }

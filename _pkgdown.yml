@@ -4,26 +4,30 @@ template:
 
 reference:
   - title: "dbSpatial Package"
-    desc: "Functions for constructing dbSpatial objects"
+    desc: "Functions and methods for `dbSpatial` objects"
     contents:
-      - has_concept("constructor")
-  - title: "Spatial Relationships"
-    desc: "Functions that calculate spatial relationships between two dbSpatial objects."
+      - has_concept("dbSpatial")
+  - title: "Spatial Joins"
+    desc: "Functions and methods that perform a spatial join between `dbSpatial` objects."
     contents:
-      - has_concept("spatial_relationships")
+      - has_concept("spatial_join")
   - title: "Spatial Summary"
-    desc: "Functions that summarize geometry data in a dbSpatial object."
+    desc: "Functions and methods that summarize geometry data in a `dbSpatial` object."
     contents:
       - has_concept("geom_summary")
   - title: "Spatial Properties"
-    desc: "Functions that return a single vector about a geometry in a dbSpatial object."
+    desc: "Functions and methods that return a single vector about a geometry in a `dbSpatial` object."
     contents:
-      - has_concept("geom_solo")
+      - has_concept("geom_scalar")
   - title: "Geometry construction"
-    desc: "Functions for constructing or modifying geometry in a dbSpatial object."
+    desc: "Functions and methods for constructing or modifying geometry in a `dbSpatial` object."
     contents:
       - has_concept("geom_construction")
   - title: "DuckDB Spatial Extension"
-    desc: "Functions specific for DuckDB spatial extension."
+    desc: "Functions and methods specific for DuckDB spatial extension."
     contents:
       - has_concept("duckdb-ext")
+  - title: "dbData"
+    desc: "dbData methods"
+    contents:
+      - has_concept("dbData")

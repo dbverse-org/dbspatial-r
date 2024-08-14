@@ -5,11 +5,11 @@
   if(missing(conn)) {
     stop("Please provide a db connection.")
   }
-  
+
   if(!DBI::dbIsValid(conn)) {
     stop("Stale connection. Reconnect your db connection.")
   }
-  
+
   if(!inherits(conn, "duckdb_connection")) {
     stop("conn must be a duckdb connection. Use duckdb drv in DBI::dbConnect().")
   }
@@ -22,14 +22,14 @@
 .check_value <- function(value){
   is_tbl_dbi = inherits(value, "tbl_dbi")
   is_df = is.data.frame(value)
-  is_terra = inherits(value, "SpatVector") | inherits(value, "SpatRaster")
+  is_terra = inherits(value, "SpatVector") || inherits(value, "SpatRaster")
   if(is.character(value)){
     is_valid_file = file.exists(value)
   } else {
     is_valid_file = FALSE
   }
   
-  if(!(is_tbl_dbi | is_df | is_terra | is_valid_file)) {
+  if(!(is_tbl_dbi || is_df || is_terra || is_valid_file)) {
     stop(
       'Invalid "value" input passed.'
     )
@@ -46,7 +46,7 @@
   
   # check that tbl is from a duckdb connection
   if (!inherits(tbl, "tbl_duckdb_connection")) {
-    stop("Please provide a duckdb table.")
+    stop("Please provide a table in a DuckDB database.")
   }
 }
 
@@ -54,23 +54,24 @@
 #' @keywords internal
 #' @noRd
 .check_name <- function(name){
+
   if(missing(name)) {
     stop("Please provide a table name.")
   }
-  
-  if(is.null(name)) {
-    stop("name cannot be NULL. Did you forget to dplyr::compute()?")
-  }
-  
+
+  # if(is.null(name)) {
+  #   stop("name cannot be NULL. Did you forget to dplyr::compute()?")
+  # }
+
   if(!is.character(name)) {
     stop("name must be a character string.")
   }
-  
+
   # if name starts with a number, add warning
   if(grepl("^[0-9]", name)) {
     stop("Table names should not start with a number.")
   }
-  
+
   # reserved name check
   reserved_names = c("intersect", "union", "except",
                      "select", "from", "where", "group", "by", "limit",
@@ -83,24 +84,17 @@
 #' Input validation for geomName arg
 #' @keywords internal
 #' @noRd
-.check_geomName <- function(tbl, geomName){
+.check_geomName <- function(value, geomName){
   
-  if(!(geomName %in% colnames(tbl))) {
-    stop("geomName not found in tbl.")
+  if(is.null(geomName)) {
+    stop("geomName cannot be NULL. Please provide a geomName.")
   }
   
-  # if name starts with a number, add warning
-  if(grepl("^[0-9]", geomName)) {
-    stop("Table names should not start with a number.")
+  if(!(geomName %in% colnames(value))) {
+    stop("geomName not found in 'value'.")
   }
   
-  # reserved name check
-  reserved_names = c("intersect", "union", "except",
-                     "select", "from", "where", "group", "by", "limit",
-                     "create", "table", "insert")
-  if(geomName %in% reserved_names){
-    stop("geomName cannot be a RESERVED word. Try another geomName.")
-  }
+  .check_name(name = geomName)
 }
 
 #' Input validation for overwrite arg
@@ -133,17 +127,22 @@
       WHERE view_name = '{name}'
     "))$is_view
     
+    arrow_tables <- duckdb::duckdb_list_arrow(conn = conn)
+    is_arrow_table <- name %in% arrow_tables
+    
     if (is_view) {
-      # Drop the view
       DBI::dbExecute(conn, glue::glue("DROP VIEW IF EXISTS {name}"))
+    } else if (is_arrow_table) {
+      duckdb::duckdb_unregister_arrow(conn = conn, name = name)
     } else {
-      # Drop the table
       DBI::dbRemoveTable(conn, name)
     }
   }
+  
+  return()
 }
 
-#' Input validation for spatial_relationships functions
+#' Input validation for spatial_join functions
 #' @keywords internal
 #' @details
 #' ensure two dbSpatial objects are in the same connection
@@ -157,7 +156,7 @@
   }
 }
 
-#' Input validation for spatial_relationships functions
+#' Input validation for spatial_join functions
 #' @keywords internal
 #' @details
 #' ensure two dbSpatial objects are in the same connection

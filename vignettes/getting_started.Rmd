@@ -37,12 +37,13 @@ test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
 # df, tbl
 # specify x and y column names to cast to a point geometry
-dbSpatial(conn = duckdb_conn,
-          name = "test_points",
-          value = test_data,
-          x_colName = "x",
-          y_colName = "y",
-          overwrite = TRUE)
+a <- dbSpatial(conn = duckdb_conn,
+               name = "test_points",
+               value = test_data,
+               x_colName = "x",
+               y_colName = "y",
+               overwrite = TRUE)
+a
 ```
 
 ### From .csv file
@@ -54,10 +55,13 @@ test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 write.csv(test_data, "test_data.csv", row.names = FALSE)
 
 # load file in db
-dbSpatial(conn = duckdb_conn,
-          name = "test_points",
-          value = 'test_data.csv',
-          overwrite = TRUE)
+a <- dbSpatial(conn = duckdb_conn,
+               name = "test_points",
+               value = 'test_data.csv',
+               x_colName = "x",
+               y_colName = "y",
+               overwrite = TRUE)
+a
 ```
 
 

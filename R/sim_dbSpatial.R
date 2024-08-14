@@ -14,7 +14,8 @@
                    name = "test_data",
                    value = test_data,
                    x_colName = "x",
-                   y_colName = "y")
+                   y_colName = "y",
+                   overwrite = TRUE)
   
   return(res)
 }

@@ -1,34 +1,34 @@
 ## Constructor ####
-#' Create a \code{\link{dbSpatial}} object with geometry
-#' @param conn \code{\link{duckdb_connection}}. A connection object to a DuckDB database.
-#' @param name \code{character}. Name of table to add to the database.
-#' @param value value to be added to database. Can be a data.frame, tbl_duckdb_connection,
-#' file path, \code{\link{sf}} object, or \code{\link{terra}} object. 
+#' Create a \code{\link{dbSpatial}} object with geometry data type
+#' @inheritParams DBI::dbWriteTable
+#' @param value \code{\link{data.frame}}, `tbl_duckdb_connection`,
+#' \code{character} (valid file path), \code{\link{sf}} object, or \code{\link{terra}} object. 
+#' Data to construct \code{\link{dbSpatial}} object with geometry data type.
 #' See details for more information.
-#' @param x_colName \code{character}. Name of column containing numerical X coordinates. default = NULL.
-#' @param y_colName \code{character}. Name of column containing numerical Y coordinates. default = NULL.
-#' @param geomName \code{character}. Name of the column containing the geometry. Must start with a character. default = "geom".
-#' @param overwrite \code{logical}. Overwrite existing table. default = FALSE.
+#' @param x_colName \code{character}. Name of column containing numerical X coordinates. default = `NULL`.
+#' @param y_colName \code{character}. Name of column containing numerical Y coordinates. default = `NULL`.
+#' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
+#' @param overwrite \code{logical}. Overwrite existing table. default = `FALSE`.
 #' @param ... Additional arguments to be passed
 #' 
 #' @description
-#' Constructor function to ingest a variety of spatial data inputs and create 
-#' a \link{dbSpatial} object containing a \code{geometry} data type based
+#' Constructor function to ingest diverse spatial data sources and create 
+#' a \code{\link{dbSpatial}} object containing a \code{geometry} data type based
 #' on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) 
 #' standard.
 #' 
-#' If \code{x_colName} and \code{y_colName} are specified, a point geometry 
+#' If \code{x_colName} and \code{y_colName} are both provided, a `POINT` geometry 
 #' will be constructed based on these columns.
 #'
 #' @details
-#' For list of files supported see \link{st_read}.
+#' For list of files supported see link below.
+#' <https://DuckDB.org/docs/extensions/spatial.html#st_read---read-spatial-value-from-files>
 #'
-#' TODO: Support for SDF, sf.
 #'
 #' @return \code{\link{dbSpatial}} object.
 #' @export
 #'
-#' @family constructor
+#' @family dbSpatial
 #'
 #' @examples
 #' # create in-memory DuckDB db
@@ -51,6 +51,8 @@
 #' dbSpatial(conn = duckdb_conn,
 #'           name = "test_points",
 #'           value = 'test_data.csv',
+#'           x_colName = "x",
+#'           y_colName = "y",
 #'           overwrite = TRUE)
 dbSpatial <- function(value,
                       name,
@@ -62,7 +64,7 @@ dbSpatial <- function(value,
                       ...) {
   if(inherits(value, "tbl_duckdb_connection")){
     conn <- dbplyr::remote_con(value)
-    name <- dbplyr::remote_name(value)
+    name <- dbplyr::remote_name(value) # will return NULL if passing VIEW
     overwrite <- 'PASS'
   }
   
@@ -81,24 +83,40 @@ dbSpatial <- function(value,
                  files, data.frames, data.tables, or tbl_duckdb_connection."))
     }
     if(inherits(value, c("data.frame", "data.table"))){
+      if(!x_colName %in% names(value) || !y_colName %in% names(value)){
+        stop("x_colName and y_colName must be columns in 'value'.")
+      }
+      
       DBI::dbWriteTable(
         conn = conn,
         name = name,
         value = value,
         overwrite = overwrite
       )
+      .add_pointGeom(conn, name, x_colName, y_colName, geomName, overwrite)
     } else if (inherits(value, "character")){
-      .handle_file(conn, name, value, overwrite)
+      .st_read(
+        conn = conn,
+        name = name,
+        value = value,
+        overwrite = overwrite,
+        x_colName = x_colName,
+        y_colName = y_colName,
+        geomName = geomName,
+        return = FALSE
+      )
     }
-    .create_pointGeom(conn, name, x_colName, y_colName, geomName)
   } else if (is.character(value)) {
-    .handle_file(conn, name, value, overwrite)
-  } else if (inherits(value, c("SpatVector", "SpatRaster"))) {
-    .handle_terra(conn, name, value, overwrite)
+    .st_read(conn = conn, name = name, value = value, overwrite = overwrite)
+  } else if (inherits(value, c("SpatVector", "SpatRaster", "sf"))) {
+    as_dbSpatial(
+      rSpatial = value,
+      conn = conn,
+      name = name,
+      overwrite = overwrite
+    )
   } else if (inherits(value, "tbl_duckdb_connection")){
     .handle_tbl(conn, value)
-  } else if (inherits(value, "sf")) {
-    stop("Support for 'sf' objects is not yet implemented.")
   } else if (inherits(value, "sdf")) {
     stop("Support for 'sdf' objects is not yet implemented.")
   } else {
@@ -110,45 +128,23 @@ dbSpatial <- function(value,
   # s3 object construction
   # res <- structure(
   #   list(
-  #     value = value,
-  #     geometry = "POINT", # Example geometry data as a matrix
   #     conn = conn,
-  #     name = name
+  #     name = name,
+  #     value = value
   #     ),
   #   class = "dbSpatial"
   # )
   
   # S4 object creation
-  # res <- new("dbSpatial", 
-  #            conn = conn, 
-  #            name = name,
-  #            geomName = geomName,
-  #            value = tbl, 
-  #            geometry = "POINT")
+  res <- new("dbSpatial",
+             conn = conn,
+             name = name,
+             value = tbl)
   
-  return(tbl)
+  return(res)
 }
 
 ## Internal functions ####
-#' @description internal func to ingest spatial file
-#' @noRd
-.handle_file <- function(conn, name, value, overwrite) {
-  file_extension <- tools::file_ext(value)
-  
-  #TODO check geometry type of parquet. usually BLOB, need to convert to WKB
-  if(file_extension == "parquet"){
-    if(overwrite){
-      sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
-                         SELECT * FROM read_parquet('{value}')")
-    } else {
-      sql <- glue::glue("CREATE TABLE {name} AS
-                         SELECT * FROM read_parquet('{value}')")
-    }
-    DBI::dbSendQuery(conn, sql)
-  } else{
-    st_read(conn = conn, name = name, value = value, overwrite = overwrite)
-  }
-}
 
 #' @description internal func to ingest terra object
 #' @noRd
@@ -179,12 +175,48 @@ dbSpatial <- function(value,
   return()
 }
 
-#' @description internal func to point geometry in table with specified geomName
-#' @noRd
-.create_pointGeom <- function(conn, name, x_colName, y_colName, geomName) {
-  sql <- glue::glue("CREATE OR REPLACE TABLE {name} AS
-                     SELECT *, ST_Point({x_colName}, {y_colName}) AS {geomName}
-                     FROM {name}")
+.add_pointGeom <- function(conn,
+                           name,
+                           x_colName,
+                           y_colName,
+                           geomName,
+                           overwrite) {
+  # First, check if the column already exists
+  check_sql <- glue::glue("SELECT COUNT(*) FROM information_schema.columns 
+                           WHERE table_name = '{name}' AND column_name = '{geomName}'")
+  
+  column_exists <- DBI::dbGetQuery(conn, check_sql)[[1]] > 0
+  
+  if (column_exists & !overwrite) {
+    stop(
+      "Column already exists with name: ",
+      geomName,
+      ". Please choose a different name or set 'overwrite' to TRUE."
+    )
+  } else if (column_exists & overwrite) {
+    sql <- glue::glue("UPDATE {name} 
+                       SET {geomName} = ST_Point({x_colName}, {y_colName})")
+  } else {
+    # If the column doesn't exist, add it
+    sql <- glue::glue("ALTER TABLE {name} 
+                       ADD COLUMN {geomName} GEOMETRY;
+                       UPDATE {name} 
+                       SET {geomName} = ST_Point({x_colName}, {y_colName})")
+  }
   
   invisible(DBI::dbExecute(conn, sql))
+}
+
+
+#' @description internal func to get first geometry column name
+#' @details assumes geometry column is of type list
+#' @noRd
+#' @keywords internal
+.get_geomName <- function(x){
+  geom_name <- x |> 
+    sapply(class) |> 
+    (\(x) names(x)[x == "list"])() |> 
+    (\(x) if(length(x) > 0) x[1] else NULL)() # first geometry col is extent
+  
+  return(geom_name)
 }
