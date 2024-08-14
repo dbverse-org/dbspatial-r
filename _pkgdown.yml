@@ -2,6 +2,17 @@ url: https://drieslab.github.io/dbSpatial/
 template:
   bootstrap: 5
   light-switch: true
+  
+navbar:
+  structure:
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, github, lightswitch]
+    
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/drieslab/dbSpatial
+      aria-label: GitHub
 
 reference:
   - title: "dbSpatial Package"

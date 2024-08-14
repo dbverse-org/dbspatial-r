@@ -11,10 +11,17 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/dbSpatial)](https://CRAN.R-project.org/package=dbSpatial)
 <!-- badges: end -->
 
+`{dbSpatial}` is a core package in the
+[`dbverse`](https://drieslab.github.io/dbverse/) library.
+
 The goal of `{dbSpatial}` is to provide larger-than-memory spatial
 operations for various spatial data sources. The package largely relies
 on the [DuckDB spatial
 extension](https://duckdb.org/docs/extensions/spatial.html).
+
+**Note: Work in progress! Bugs or unexpected behavior are likely to
+occur. We welcome user feedback and reporting issues on the [Github
+page](https://github.com/drieslab/dbSpatial/).**
 
 ## Installation
 
