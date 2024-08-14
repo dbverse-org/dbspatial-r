@@ -6,8 +6,8 @@ Authors@R:
            comment = c(ORCID = "0000-0002-9174-5387")),
     person("Jiaji", "George Chen", email = "jiajic@bu.edu", role = c("aut")),
     person("Ruben", "Dries", email = "rubendries@gmail.com",role = c("aut", "rev")))
-Description: Database spatial operations via DuckDB Spatial Extension
-License: GPLv3
+Description: dbSpatial is a package in the dbverse for working with spatial geometries in a DuckDB database.
+License: GPL-3 | MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
