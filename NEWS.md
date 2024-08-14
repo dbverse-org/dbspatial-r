@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# dbSpatial 0.0.0.9009 (2024-08-14)
+
+## Features
+
+- Add `show()` method for `dbSpatial` objects.
+
+- Add new `to_dbSpatial()` function  for `{sf}` and `{terra}` object interop.
+
+- Use `VIEW` for file reads.
+
+- Support overwriting `VIEW`.
+
+## Chore
+
+- Add `sfarrow`, `glue` to imports.
+
+- Update generics.
+
+## Docs
+
+- Add dark mode button to pkgdown site.
+
+- Organize pkgdown Reference section.
+
+
 # dbSpatial 0.0.0.9008 (2024-07-03)
 
 ## Docs
