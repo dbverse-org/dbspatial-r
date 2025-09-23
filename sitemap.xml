@@ -18,6 +18,7 @@
 <url><loc>https://drieslab.github.io/dbSpatial/reference/index.html</loc></url>
 <url><loc>https://drieslab.github.io/dbSpatial/reference/loadSpatial.html</loc></url>
 <url><loc>https://drieslab.github.io/dbSpatial/reference/show.html</loc></url>
+<url><loc>https://drieslab.github.io/dbSpatial/reference/st_as_sf-dbSpatial-method.html</loc></url>
 <url><loc>https://drieslab.github.io/dbSpatial/reference/st_contains.html</loc></url>
 <url><loc>https://drieslab.github.io/dbSpatial/reference/st_coveredby.html</loc></url>
 <url><loc>https://drieslab.github.io/dbSpatial/reference/st_covers.html</loc></url>
@@ -35,5 +36,6 @@
 <url><loc>https://drieslab.github.io/dbSpatial/reference/st_xmax.html</loc></url>
 <url><loc>https://drieslab.github.io/dbSpatial/reference/st_ymax.html</loc></url>
 <url><loc>https://drieslab.github.io/dbSpatial/reference/tail.html</loc></url>
+<url><loc>https://drieslab.github.io/dbSpatial/reference/vect-dbSpatial-method.html</loc></url>
 </urlset>
 

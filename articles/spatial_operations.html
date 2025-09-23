@@ -82,7 +82,7 @@
 <code class="sourceCode R"><span><span class="co"># load libs</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://drieslab.github.io/dbSpatial/">dbSpatial</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; terra 1.8.50</span></span>
+<span><span class="co">#&gt; terra 1.8.60</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
@@ -120,20 +120,20 @@
 <span><span class="co"># Preview points table</span></span>
 <span><span class="va">db_points</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   table&lt;spatVector_proxy&gt; [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB v1.2.2 [unknown@Linux 6.11.0-1013-azure:R 4.5.0/:memory:]</span></span></span>
-<span><span class="co">#&gt;       id name  geometry   geom      </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 A_1   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2 A_2   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3 A_3   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 A_4   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5 A_5   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6 A_6   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7 A_7   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8 A_8   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9 A_9   <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10 A_10  <span style="color: #949494;">&lt;raw [21]&gt;</span> <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   table&lt;spatVector_proxy&gt; [?? x 3]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.0 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]</span></span></span>
+<span><span class="co">#&gt;       id name  geom      </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 A_1   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2 A_2   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3 A_3   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 A_4   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5 A_5   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6 A_6   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7 A_7   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8 A_8   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9 A_9   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10 A_10  <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ more rows</span></span></span></code></pre></div>
 <div class="section level4">
 <h4 id="extent">Extent<a class="anchor" aria-label="anchor" href="#extent"></a>
@@ -171,7 +171,7 @@
 <span><span class="fu">dbSpatial</span><span class="fu">::</span><span class="fu"><a href="../reference/st_isvalid.html">st_isvalid</a></span><span class="op">(</span>dbSpatial <span class="op">=</span> <span class="va">db_points</span>, geomName <span class="op">=</span> <span class="st">"geom"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
 <span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 1]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB v1.2.2 [unknown@Linux 6.11.0-1013-azure:R 4.5.0/:memory:]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.0 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]</span></span></span>
 <span><span class="co">#&gt;    geom </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TRUE </span></span>
@@ -226,7 +226,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
