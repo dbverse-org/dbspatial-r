@@ -4,7 +4,10 @@
 \alias{.sim_dbSpatial}
 \title{Simulate basic dbSpatial object}
 \usage{
-.sim_dbSpatial()
+.sim_dbSpatial(geom = c("point", "polygon"))
+}
+\arguments{
+\item{geom}{whether to load 'point' or 'polygon' GEOMETRY test file}
 }
 \value{
 A dbSpatial object
