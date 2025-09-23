@@ -72,6 +72,7 @@ as_dbSpatial <- function(rSpatial,
   tbl <- arrow::open_dataset(temp_file) |> 
     arrow::to_duckdb(con = conn) |>
     dplyr::mutate(geom = st_geomfromwkb(geometry)) |>
+    dplyr::select(-geometry) |>
     dplyr::compute(overwrite = overwrite, name = name)
   
   res <- dbSpatial(value = tbl, name = name)
