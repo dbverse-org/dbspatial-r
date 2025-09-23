@@ -25,10 +25,13 @@ Imports:
     crayon,
     rlang,
     glue,
-    sfarrow
+    sfarrow,
+    tidyselect
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 URL: https://dbverse-org.github.io/dbspatial-r/
 BugReports: https://dbverse-org.github.io/dbspatial-r//issues
+Config/testthat/edition: 3
