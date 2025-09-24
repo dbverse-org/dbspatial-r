@@ -1,20 +1,12 @@
-#' @import methods
 #' @importFrom sf st_as_sf st_read
 #' @importFrom dbplyr sql_render remote_con
 #' @importFrom tidyselect everything all_of
 NULL
 
-# Conditional generic registration
-if (!requireNamespace("sf", quietly = TRUE)) {
-  stop("sf package required for spatial conversions", call. = FALSE)
-} else {
-  setGeneric("st_as_sf", package = "sf")
-}
-
 #' Convert dbSpatial objects to sf objects
 #'
 #' @description
-#' S4 method implementation for converting `dbSpatial` objects to `sf` objects.
+#' S3 method implementation for converting `dbSpatial` objects to `sf` objects.
 #'
 #' @param x A [`dbSpatial`] object to convert
 #' @param geomName \code{character string}. The geometry column name in the  
@@ -31,14 +23,11 @@ if (!requireNamespace("sf", quietly = TRUE)) {
 #' - SQL-level column subsetting for efficiency
 #'
 #' @family dbSpatial
+#' @method st_as_sf dbSpatial
 #' @export
-setMethod(
-  "st_as_sf",
-  signature = "dbSpatial",
-  function(x, geomName = "geom", select = tidyselect::everything(), ...) {
-    .st_as_sf(x, geomName = geomName, select = {{ select }}, ...)
-  }
-)
+st_as_sf.dbSpatial <- function(x, geomName = "geom", select = tidyselect::everything(), ...) {
+  .st_as_sf(x, geomName = geomName, select = {{ select }}, ...)
+}
 
 #' @keywords internal
 .st_as_sf <- function(x, geomName = "geom", select, ...) {
