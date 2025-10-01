@@ -48,7 +48,7 @@ dbSpatial
 Other dbSpatial: 
 \code{\link{dbSpatial}},
 \code{\link{show}()},
-\code{\link{st_as_sf,dbSpatial-method}},
+\code{\link{st_as_sf.dbSpatial}()},
 \code{\link{vect,dbSpatial-method}}
 }
 \concept{dbSpatial}

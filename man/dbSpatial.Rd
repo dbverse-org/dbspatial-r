@@ -89,7 +89,7 @@ dbSpatial(conn = duckdb_conn,
 Other dbSpatial: 
 \code{\link{as_dbSpatial}()},
 \code{\link{show}()},
-\code{\link{st_as_sf,dbSpatial-method}},
+\code{\link{st_as_sf.dbSpatial}()},
 \code{\link{vect,dbSpatial-method}}
 }
 \concept{dbSpatial}
