@@ -1,33 +1,10 @@
 # dbData ####
 ## Empty ####
 ### Extract [] ####
-#' @title Extract method for dbSpatial
-#' @name dbData
-#' @rdname hidden_aliases
-#' @family dbData
-#' @export
-setMethod('[', 
-          signature(x = 'dbSpatial', i = 'missing', j = 'missing', drop = 'missing'),
-          function(x, i, j, ...) {
-          methods::slot(x, "value")
-          })
+# Inherit from dbData class in {dbProject}
 
 ### Set [] ####
-# no initialize to prevent slowdown
-#' @title Set method for dbSpatial
-#' @name dbData
-#' @rdname hidden_aliases
-#' @family dbData
-#' @export
-setMethod('[<-',
-          signature(
-            x = 'dbSpatial',
-            value = 'ANY'
-          ),
-          function(x, value) {
-            methods::slot(x, "value") <- value
-            x
-          })
+# Inherit from dbData class in {dbProject}
 
 # head ####
 #' @title head method for dbSpatial

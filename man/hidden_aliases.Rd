@@ -2,22 +2,14 @@
 % Please edit documentation in R/extract.R
 \name{dbData}
 \alias{dbData}
-\title{Extract method for dbSpatial}
+\title{Set method for dbSpatial}
 \usage{
-\S4method{[}{dbSpatial,missing,missing,missing}(x, i, j, ..., drop = TRUE)
-
 \S4method{[}{dbSpatial,ANY,ANY,ANY}(x) <- value
 }
 \description{
-Extract method for dbSpatial
-
 Set method for dbSpatial
 }
 \seealso{
-Other dbData: 
-\code{\link{head}()},
-\code{\link{tail}()}
-
 Other dbData: 
 \code{\link{head}()},
 \code{\link{tail}()}
