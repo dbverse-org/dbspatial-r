@@ -1,12 +1,6 @@
 ## S4 Class Specification ####
-#' @name dbData
-#' @title dbData
-#' @description Base class for all db objects
-#' @noRd
-setClass(
-  Class = 'dbData',
-  contains = c('VIRTUAL')
-)
+# Note: dbData class is imported from dbProject package - no need to redefine it here
+#' @importClassesFrom dbProject dbData
 
 #' @title S4 dbSpatial class
 #' @description

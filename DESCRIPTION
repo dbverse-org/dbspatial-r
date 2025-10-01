@@ -26,7 +26,8 @@ Imports:
     rlang,
     glue,
     sfarrow,
-    tidyselect
+    tidyselect,
+    dbProject
 Suggests: 
     knitr,
     rmarkdown,
