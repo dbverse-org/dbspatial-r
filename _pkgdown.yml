@@ -1,4 +1,4 @@
-url: https://drieslab.github.io/dbSpatial/
+url: https://dbverse-org.github.io/dbspatial-r/
 template:
   bootstrap: 5
   light-switch: true
@@ -11,7 +11,7 @@ navbar:
   components:
     github:
       icon: fab fa-github
-      href: https://github.com/drieslab/dbSpatial
+      href: https://github.com/dbverse-org/dbspatial-r
       aria-label: GitHub
 
 reference:
