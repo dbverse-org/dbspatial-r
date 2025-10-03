@@ -16,7 +16,7 @@ Depends:
 Imports:
     tools,
     DBI,
-    duckdb (>= 0.9.2),
+    duckdb (>= 1.4.0),
     data.table,
     dplyr,
     dbplyr,
