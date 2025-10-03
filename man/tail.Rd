@@ -11,7 +11,6 @@ tail method for dbSpatial
 }
 \seealso{
 Other dbData: 
-\code{\link{dbData}},
 \code{\link{head}()}
 }
 \concept{dbData}
