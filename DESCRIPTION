@@ -33,6 +33,6 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
-URL: https://dbverse-org.github.io/dbspatial-r/
-BugReports: https://dbverse-org.github.io/dbspatial-r//issues
+URL: https://github.com/dbverse-org/dbspatial-r, https://dbverse-org.github.io/dbspatial-r/
+BugReports: https://github.com/dbverse-org/dbspatial-r/issues
 Config/testthat/edition: 3
