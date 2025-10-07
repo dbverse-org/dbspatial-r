@@ -5,7 +5,7 @@ articles:
   class_structure: class_structure.html
   getting_started: getting_started.html
   spatial_operations: spatial_operations.html
-last_built: 2025-09-24T17:33Z
+last_built: 2025-10-07T19:36Z
 urls:
-  reference: https://drieslab.github.io/dbSpatial/reference
-  article: https://drieslab.github.io/dbSpatial/articles
+  reference: https://dbverse-org.github.io/dbspatial-r/reference
+  article: https://dbverse-org.github.io/dbspatial-r/articles
