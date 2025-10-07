@@ -1,5 +1,31 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# dbSpatial 0.0.0.9109 (2025-10-07)
+
+## Breaking Changes
+
+- Removed dbData class definition from dbSpatial package. Now imports dbData from dbProject package.
+
+## Features
+
+- **dbProject Integration**: Full integration with `dbProject` package and `dbData` base class. `dbSpatial` now inherits from `dbData` providing unified database-backed object interface across dbverse ecosystem.
+- Added `st_as_sf()` S3 method for dbSpatial objects.
+- Added `vect()` method for converting dbSpatial objects to terra::SpatVector format.
+
+## Chore
+
+- Migrated repository to `dbverse-org` organization from previous location.
+- Updated all URLs and links to reflect new `dbverse-org` organization structure.
+- Required DuckDB >= 1.4.0 (LTS).
+- Added `testthat` to Suggests for comprehensive testing infrastructure.
+- Updated imports to reflect dbProject dependency.
+- Included `dev` branch in GitHub Actions workflow.
+
+## Bug Fixes
+
+- Fixed `.sim_dbSpatial()` function for proper spatial simulation.
+- Removed unused extract methods for dbSpatial - functionality now comes from `dbProject::dbData` base class.
+
 # dbSpatial 0.0.0.9009 (2024-08-14)
 
 ## Features
