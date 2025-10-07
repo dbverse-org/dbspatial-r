@@ -32,6 +32,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
+Remotes:
+    dbProject=dbverse-org/dbproject-r
 VignetteBuilder: knitr
 URL: https://github.com/dbverse-org/dbspatial-r, https://dbverse-org.github.io/dbspatial-r/
 BugReports: https://github.com/dbverse-org/dbspatial-r/issues
