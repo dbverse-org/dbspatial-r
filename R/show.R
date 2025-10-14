@@ -2,14 +2,12 @@
 #' @title show method for dbSpatial
 #' @name show
 #' @family dbSpatial
-setMethod('show',
-          signature(object = 'dbSpatial'),
-          function(object) {
+setMethod('show', signature(object = 'dbSpatial'), function(object) {
   # prepare show
   # preview <- object[] |> head(1) |> dplyr::collect()
-  
+
   # geom_name <- .get_geomName(preview)
-  
+
   # in cases where reading in spatial data and no geom
   # is present. e.g. parquet file
   # if(is.null(geom_name)){
@@ -18,7 +16,7 @@ setMethod('show',
   #   cat(grey_color("# Extent:   NA\n"))
   #   return(show(object[]))
   # }
-  
+
   # extent <- object |>
   #   st_extent(geomName = geom_name) |>
   #   unname() |>

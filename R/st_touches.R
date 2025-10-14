@@ -2,15 +2,17 @@
 setMethod(
   "st_touches",
   signature(g1 = "dbSpatial", g2 = "dbSpatial"),
-  function(g1,
-           g1_geomName = "geom",
-           g1_cols_keep = "all",
-           g2,
-           g2_geomName = "geom",
-           g2_cols_keep = "all",
-           overwrite = FALSE,
-           name = "touches_geom",
-           ...) {
+  function(
+    g1,
+    g1_geomName = "geom",
+    g1_cols_keep = "all",
+    g2,
+    g2_geomName = "geom",
+    g2_cols_keep = "all",
+    overwrite = FALSE,
+    name = "touches_geom",
+    ...
+  ) {
     .st_spatial_join(
       g1,
       g1_geomName,

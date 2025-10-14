@@ -2,15 +2,17 @@
 setMethod(
   "st_equals",
   signature(g1 = "dbSpatial", g2 = "dbSpatial"),
-  function(g1,
-           g1_geomName = "geom",
-           g1_cols_keep = "all",
-           g2,
-           g2_geomName = "geom",
-           g2_cols_keep = "all",
-           overwrite = FALSE,
-           name = "equals_geom",
-           ...) {
+  function(
+    g1,
+    g1_geomName = "geom",
+    g1_cols_keep = "all",
+    g2,
+    g2_geomName = "geom",
+    g2_cols_keep = "all",
+    overwrite = FALSE,
+    name = "equals_geom",
+    ...
+  ) {
     .st_spatial_join(
       g1,
       g1_geomName,

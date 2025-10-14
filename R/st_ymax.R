@@ -4,12 +4,12 @@
   tbl <- dbSpatial[]
   .check_tbl(tbl = tbl)
   .check_geomName(value = tbl, geomName = geomName)
-  
+
   ymax <- tbl |>
     dplyr::mutate(!!geomName := st_ymax(!!rlang::sym(geomName))) |>
     dplyr::summarize(y = max(!!rlang::sym(geomName), na.rm = TRUE)) |>
     dplyr::pull(y)
-  
+
   return(ymax)
 }
 
@@ -17,6 +17,7 @@
 setMethod(
   "st_ymax",
   signature(dbSpatial = "dbSpatial"),
-  function(dbSpatial, geomName = "geom", ...) 
+  function(dbSpatial, geomName = "geom", ...) {
     .st_ymax(dbSpatial = dbSpatial, geomName = geomName)
+  }
 )

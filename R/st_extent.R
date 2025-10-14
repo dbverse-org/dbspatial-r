@@ -5,7 +5,7 @@
   .check_con(conn = con)
   .check_tbl(tbl = tbl)
   .check_geomName(value = tbl, geomName = geomName)
-  
+
   res <- tbl |>
     dplyr::summarise(
       xmin = min(st_xmin(geom)),
@@ -15,7 +15,7 @@
     ) |>
     dplyr::collect() |>
     unlist() # conversion to named numeric vector
-  
+
   return(res)
 }
 
@@ -23,6 +23,7 @@
 setMethod(
   "st_extent",
   signature(dbSpatial = "dbSpatial"),
-  function(dbSpatial, geomName = "geom", ...)
+  function(dbSpatial, geomName = "geom", ...) {
     .st_extent(dbSpatial, geomName = "geom")
+  }
 )

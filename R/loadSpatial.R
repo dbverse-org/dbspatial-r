@@ -8,7 +8,7 @@
 #' @examples
 #' duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #' loadSpatial(conn = duckdb_conn)
-loadSpatial <- function(conn){
+loadSpatial <- function(conn) {
   # input validation
   .check_con(conn)
 

@@ -18,7 +18,7 @@ dbSpatial = setClass(
     conn = 'duckdb_connection',
     name = 'character',
     value = "ANY"
-    ),
+  ),
   prototype = list(
     conn = NULL,
     name = NA_character_,
