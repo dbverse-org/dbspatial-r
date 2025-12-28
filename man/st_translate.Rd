@@ -41,12 +41,12 @@ attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 
 # Combine the coordinates and attributes
 dummy_data <- cbind(coordinates, attributes)
- 
+
 points <- dbSpatial(conn = con,
-                    name = "points", 
-                    value = dummy_data, 
-                    overwrite = TRUE, 
-                    x_colName = "x", 
+                    name = "points",
+                    value = dummy_data,
+                    overwrite = TRUE,
+                    x_colName = "x",
                     y_colName = "y")
 
 points

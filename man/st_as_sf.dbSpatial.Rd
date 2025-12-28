@@ -17,13 +17,13 @@
 \item{...}{Additional arguments passed to \code{\link[sf:st_read]{sf::st_read}}}
 }
 \value{
-An \code{\link{sf}} object
+An \code{\link[sf:sf]{sf::sf}} object
 }
 \description{
 S3 method implementation for converting \code{dbSpatial} objects to \code{sf} objects.
 }
 \details{
-This method handles conversion of \code{\link{dbSpatial}} to \code{\link{sf}} objects using:
+This method handles conversion of \code{\link{dbSpatial}} to \code{\link[sf:sf]{sf::sf}} objects using:
 \itemize{
 \item Dynamic column selection via tidyselect semantics
 \item Automatic geometry column preservation

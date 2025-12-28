@@ -47,7 +47,7 @@ db_points = dbSpatial(conn = con,
                       overwrite = TRUE)
 
 st_extent(dbSpatial = db_points)
-                      
+
 st_ymax(dbSpatial = db_points)
 }
 \seealso{

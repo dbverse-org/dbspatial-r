@@ -46,7 +46,7 @@ db_points = dbSpatial(conn = con,
                       y_colName = "y",
                       name = "foo",
                       overwrite = TRUE)
-                      
+
 st_geometrytype(dbSpatial = db_points)
 }
 \seealso{

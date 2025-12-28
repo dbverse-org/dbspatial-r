@@ -45,7 +45,7 @@ db_points = dbSpatial(conn = con,
                       y_colName = "y",
                       name = "foo",
                       overwrite = TRUE)
-                      
+
 # Get extent of the table
 st_extent(db_points)
 }

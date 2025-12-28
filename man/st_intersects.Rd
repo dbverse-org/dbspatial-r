@@ -72,12 +72,12 @@ attributes <- data.frame(id = 1:3, name = c("A1", "B1", "C1"))
 
 # Combine the coordinates and attributes
 dummy_data <- cbind(coordinates, attributes)
- 
+
 points <- dbSpatial(conn = con,
-                    name = "points", 
-                    value = dummy_data, 
-                    overwrite = TRUE, 
-                    x_colName = "x", 
+                    name = "points",
+                    value = dummy_data,
+                    overwrite = TRUE,
+                    x_colName = "x",
                     y_colName = "y")
 
 # preview
@@ -89,16 +89,16 @@ dummy_data2[c(2,3),c(1,2)] <- dummy_data2[c(2,3),c(1,2)] + 150
 dummy_data2$name <- c('A2', 'B2', 'C2')
 
 points2 <- dbSpatial(conn = con,
-                     name = "points2", 
-                     value = dummy_data2, 
-                     overwrite = TRUE, 
-                     x_colName = "x", 
+                     name = "points2",
+                     value = dummy_data2,
+                     overwrite = TRUE,
+                     x_colName = "x",
                      y_colName = "y")
 # preview
 points2
 
-res <- st_intersects(g1 = points, 
-                     g1_cols_keep = c("name"), 
+res <- st_intersects(g1 = points,
+                     g1_cols_keep = c("name"),
                      g2 = points2,
                      overwrite = TRUE)
 
