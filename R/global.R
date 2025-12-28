@@ -1,12 +1,9 @@
 #' dbSpatial Package Global Options
-#' @description The following global options can be modified to control the
-#' behavior of the [`dbSpatial`] package.
+#' @description Global options to control package behavior.
 #' @details Use `options()` to set the below options.
 #' @section Options:
-#' * [`dbSpatial.max_mem_convert`]: numeric. Maximum size (in bytes) allowed for
-#' implicit conversion of `dbSpatial` to in-memory object (SpatVector/sf). Default is 8 * 1024^3 (8GB).
-#' * [`dbSpatial.verbose`]: logical. If `TRUE` (default), prints informative messages
-#' during implicit coercion.
+#' * `dbSpatial.max_mem_convert`: numeric. Max bytes for implicit coercion (default 8GB).
+#' * `dbSpatial.verbose`: logical. Print info messages during coercion (default TRUE).
 #'
 #' @name dbSpatial_options
 #' @keywords internal
