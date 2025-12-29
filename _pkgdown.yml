@@ -35,6 +35,7 @@ reference:
     desc: "Functions and methods for constructing or modifying geometry in a `dbSpatial` object."
     contents:
       - has_concept("geom_construction")
+      - has_concept("constructors")
   - title: "DuckDB Spatial Extension"
     desc: "Functions and methods specific for DuckDB spatial extension."
     contents:
@@ -43,3 +44,24 @@ reference:
     desc: "dbData methods"
     contents:
       - has_concept("dbData")
+
+  - title: "Geometry Operations"
+    desc: "Functions that modify or transform geometries."
+    contents:
+      - has_concept("geometry_ops")
+
+  - title: "Measurements"
+    desc: "Functions that compute metric measurements of geometries."
+    contents:
+      - has_concept("measurements")
+
+  - title: "Accessors"
+    desc: "Functions that extract coordinates or properties."
+    contents:
+      - has_concept("accessors")
+
+  - title: "Configuration"
+    desc: "Global package options."
+    contents:
+      - has_concept("options")
+
