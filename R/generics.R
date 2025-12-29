@@ -887,6 +887,57 @@ setGeneric(
     standardGeneric("st_translate")
   }
 )
+## Geometry Operations ####
+#' Compute buffer around geometry
+#' @name st_buffer
+#' @description Returns a geometry that represents all points whose distance from this Geometry is less than or equal to distance.
+#' @param x \code{\link{dbSpatial}} object
+#' @param dist numeric distance
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with buffered geometry
+#' @family geometry_ops
+#' @concept geometry_ops
+#' @importFrom sf st_buffer
+#' @export
+#' @examples
+#' \dontrun{
+#' st_buffer(x, dist = 1)
+#' }
+NULL
+
+#' Compute centroid of geometry
+#' @name st_centroid
+#' @description Returns the geometric center of a geometry.
+#' @param x \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with centroid geometry
+#' @family geometry_ops
+#' @concept geometry_ops
+#' @importFrom sf st_centroid
+#' @export
+#' @examples
+#' \dontrun{
+#' st_centroid(x)
+#' }
+NULL
+
+#' Simplify geometry
+#' @name st_simplify
+#' @description Returns a simplified version of the given geometry using the Douglas-Peucker algorithm.
+#' @param x \code{\link{dbSpatial}} object
+#' @param dTolerance numeric tolerance
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with simplified geometry
+#' @family geometry_ops
+#' @concept geometry_ops
+#' @importFrom sf st_simplify
+#' @export
+#' @examples
+#' \dontrun{
+#' st_simplify(x, dTolerance = 0.1)
+#' }
+NULL
+
 ## Accessors ####
 #' Get X coordinate
 #' @name st_x
