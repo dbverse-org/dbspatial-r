@@ -8,93 +8,69 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-# Spatial Operations with {terra} Comparisons
-
 ```{r setup}
-# load libs
 library(dbSpatial)
-library(terra)
+library(sf)
 library(dplyr)
 ```
 
-## Create test data
+## Setup
+
 ```{r}
-# Create a data.frame with x and y coordinates and attributes
-coordinates <- data.frame(x = 1:1e3, y = 1:1e3)
-attributes <- data.frame(id = 1:1e3, name = paste("A", 1:1e3, sep = "_"))
+con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
 
-# Combine the coordinates and attributes
-dummy_data <- cbind(coordinates, attributes)
-
-# Create a SpatVector from the data.frame
-dummy_spatvector <- terra::vect(dummy_data, geom = c("x", "y"))
-
-# DuckDB
-duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
-
-db_points = dbSpatial(conn = duckdb_conn,
-                      name = "spatVector_proxy",
-                      value = dummy_spatvector,
-                      overwrite = TRUE)
-
-# Preview points table
-db_points
+# Sample points
+df <- data.frame(id = 1:3, x = c(0, 10, 20), y = c(0, 10, 20))
+pts <- dbSpatial(
+  conn = con, name = "pts", value = df,
+  x_colName = "x", y_colName = "y", overwrite = TRUE
+)
+pts
 ```
 
+## Geometry Operations
 
-### Extent
 ```{r}
-# terra
-terra::ext(dummy_spatvector)
+# Buffer
+st_buffer(pts, dist = 5)
 
-# dbSpatial
-dbSpatial::st_extent(dbSpatial = db_points, geom = "geom")
+# Centroid
+st_centroid(pts)
+
+# Simplify
+st_simplify(pts, dTolerance = 1)
 ```
 
-```{r, eval = FALSE, echo = FALSE}
-### Shift
+## Measurements
 
-# terra
-head(terra::geom(dummy_spatvector))
-
-shifted_spatVector = terra::shift(dummy_spatvector, dx = 10, dy = 10)
-
-head(terra::geom(shifted_spatVector))
-
-# dbSpatial
-dbSpatial::st_translate(dbSpatial = db_points, dx = 10, dy = 10)
-```
-
-### Is.Valid
 ```{r}
-# terra
-head(terra::geom(dummy_spatvector))
+# Bounding box
+st_bbox(pts)
 
-head(terra::is.valid(dummy_spatvector))
+# Check validity
+st_is_valid(pts)
 
-dbSpatial::st_isvalid(dbSpatial = db_points, geomName = "geom")
+# Geometry type
+st_geometry_type(pts)
 ```
 
+## Spatial Predicates
 
-### Y, X Max
 ```{r}
-# terra
-head(terra::geom(dummy_spatvector))
-
-terra::ymax(dummy_spatvector)
-
-terra::xmax(dummy_spatvector)
-
-# dbSpatial
-dbSpatial::st_ymax(db_points)
-
-dbSpatial::st_xmax(db_points)
-
+# Self-intersection (returns joined table)
+st_intersects(pts, pts)
 ```
 
+## Convert to sf
+
+```{r}
+sf_pts <- st_as_sf(pts)
+sf_pts
+```
+
+```{r cleanup, include=FALSE}
+DBI::dbDisconnect(con, shutdown = TRUE)
+```
