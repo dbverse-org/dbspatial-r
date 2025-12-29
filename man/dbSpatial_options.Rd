@@ -2,6 +2,7 @@
 % Please edit documentation in R/global.R
 \name{dbSpatial_options}
 \alias{dbSpatial_options}
+\alias{dbSpatial-options}
 \title{dbSpatial Package Global Options}
 \description{
 Global options to control package behavior.
@@ -12,9 +13,16 @@ Use \code{options()} to set the below options.
 \section{Options}{
 
 \itemize{
+\item \code{dbSpatial.max_print}: integer. Max characters for WKT in show method (default 30).
 \item \code{dbSpatial.max_mem_convert}: numeric. Max bytes for implicit coercion (default 8GB).
 \item \code{dbSpatial.verbose}: logical. Print info messages during coercion (default TRUE).
 }
 }
 
-\keyword{internal}
+\examples{
+\dontrun{
+options(dbSpatial.max_print = 50)
+options(dbSpatial.max_mem_convert = 16 * 1024^3)
+options(dbSpatial.verbose = FALSE)
+}
+}
