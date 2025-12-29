@@ -14,6 +14,7 @@ RoxygenNote: 7.3.3
 Depends:
     R (>= 4.1.0)
 Imports:
+    methods,
     tools,
     DBI,
     duckdb (>= 1.4.0),
@@ -38,3 +39,33 @@ VignetteBuilder: knitr
 URL: https://github.com/dbverse-org/dbspatial-r, https://dbverse-org.github.io/dbspatial-r/
 BugReports: https://github.com/dbverse-org/dbspatial-r/issues
 Config/testthat/edition: 3
+Collate: 
+    'utils.R'
+    'generics.R'
+    'classes.R'
+    'accessors.R'
+    'as_dbSpatial.R'
+    'coerce.R'
+    'constructors.R'
+    'dbSpatial.R'
+    'extract.R'
+    'geometry_ops.R'
+    'global.R'
+    'imports.R'
+    'input_validation.R'
+    'loadSpatial.R'
+    'measurements.R'
+    'st_spatial_join.R'
+    'predicates.R'
+    'show.R'
+    'sim_dbSpatial.R'
+    'sql_gen.R'
+    'st_as_sf.R'
+    'st_bbox.R'
+    'st_geometry_type.R'
+    'st_is_valid.R'
+    'st_read.R'
+    'st_translate.R'
+    'st_xmax.R'
+    'st_ymax.R'
+    'vect.R'
