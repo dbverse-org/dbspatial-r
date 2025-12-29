@@ -29,6 +29,7 @@
   overwrite = FALSE,
   name,
   st_name,
+  extra_args = NULL,
   ...
 ) {
   # Check inputs
@@ -51,9 +52,13 @@
 
   # Update SQL statement depending on g1_cols_keep and g2_cols_keep
   tblName_g1 <- dbplyr::remote_name(g1[])
+  if (is.null(tblName_g1)) {
+    tblName_g1 <- paste0("(", dbplyr::sql_render(g1[]), ")")
+  }
+  
   tblName_g2 <- dbplyr::remote_name(g2[])
-  if (is.null(tblName_g1) || is.null(tblName_g2)) {
-    stop("Unable to determine table names.")
+  if (is.null(tblName_g2)) {
+    tblName_g2 <- paste0("(", dbplyr::sql_render(g2[]), ")")
   }
 
   sql <- .gen_sql_query(
@@ -65,10 +70,20 @@
     g1_cols_keep = g1_cols_keep,
     g2_cols_keep = g2_cols_keep,
     st_name = st_name,
-    overwrite = overwrite
+    overwrite = overwrite,
+    extra_args = extra_args
   )
 
   duckdb::dbSendQuery(con1, sql)
+  
+  # Check for unsupported arguments in ...
+  args <- list(...)
+  if (length(args) > 0) {
+    warning("The following arguments are not supported by dbSpatial: ", 
+            paste(names(args), collapse = ", "), 
+            call. = FALSE)
+  }
+
 
   out_tbl <- dplyr::tbl(con1, name)
 
