@@ -9,6 +9,8 @@
 #' @param g2_cols_keep Columns from the second table to keep in the output table. Can be a character vector of column names or "all" to include all columns.
 #' @param st_name The name of the spatial function to use for determining intersections.
 #' @param overwrite Logical; if TRUE, the output table will be replaced if it already exists.
+#' @param g2_suffix Suffix to append to duplicate column names from the second table. Default: ".2"
+#' @param extra_args Additional arguments to pass to the spatial function (e.g., distance for ST_DWithin).
 #'
 #' @details
 #' This function generates an SQL query that creates or replaces a new table
@@ -28,7 +30,8 @@
   g2_cols_keep,
   st_name,
   overwrite,
-  g2_suffix = ".2"
+  g2_suffix = ".2",
+  extra_args = NULL
 ) {
   # Helper function to construct col strings
   generate_cols_selection <- function(prefix, cols_keep) {
@@ -49,7 +52,7 @@
   sql_template <- "CREATE {replace} VIEW {name} AS
                    SELECT {g1_cols}, {g2_cols}
                    FROM {tblName_g1} g1, {tblName_g2} g2
-                   WHERE {st_name}(g1.{g1_geomName}, g2.{g2_geomName});"
+                   WHERE {st_name}(g1.{g1_geomName}, g2.{g2_geomName}{extra_args});"
 
   replace_clause <- ifelse(overwrite, "OR REPLACE", "")
   sql <- glue::glue(
@@ -62,7 +65,8 @@
     tblName_g2 = tblName_g2 %||% "DEFAULT_G2_TABLE",
     st_name = st_name %||% "DEFAULT_st",
     g1_geomName = g1_geomName %||% "geom",
-    g2_geomName = g2_geomName %||% "geom"
+    g2_geomName = g2_geomName %||% "geom",
+    extra_args = if (!is.null(extra_args)) paste0(", ", extra_args) else ""
   )
 
   return(sql)

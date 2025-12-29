@@ -99,19 +99,26 @@ dbSpatial <- function(
       )
       .add_pointGeom(conn, name, x_colName, y_colName, geomName, overwrite)
     } else if (inherits(value, "character")) {
+      # return = FALSE to not create a dbSpatial in .st_read (we do it below)
       .st_read(
         conn = conn,
         name = name,
         value = value,
-        overwrite = overwrite,
         x_colName = x_colName,
         y_colName = y_colName,
         geomName = geomName,
-        return = FALSE
+        overwrite = overwrite,
+        `return` = FALSE
       )
     }
   } else if (is.character(value)) {
-    .st_read(conn = conn, name = name, value = value, overwrite = overwrite)
+    .st_read(
+      conn = conn,
+      name = name,
+      value = value,
+      overwrite = overwrite,
+      `return` = FALSE
+    )
   } else if (inherits(value, c("SpatVector", "SpatRaster", "sf"))) {
     as_dbSpatial(
       rSpatial = value,
@@ -124,23 +131,13 @@ dbSpatial <- function(
   } else if (inherits(value, "sdf")) {
     stop("Support for 'sdf' objects is not yet implemented.")
   } else {
-    stop("Invalid 'value' paramater.")
+    stop("Invalid 'value' parameter.")
   }
 
   tbl <- dplyr::tbl(conn, name)
 
-  # s3 object construction
-  # res <- structure(
-  #   list(
-  #     conn = conn,
-  #     name = name,
-  #     value = value
-  #     ),
-  #   class = "dbSpatial"
-  # )
-
   # S4 object creation
-  res <- new("dbSpatial", conn = conn, name = name, value = tbl)
+  res <- new("dbSpatial", name = name, value = tbl)
 
   return(res)
 }
@@ -150,7 +147,7 @@ dbSpatial <- function(
 #' @description internal func to ingest terra object
 #' @noRd
 .handle_terra <- function(conn, name, value, overwrite) {
-  tmp_shp = tempfile(fileext = ".shp")
+  tmp_shp <- tempfile(fileext = ".shp")
 
   if (inherits(value, "SpatVector")) {
     terra::writeVector(
@@ -194,13 +191,13 @@ dbSpatial <- function(
 
   column_exists <- DBI::dbGetQuery(conn, check_sql)[[1]] > 0
 
-  if (column_exists & !overwrite) {
+  if (column_exists && !overwrite) {
     stop(
       "Column already exists with name: ",
       geomName,
       ". Please choose a different name or set 'overwrite' to TRUE."
     )
-  } else if (column_exists & overwrite) {
+  } else if (column_exists && overwrite) {
     sql <- glue::glue(
       "UPDATE {name} 
                        SET {geomName} = ST_Point({x_colName}, {y_colName})"
