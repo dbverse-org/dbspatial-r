@@ -13,15 +13,5 @@
 #' @export
 dbSpatial = setClass(
   Class = 'dbSpatial',
-  contains = c('dbData'),
-  slots = list(
-    conn = 'duckdb_connection',
-    name = 'character',
-    value = "ANY"
-  ),
-  prototype = list(
-    conn = NULL,
-    name = NA_character_,
-    value = NULL
-  )
+  contains = c('dbData')
 )
