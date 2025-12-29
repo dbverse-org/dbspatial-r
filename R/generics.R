@@ -887,3 +887,49 @@ setGeneric(
     standardGeneric("st_translate")
   }
 )
+## Accessors ####
+#' Get X coordinate
+#' @name st_x
+#' @description Returns the X coordinate of a point.
+#' @param x \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with X coordinate column
+#' @family accessors
+#' @concept accessors
+#' @export
+#' @examples
+#' \dontrun{
+#' st_x(x)
+#' }
+setGeneric("st_x", function(x, ...) standardGeneric("st_x"))
+
+#' Get Y coordinate
+#' @name st_y
+#' @description Returns the Y coordinate of a point.
+#' @param x \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with Y coordinate column
+#' @family accessors
+#' @concept accessors
+#' @export
+#' @examples
+#' \dontrun{
+#' st_y(x)
+#' }
+setGeneric("st_y", function(x, ...) standardGeneric("st_y"))
+
+#' Get number of points
+#' @name st_npoints
+#' @description Returns the number of points in a geometry.
+#' @param x \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with npoints column
+#' @family accessors
+#' @concept accessors
+#' @export
+#' @examples
+#' \dontrun{
+#' st_npoints(x)
+#' }
+setGeneric("st_npoints", function(x, ...) standardGeneric("st_npoints"))
+
