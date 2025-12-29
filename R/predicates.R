@@ -1,9 +1,6 @@
 #' @include generics.R st_spatial_join.R
 NULL
 
-# Note: DuckDB spatial joins return a TABLE (dbSpatial), effectively sparse=FALSE logic (but lazy).
-# We ignore 'sparse' and 'prepared' arguments as they are specific to in-memory processing or return type control.
-
 #' @importFrom sf st_intersects
 #' @describeIn st_intersects Method for `dbSpatial` objects
 setMethod(
@@ -170,7 +167,6 @@ setMethod(
   "st_is_within_distance",
   signature(x = "dbSpatial", y = "dbSpatial"),
   function(x, y, dist, sparse = TRUE, ..., remove_self = FALSE) {
-    jarl
     .st_spatial_join(
       g1 = x,
       g2 = y,
@@ -181,3 +177,4 @@ setMethod(
     )
   }
 )
+

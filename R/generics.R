@@ -8,6 +8,7 @@
 #' @param ... additional arguments passed to methods
 #' @return numerical column vector in database
 #' @family geom_summary
+#' @concept geom_summary
 #' @export
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
@@ -47,6 +48,7 @@ setGeneric(
 #' @param ... additional arguments passed to methods
 #' @return numerical column vector in database
 #' @family geom_summary
+#' @concept geom_summary
 #' @export
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
@@ -67,7 +69,7 @@ setGeneric(
 #'                       name = "foo",
 #'                       overwrite = TRUE)
 #'
-#' st_extent(dbSpatial = db_points)
+#' st_bbox(obj = db_points)
 #'
 #' st_ymax(dbSpatial = db_points)
 setGeneric(
@@ -545,6 +547,7 @@ NULL
 #' @param ... additional arguments passed to methods
 #' @return \code{\link{dbSpatial}} object
 #' @family geom_construction
+#' @concept geom_construction
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")

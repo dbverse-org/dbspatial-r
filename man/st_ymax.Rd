@@ -46,13 +46,13 @@ db_points = dbSpatial(conn = con,
                       name = "foo",
                       overwrite = TRUE)
 
-st_extent(dbSpatial = db_points)
+st_bbox(obj = db_points)
 
 st_ymax(dbSpatial = db_points)
 }
 \seealso{
 Other geom_summary: 
-\code{\link{st_extent}()},
+\code{\link{st_bbox}()},
 \code{\link{st_xmax}()}
 }
 \concept{geom_summary}

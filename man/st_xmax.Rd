@@ -53,7 +53,7 @@ st_xmax(dbSpatial = db_points)
 }
 \seealso{
 Other geom_summary: 
-\code{\link{st_extent}()},
+\code{\link{st_bbox}()},
 \code{\link{st_ymax}()}
 }
 \concept{geom_summary}

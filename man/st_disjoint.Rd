@@ -68,8 +68,6 @@ Other spatial_join:
 \code{\link{st_covered_by}()},
 \code{\link{st_covers}()},
 \code{\link{st_crosses}()},
-\code{\link{st_difference}()},
-\code{\link{st_distance}()},
 \code{\link{st_equals}()},
 \code{\link{st_intersects}()},
 \code{\link{st_is_within_distance}()},
