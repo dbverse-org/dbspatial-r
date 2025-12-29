@@ -125,6 +125,7 @@ setGeneric(
 #' @param name \code{character}. Default: "intersect_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_intersects
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -159,28 +160,12 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_intersects(g1 = points,
-#'                      g1_cols_keep = c("name"),
-#'                      g2 = points2,
+#' res <- st_intersects(x = points,
+#'                      y = points2,
 #'                      overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_intersects",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "intersect_geom",
-    ...
-  ) {
-    standardGeneric("st_intersects")
-  }
-)
+NULL
 
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects contain each other
 #' @name st_contains
@@ -190,6 +175,7 @@ setGeneric(
 #' @param name \code{character}. Default: "contains_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_contains
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -224,37 +210,22 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_contains(g1 = points,
-#'                    g1_cols_keep = c("name"),
-#'                    g2 = points2,
+#' res <- st_contains(x = points,
+#'                    y = points2,
 #'                    overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_contains",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "contains_geom",
-    ...
-  ) {
-    standardGeneric("st_contains")
-  }
-)
+NULL
 
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects are covered by each other
-#' @name st_coveredby
+#' @name st_covered_by
 #' @description
 #' <https://postgis.net/docs/ST_CoveredBy.html>
 #' @inheritParams .st_spatial_join
 #' @param name \code{character}. Default: "coveredBy_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_covered_by
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -289,28 +260,12 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_coveredby(g1 = points,
-#'                     g1_cols_keep = c("name"),
-#'                     g2 = points2,
-#'                     overwrite = TRUE)
+#' res <- st_covered_by(x = points,
+#'                      y = points2,
+#'                      overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_coveredby",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "coveredby_geom",
-    ...
-  ) {
-    standardGeneric("st_coveredby")
-  }
-)
+NULL
 
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects cover each other
 #' @name st_covers
@@ -320,6 +275,7 @@ setGeneric(
 #' @param name \code{character}. Default: "covers_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_covers
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -354,28 +310,12 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_covers(g1 = points,
-#'                  g1_cols_keep = c("name"),
-#'                  g2 = points2,
+#' res <- st_covers(x = points,
+#'                  y = points2,
 #'                  overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_covers",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "covers_geom",
-    ...
-  ) {
-    standardGeneric("st_covers")
-  }
-)
+NULL
 
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects cross each other
 #' @name st_crosses
@@ -385,6 +325,7 @@ setGeneric(
 #' @param name \code{character}. Default: "crosses_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_crosses
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -419,28 +360,12 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_crosses(g1 = points,
-#'                   g1_cols_keep = c("name"),
-#'                   g2 = points2,
+#' res <- st_crosses(x = points,
+#'                   y = points2,
 #'                   overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_crosses",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "crosses_geom",
-    ...
-  ) {
-    standardGeneric("st_crosses")
-  }
-)
+NULL
 
 #' Calculate the difference between geometries in two \code{\link{dbSpatial}}  objects
 #' @name st_difference
@@ -515,6 +440,7 @@ setGeneric(
 #' @param name \code{character}. Default: "disjoint_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_disjoint
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -549,28 +475,12 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_disjoint(g1 = points,
-#'                    g1_cols_keep = c("name"),
-#'                    g2 = points2,
+#' res <- st_disjoint(x = points,
+#'                    y = points2,
 #'                    overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_disjoint",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "disjoint_geom",
-    ...
-  ) {
-    standardGeneric("st_disjoint")
-  }
-)
+NULL
 
 #' Calculate the distance between geometries in two \code{\link{dbSpatial}}  objects
 #' @name st_distance
@@ -645,6 +555,7 @@ setGeneric(
 #' @param name \code{character}. Default: "equals_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_equals
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -679,28 +590,12 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_equals(g1 = points,
-#'                  g1_cols_keep = c("name"),
-#'                  g2 = points2,
+#' res <- st_equals(x = points,
+#'                  y = points2,
 #'                  overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_equals",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "equals_geom",
-    ...
-  ) {
-    standardGeneric("st_equals")
-  }
-)
+NULL
 
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects touch each other
 #' @name st_touches
@@ -710,6 +605,7 @@ setGeneric(
 #' @param name \code{character}. Default: "touches_geom"
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
+#' @importFrom sf st_touches
 #' @export
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
@@ -744,28 +640,12 @@ setGeneric(
 #' # preview
 #' points2
 #'
-#' res <- st_touches(g1 = points,
-#'                   g1_cols_keep = c("name"),
-#'                   g2 = points2,
+#' res <- st_touches(x = points,
+#'                   y = points2,
 #'                   overwrite = TRUE)
 #'
 #' res
-setGeneric(
-  "st_touches",
-  function(
-    g1,
-    g1_geomName = "geom",
-    g1_cols_keep = "all",
-    g2,
-    g2_geomName = "geom",
-    g2_cols_keep = "all",
-    overwrite = FALSE,
-    name = "touches_geom",
-    ...
-  ) {
-    standardGeneric("st_touches")
-  }
-)
+NULL
 
 ## geom_scalar ####
 #' Return geometry type
@@ -1040,6 +920,56 @@ setGeneric("st_y", function(x, ...) standardGeneric("st_y"))
 #' st_npoints(x)
 #' }
 setGeneric("st_npoints", function(x, ...) standardGeneric("st_npoints"))
+
+## Predicates ####
+#' Check if geometry A is within geometry B
+#' @name st_within
+#' @description Returns true if geometry A is completely inside geometry B.
+#' @param x \code{\link{dbSpatial}} object
+#' @param y \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object (view) with predicate result
+#' @family spatial_join
+#' @importFrom sf st_within
+#' @export
+#' @examples
+#' \dontrun{
+#' st_within(x, y)
+#' }
+NULL
+
+#' Check if geometries overlap
+#' @name st_overlaps
+#' @description Returns true if the Geometries share space, are of the same dimension, but are not completely contained by each other.
+#' @param x \code{\link{dbSpatial}} object
+#' @param y \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object (view) with predicate result
+#' @family spatial_join
+#' @importFrom sf st_overlaps
+#' @export
+#' @examples
+#' \dontrun{
+#' st_overlaps(x, y)
+#' }
+NULL
+
+#' Check if geometries are within a certain distance
+#' @name st_is_within_distance
+#' @description Returns true if the geometries are within the specified distance of one another.
+#' @param x \code{\link{dbSpatial}} object
+#' @param y \code{\link{dbSpatial}} object
+#' @param dist numeric distance
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object (view) with predicate result
+#' @family spatial_join
+#' @importFrom sf st_is_within_distance
+#' @export
+#' @examples
+#' \dontrun{
+#' st_is_within_distance(x, y, dist = 10)
+#' }
+NULL
 
 ## Constructors ####
 #' Convert to WKT
