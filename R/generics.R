@@ -933,3 +933,34 @@ setGeneric("st_y", function(x, ...) standardGeneric("st_y"))
 #' }
 setGeneric("st_npoints", function(x, ...) standardGeneric("st_npoints"))
 
+## Constructors ####
+#' Convert to WKT
+#' @name st_as_text
+#' @description Returns the Well-Known Text (WKT) representation of the geometry.
+#' @param x \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with WKT column
+#' @family constructors
+#' @concept constructors
+#' @importFrom sf st_as_text
+#' @export
+#' @examples
+#' \dontrun{
+#' st_as_text(x)
+#' }
+NULL
+
+#' Convert to GeoJSON
+#' @name st_as_geojson
+#' @description Returns the GeoJSON representation of the geometry.
+#' @param x \code{\link{dbSpatial}} object
+#' @param ... additional arguments
+#' @return \code{\link{dbSpatial}} object with GeoJSON column
+#' @family constructors
+#' @concept constructors
+#' @export
+#' @examples
+#' \dontrun{
+#' st_as_geojson(x)
+#' }
+setGeneric("st_as_geojson", function(x, ...) standardGeneric("st_as_geojson"))
