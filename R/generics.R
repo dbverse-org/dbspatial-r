@@ -887,6 +887,63 @@ setGeneric(
     standardGeneric("st_translate")
   }
 )
+
+
+## Measurements ####
+#' Get area of geometries
+#' @name st_area
+#' @description
+#' Returns the area of the geometry column.
+#' @param x \code{\link{dbSpatial}} object
+#' @param geomName \code{character string}. The geometry column name. Default: `"geom"`.
+#' @param ... additional arguments passed to methods
+#' @return \code{\link{dbSpatial}} object (lazy tibble with area column)
+#' @family measurements
+#' @concept measurements
+#' @importFrom sf st_area
+#' @export
+#' @examples
+#' \dontrun{
+#' st_area(x)
+#' }
+NULL
+
+#' Get length of geometries
+#' @name st_length
+#' @description
+#' Returns the length of the geometry column.
+#' @param x \code{\link{dbSpatial}} object
+#' @param geomName \code{character string}. The geometry column name. Default: `"geom"`.
+#' @param ... additional arguments passed to methods
+#' @return \code{\link{dbSpatial}} object (lazy tibble with length column)
+#' @family measurements
+#' @concept measurements
+#' @importFrom sf st_length
+#' @export
+#' @examples
+#' \dontrun{
+#' st_length(x)
+#' }
+NULL
+
+#' Get perimeter of geometries
+#' @name st_perimeter
+#' @description
+#' Returns the perimeter of the geometry column.
+#' @param x \code{\link{dbSpatial}} object
+#' @param geomName \code{character string}. The geometry column name. Default: `"geom"`.
+#' @param ... additional arguments passed to methods
+#' @return \code{\link{dbSpatial}} object (lazy tibble with perimeter column)
+#' @family measurements
+#' @concept measurements
+#' @importFrom sf st_perimeter
+#' @export
+#' @examples
+#' \dontrun{
+#' st_perimeter(x)
+#' }
+NULL
+
 ## Geometry Operations ####
 #' Compute buffer around geometry
 #' @name st_buffer
