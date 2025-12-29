@@ -1,42 +1,3 @@
-## geom_summary ####
-#' Get extent of a geometry column in \code{\link{dbSpatial}}  object
-#'
-#' @param \code{\link{dbSpatial}}  object
-#' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
-#' @param ... additional arguments passed to methods
-#'
-#' @return named numeric vector
-#' @family geom_summary
-#' @export
-#'
-#' @examples
-#' # Create a data.frame with x and y coordinates and attributes
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
-#'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
-#'
-#' # Create a duckdb connection
-#' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
-#'
-#' # Create a duckdb table with spatial points
-#' db_points = dbSpatial(conn = con,
-#'                       value = dummy_data,
-#'                       x_colName = "x",
-#'                       y_colName = "y",
-#'                       name = "foo",
-#'                       overwrite = TRUE)
-#'
-#' # Get extent of the table
-#' st_extent(db_points)
-setGeneric(
-  "st_extent",
-  function(dbSpatial, geomName = "geom", ...) {
-    standardGeneric("st_extent")
-  }
-)
-
 #' Get maximum x coordinate
 #' @name st_xmax
 #' @description
@@ -649,15 +610,16 @@ NULL
 
 ## geom_scalar ####
 #' Return geometry type
-#' @name st_geometrytype
+#' @name st_geometry_type
 #' @description
 #' This function returns the geometry type of the specified geometry column in
 #' a \code{\link{dbSpatial}}  object.
-#' @param \code{\link{dbSpatial}}  object
+#' @param x \code{\link{dbSpatial}}  object
 #' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
 #' @param ... additional arguments passed to methods
 #' @return factor column vector in database
 #' @family geom_scalar
+#' @importFrom sf st_geometry_type
 #' @export
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
@@ -678,53 +640,25 @@ NULL
 #'                       name = "foo",
 #'                       overwrite = TRUE)
 #'
-#' st_geometrytype(dbSpatial = db_points)
-setGeneric(
-  "st_geometrytype",
-  function(dbSpatial, geomName = "geom", ...) {
-    standardGeneric("st_geometrytype")
-  }
-)
+#'
+#' st_geometry_type(x = db_points)
+NULL
 
 #' Determine if geometry is valid
-#' @name st_isvalid
+#' @name st_is_valid
 #' @description
 #' This function returns whether the specified geometry column in the specified
 #' \code{\link{dbSpatial}}  object is valid or not.
-#' @param \code{\link{dbSpatial}}  object
+#' @param x \code{\link{dbSpatial}}  object
 #' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
 #' @param ... additional arguments passed to methods
 #' @return boolean column vector in database
 #' @family geom_scalar
+#' @importFrom sf st_is_valid
 #' @export
 #' @examples
-#' # Create a data.frame with x and y coordinates and attributes
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
-#'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
-#'
-#' # Create a SpatVector from the data.frame
-#' dummy_spatvector <- terra::vect(dummy_data, geom = c("x", "y"))
-#'
-#' # Create a duckdb connection
-#' duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
-#'
-#' # Create a duckdb table with spatial points
-#' db_points = dbSpatial(conn = duckdb_conn,
-#'                       name = "spatVector_proxy",
-#'                       value = dummy_spatvector,
-#'                       overwrite = TRUE)
-#'
-#' # Check if geometries are valid
-#' st_isvalid(dbSpatial = db_points)
-setGeneric(
-  "st_isvalid",
-  function(dbSpatial, geomName = "geom", ...) {
-    standardGeneric("st_isvalid")
-  }
-)
+#' # ...
+NULL
 
 ## geom_construction ####
 #' Translate x, y coordinates by delta x, delta y for point geometries
