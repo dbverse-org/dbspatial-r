@@ -89,7 +89,7 @@ setGeneric(
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_intersects
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -130,6 +130,8 @@ setGeneric(
 #' res
 NULL
 
+
+
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects contain each other
 #' @name st_contains
 #' @description
@@ -139,7 +141,7 @@ NULL
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_contains
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -180,6 +182,8 @@ NULL
 #' res
 NULL
 
+
+
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects are covered by each other
 #' @name st_covered_by
 #' @description
@@ -189,7 +193,7 @@ NULL
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_covered_by
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -230,6 +234,8 @@ NULL
 #' res
 NULL
 
+
+
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects cover each other
 #' @name st_covers
 #' @description
@@ -239,7 +245,7 @@ NULL
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_covers
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -280,6 +286,8 @@ NULL
 #' res
 NULL
 
+
+
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects cross each other
 #' @name st_crosses
 #' @description
@@ -289,7 +297,7 @@ NULL
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_crosses
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -331,6 +339,8 @@ NULL
 NULL
 
 
+
+
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects are disjoint
 #' @name st_disjoint
 #' @description
@@ -340,7 +350,7 @@ NULL
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_disjoint
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -382,6 +392,8 @@ NULL
 NULL
 
 
+
+
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects are equal
 #' @name st_equals
 #' @description
@@ -391,7 +403,7 @@ NULL
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_equals
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -432,6 +444,8 @@ NULL
 #' res
 NULL
 
+
+
 #' Determine if geometries in two \code{\link{dbSpatial}}  objects touch each other
 #' @name st_touches
 #' @description
@@ -441,7 +455,7 @@ NULL
 #' @return \code{\link{dbSpatial}} object
 #' @family spatial_join
 #' @importFrom sf st_touches
-#' @export
+
 #' @examples
 #' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
@@ -482,6 +496,8 @@ NULL
 #' res
 NULL
 
+
+
 ## geom_scalar ####
 #' Return geometry type
 #' @name st_geometry_type
@@ -494,7 +510,7 @@ NULL
 #' @return factor column vector in database
 #' @family geom_scalar
 #' @importFrom sf st_geometry_type
-#' @export
+
 #' @examples
 #' # Create a data.frame with x and y coordinates and attributes
 #' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
@@ -518,6 +534,8 @@ NULL
 #' st_geometry_type(x = db_points)
 NULL
 
+
+
 #' Determine if geometry is valid
 #' @name st_is_valid
 #' @description
@@ -529,10 +547,12 @@ NULL
 #' @return boolean column vector in database
 #' @family geom_scalar
 #' @importFrom sf st_is_valid
-#' @export
+
 #' @examples
 #' # ...
 NULL
+
+
 
 ## geom_construction ####
 #' Translate x, y coordinates by delta x, delta y for point geometries
@@ -590,12 +610,14 @@ setGeneric(
 #' @family measurements
 #' @concept measurements
 #' @importFrom sf st_area
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_area(x)
 #' }
 NULL
+
+
 
 #' Get length of geometries
 #' @name st_length
@@ -608,12 +630,14 @@ NULL
 #' @family measurements
 #' @concept measurements
 #' @importFrom sf st_length
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_length(x)
 #' }
 NULL
+
+
 
 #' Get perimeter of geometries
 #' @name st_perimeter
@@ -626,12 +650,14 @@ NULL
 #' @family measurements
 #' @concept measurements
 #' @importFrom sf st_perimeter
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_perimeter(x)
 #' }
 NULL
+
+
 
 ## Geometry Operations ####
 #' Compute buffer around geometry
@@ -644,12 +670,14 @@ NULL
 #' @family geometry_ops
 #' @concept geometry_ops
 #' @importFrom sf st_buffer
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_buffer(x, dist = 1)
 #' }
 NULL
+
+
 
 #' Compute centroid of geometry
 #' @name st_centroid
@@ -660,12 +688,14 @@ NULL
 #' @family geometry_ops
 #' @concept geometry_ops
 #' @importFrom sf st_centroid
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_centroid(x)
 #' }
 NULL
+
+
 
 #' Simplify geometry
 #' @name st_simplify
@@ -677,12 +707,14 @@ NULL
 #' @family geometry_ops
 #' @concept geometry_ops
 #' @importFrom sf st_simplify
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_simplify(x, dTolerance = 0.1)
 #' }
 NULL
+
+
 
 ## Accessors ####
 #' Get X coordinate
@@ -740,12 +772,14 @@ setGeneric("st_npoints", function(x, ...) standardGeneric("st_npoints"))
 #' @return \code{\link{dbSpatial}} object (view) with predicate result
 #' @family spatial_join
 #' @importFrom sf st_within
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_within(x, y)
 #' }
 NULL
+
+
 
 #' Check if geometries overlap
 #' @name st_overlaps
@@ -756,12 +790,14 @@ NULL
 #' @return \code{\link{dbSpatial}} object (view) with predicate result
 #' @family spatial_join
 #' @importFrom sf st_overlaps
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_overlaps(x, y)
 #' }
 NULL
+
+
 
 #' Check if geometries are within a certain distance
 #' @name st_is_within_distance
@@ -773,12 +809,14 @@ NULL
 #' @return \code{\link{dbSpatial}} object (view) with predicate result
 #' @family spatial_join
 #' @importFrom sf st_is_within_distance
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_is_within_distance(x, y, dist = 10)
 #' }
 NULL
+
+
 
 ## Constructors ####
 #' Convert to WKT
@@ -790,12 +828,14 @@ NULL
 #' @family constructors
 #' @concept constructors
 #' @importFrom sf st_as_text
-#' @export
+
 #' @examples
 #' \dontrun{
 #' st_as_text(x)
 #' }
 NULL
+
+
 
 #' Convert to GeoJSON
 #' @name st_as_geojson

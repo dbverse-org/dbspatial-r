@@ -1,4 +1,4 @@
-#' @include generics.R utils.R
+#' @include utils.R
 NULL
 
 #' @keywords internal
@@ -44,17 +44,7 @@ NULL
 #' @concept geom_summary
 #' @importFrom sf st_bbox
 #' @export
-#' @examples
-#' \dontrun{
-#' st_bbox(x)
-#' }
-NULL
-
-#' @describeIn st_bbox Method for `dbSpatial` objects
-setMethod(
-  "st_bbox",
-  signature(obj = "dbSpatial"),
-  function(obj, ...) {
-    .st_bbox(dbSpatial = obj, ...)
-  }
-)
+#' @method st_bbox dbSpatial
+st_bbox.dbSpatial <- function(obj, ...) {
+  .st_bbox(dbSpatial = obj, ...)
+}

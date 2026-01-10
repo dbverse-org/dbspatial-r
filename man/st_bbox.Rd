@@ -2,10 +2,10 @@
 % Please edit documentation in R/st_bbox.R
 \name{st_bbox}
 \alias{st_bbox}
-\alias{st_bbox,dbSpatial-method}
+\alias{st_bbox.dbSpatial}
 \title{Compute bounding box for dbSpatial object}
 \usage{
-\S4method{st_bbox}{dbSpatial}(obj, ...)
+\method{st_bbox}{dbSpatial}(obj, ...)
 }
 \arguments{
 \item{obj}{\code{\link{dbSpatial}} object}
@@ -17,16 +17,6 @@
 }
 \description{
 Returns the bounding box of the geometry column.
-}
-\section{Methods (by class)}{
-\itemize{
-\item \code{st_bbox(dbSpatial)}: Method for \code{dbSpatial} objects
-
-}}
-\examples{
-\dontrun{
-st_bbox(x)
-}
 }
 \seealso{
 Other geom_summary: 

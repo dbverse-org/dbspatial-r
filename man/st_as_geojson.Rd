@@ -2,12 +2,12 @@
 % Please edit documentation in R/generics.R, R/constructors.R
 \name{st_as_geojson}
 \alias{st_as_geojson}
-\alias{st_as_geojson,dbSpatial-method}
+\alias{st_as_geojson.dbSpatial}
 \title{Convert to GeoJSON}
 \usage{
 st_as_geojson(x, ...)
 
-\S4method{st_as_geojson}{dbSpatial}(x, ...)
+\method{st_as_geojson}{dbSpatial}(x, ...)
 }
 \arguments{
 \item{x}{\code{\link{dbSpatial}} object}
@@ -20,7 +20,7 @@ st_as_geojson(x, ...)
 \description{
 Returns the GeoJSON representation of the geometry.
 }
-\section{Methods (by class)}{
+\section{Functions}{
 \itemize{
 \item \code{st_as_geojson(dbSpatial)}: Method for \code{dbSpatial} objects
 
