@@ -88,8 +88,8 @@ the specified <code><a href="dbSpatial.html">dbSpatial</a></code> object.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other geom_summary:
-<code><a href="st_extent.html">st_extent</a>()</code>,
-<code><a href="st_ymax.html">st_ymax</a>()</code></p></div>
+<code><a href="st_bbox.html">st_bbox()</a></code>,
+<code><a href="st_ymax.html">st_ymax()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -112,10 +112,9 @@ the specified <code><a href="dbSpatial.html">dbSpatial</a></code> object.</p>
 <span class="r-in"><span>                      name <span class="op">=</span> <span class="st">"foo"</span>,</span></span>
 <span class="r-in"><span>                      overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="st_extent.html">st_extent</a></span><span class="op">(</span>dbSpatial <span class="op">=</span> <span class="va">db_points</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> xmin xmax ymin ymax </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  100  300  500  700 </span>
-<span class="r-in"><span>                      </span></span>
+<span class="r-in"><span><span class="fu">st_extent</span><span class="op">(</span>dbSpatial <span class="op">=</span> <span class="va">db_points</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in st_extent(dbSpatial = db_points):</span> could not find function "st_extent"</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">st_xmax</span><span class="op">(</span>dbSpatial <span class="op">=</span> <span class="va">db_points</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 300</span>
 </code></pre></div>
@@ -129,7 +128,7 @@ the specified <code><a href="dbSpatial.html">dbSpatial</a></code> object.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

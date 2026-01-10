@@ -41,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Determine if geometries in two <code><a href="dbSpatial.html">dbSpatial</a></code> objects cross each other</h1>
-      <small class="dont-index">Source: <a href="https://github.com/dbverse-org/dbspatial-r/blob/dev/R/generics.R" class="external-link"><code>R/generics.R</code></a>, <a href="https://github.com/dbverse-org/dbspatial-r/blob/dev/R/st_crosses.R" class="external-link"><code>R/st_crosses.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbverse-org/dbspatial-r/blob/dev/R/generics.R" class="external-link"><code>R/generics.R</code></a></small>
       <div class="d-none name"><code>st_crosses.Rd</code></div>
     </div>
 
@@ -49,72 +49,13 @@
     <p>https://postgis.net/docs/ST_Crosses.html</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">st_crosses</span><span class="op">(</span></span>
-<span>  <span class="va">g1</span>,</span>
-<span>  g1_geomName <span class="op">=</span> <span class="st">"geom"</span>,</span>
-<span>  g1_cols_keep <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  <span class="va">g2</span>,</span>
-<span>  g2_geomName <span class="op">=</span> <span class="st">"geom"</span>,</span>
-<span>  g2_cols_keep <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  name <span class="op">=</span> <span class="st">"crosses_geom"</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for class 'dbSpatial,ANY,ANY,dbSpatial'</span></span>
-<span><span class="fu">st_crosses</span><span class="op">(</span></span>
-<span>  <span class="va">g1</span>,</span>
-<span>  g1_geomName <span class="op">=</span> <span class="st">"geom"</span>,</span>
-<span>  g1_cols_keep <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  <span class="va">g2</span>,</span>
-<span>  g2_geomName <span class="op">=</span> <span class="st">"geom"</span>,</span>
-<span>  g2_cols_keep <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  name <span class="op">=</span> <span class="st">"crosses_geom"</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-    </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-g-">g1<a class="anchor" aria-label="anchor" href="#arg-g-"></a></dt>
-<dd><p>A <code><a href="dbSpatial.html">dbSpatial</a></code> object.</p></dd>
-
-
-<dt id="arg-g-geomname">g1_geomName<a class="anchor" aria-label="anchor" href="#arg-g-geomname"></a></dt>
-<dd><p><code>character</code>. The <code>geometry</code> column name in <code>g1</code>. Default: "geom".</p></dd>
-
-
-<dt id="arg-g-cols-keep">g1_cols_keep<a class="anchor" aria-label="anchor" href="#arg-g-cols-keep"></a></dt>
-<dd><p><code>character vector</code>. The column names in <code>g1</code> to keep. Default: "all".</p></dd>
-
-
-<dt id="arg-g-">g2<a class="anchor" aria-label="anchor" href="#arg-g-"></a></dt>
-<dd><p>A <code><a href="dbSpatial.html">dbSpatial</a></code> object.</p></dd>
-
-
-<dt id="arg-g-geomname">g2_geomName<a class="anchor" aria-label="anchor" href="#arg-g-geomname"></a></dt>
-<dd><p><code>character</code>. The <code>geometry</code> column name in <code>g2</code>. Default: "geom".</p></dd>
-
-
-<dt id="arg-g-cols-keep">g2_cols_keep<a class="anchor" aria-label="anchor" href="#arg-g-cols-keep"></a></dt>
-<dd><p><code>character vector</code>. The column names in <code>g2</code> to keep. Default: "all".</p></dd>
-
-
-<dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
-<dd><p><code>logical</code>. If <code>TRUE</code>, overwrite existing table. Default: <code>FALSE</code>.</p></dd>
-
-
-<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
+<dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
 <dd><p><code>character</code>. Default: "crosses_geom"</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code>duckdb::dbSendQuery</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -122,27 +63,18 @@
     <p><code><a href="dbSpatial.html">dbSpatial</a></code> object</p>
     </div>
     <div class="section level2">
-    <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
-
-<ul><li><p><code>st_crosses(
-  g1 = dbSpatial,
-  g1_geomName = ANY,
-  g1_cols_keep = ANY,
-  g2 = dbSpatial
-)</code>: Method for <code>dbSpatial</code> objects</p></li>
-</ul></div>
-    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other spatial_join:
-<code><a href="st_contains.html">st_contains</a>()</code>,
-<code><a href="st_coveredby.html">st_coveredby</a>()</code>,
-<code><a href="st_covers.html">st_covers</a>()</code>,
-<code><a href="st_difference.html">st_difference</a>()</code>,
-<code><a href="st_disjoint.html">st_disjoint</a>()</code>,
-<code><a href="st_distance.html">st_distance</a>()</code>,
-<code><a href="st_equals.html">st_equals</a>()</code>,
-<code><a href="st_intersects.html">st_intersects</a>()</code>,
-<code><a href="st_touches.html">st_touches</a>()</code></p></div>
+<code><a href="st_contains.html">st_contains()</a></code>,
+<code><a href="st_covered_by.html">st_covered_by()</a></code>,
+<code><a href="st_covers.html">st_covers()</a></code>,
+<code><a href="st_disjoint.html">st_disjoint()</a></code>,
+<code><a href="st_equals.html">st_equals()</a></code>,
+<code><a href="st_intersects.html">st_intersects()</a></code>,
+<code><a href="st_is_within_distance.html">st_is_within_distance()</a></code>,
+<code><a href="st_overlaps.html">st_overlaps()</a></code>,
+<code><a href="st_touches.html">st_touches()</a></code>,
+<code><a href="st_within.html">st_within()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -154,24 +86,24 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Combine the coordinates and attributes</span></span></span>
 <span class="r-in"><span><span class="va">dummy_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">coordinates</span>, <span class="va">attributes</span><span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">con</span>,</span></span>
-<span class="r-in"><span>                    name <span class="op">=</span> <span class="st">"points"</span>, </span></span>
-<span class="r-in"><span>                    value <span class="op">=</span> <span class="va">dummy_data</span>, </span></span>
-<span class="r-in"><span>                    overwrite <span class="op">=</span> <span class="cn">TRUE</span>, </span></span>
-<span class="r-in"><span>                    x_colName <span class="op">=</span> <span class="st">"x"</span>, </span></span>
+<span class="r-in"><span>                    name <span class="op">=</span> <span class="st">"points"</span>,</span></span>
+<span class="r-in"><span>                    value <span class="op">=</span> <span class="va">dummy_data</span>,</span></span>
+<span class="r-in"><span>                    overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                    x_colName <span class="op">=</span> <span class="st">"x"</span>,</span></span>
 <span class="r-in"><span>                    y_colName <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview</span></span></span>
 <span class="r-in"><span><span class="va">points</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Class:    dbSpatial </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Source:   table&lt;points&gt; [?? x 5]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Database: DuckDB 1.4.0 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       x     y    id name  geom      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   100   500     1 A1    <span style="color: #949494;">&lt;raw [32]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>   200   600     2 B1    <span style="color: #949494;">&lt;raw [32]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   300   700     3 C1    <span style="color: #949494;">&lt;raw [32]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Source:   SQL [?? x 5]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       x     y    id name  geom           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   100   500     1 A1    POINT (100 500)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>   200   600     2 B1    POINT (200 600)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   300   700     3 C1    POINT (300 700)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a second set of points, with B1 and C1 translated by + 100</span></span></span>
 <span class="r-in"><span><span class="va">dummy_data2</span> <span class="op">&lt;-</span> <span class="va">dummy_data</span></span></span>
@@ -179,33 +111,29 @@
 <span class="r-in"><span><span class="va">dummy_data2</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A2'</span>, <span class="st">'B2'</span>, <span class="st">'C2'</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">points2</span> <span class="op">&lt;-</span> <span class="fu"><a href="dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">con</span>,</span></span>
-<span class="r-in"><span>                     name <span class="op">=</span> <span class="st">"points2"</span>, </span></span>
-<span class="r-in"><span>                     value <span class="op">=</span> <span class="va">dummy_data2</span>, </span></span>
-<span class="r-in"><span>                     overwrite <span class="op">=</span> <span class="cn">TRUE</span>, </span></span>
-<span class="r-in"><span>                     x_colName <span class="op">=</span> <span class="st">"x"</span>, </span></span>
+<span class="r-in"><span>                     name <span class="op">=</span> <span class="st">"points2"</span>,</span></span>
+<span class="r-in"><span>                     value <span class="op">=</span> <span class="va">dummy_data2</span>,</span></span>
+<span class="r-in"><span>                     overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                     x_colName <span class="op">=</span> <span class="st">"x"</span>,</span></span>
 <span class="r-in"><span>                     y_colName <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># preview</span></span></span>
 <span class="r-in"><span><span class="va">points2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Class:    dbSpatial </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Source:   table&lt;points2&gt; [?? x 5]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Database: DuckDB 1.4.0 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       x     y    id name  geom      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   100   500     1 A2    <span style="color: #949494;">&lt;raw [32]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>   350   750     2 B2    <span style="color: #949494;">&lt;raw [32]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   450   850     3 C2    <span style="color: #949494;">&lt;raw [32]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Source:   SQL [?? x 5]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       x     y    id name  geom           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   100   500     1 A2    POINT (100 500)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>   350   750     2 B2    POINT (350 750)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   450   850     3 C2    POINT (450 850)</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">st_crosses</span><span class="op">(</span>g1 <span class="op">=</span> <span class="va">points</span>, </span></span>
-<span class="r-in"><span>                  g1_cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                  g2 <span class="op">=</span> <span class="va">points2</span>,</span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">st_crosses</span><span class="op">(</span>x <span class="op">=</span> <span class="va">points</span>,</span></span>
+<span class="r-in"><span>                  y <span class="op">=</span> <span class="va">points2</span>,</span></span>
 <span class="r-in"><span>                  overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in st_crosses(x = points, y = points2, overwrite = TRUE):</span> could not find function "st_crosses"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">res</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Class:    dbSpatial </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Source:   table&lt;crosses_geom&gt; [?? x 6]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Database: DuckDB 1.4.0 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 variables: name &lt;chr&gt;, x &lt;dbl&gt;, y &lt;dbl&gt;, id &lt;int&gt;, name_1 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   geom &lt;list&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'res' not found</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -217,7 +145,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

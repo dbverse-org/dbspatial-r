@@ -75,145 +75,128 @@
 
     
     
-<div class="section level2">
-<h2 id="spatial-operations-with-terra-comparisons">Spatial Operations with {terra} Comparisons<a class="anchor" aria-label="anchor" href="#spatial-operations-with-terra-comparisons"></a>
-</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># load libs</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbverse-org/dbspatial-r" class="external-link">dbSpatial</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; terra 1.8.70</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbverse-org/dbspatial-r" class="external-link">dbSpatial</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:terra':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, union</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     filter, lag</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="create-test-data">Create test data<a class="anchor" aria-label="anchor" href="#create-test-data"></a>
-</h3>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create a data.frame with x and y coordinates and attributes</span></span>
-<span><span class="va">coordinates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1e3</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1e3</span><span class="op">)</span></span>
-<span><span class="va">attributes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1e3</span>, name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1e3</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Combine the coordinates and attributes</span></span>
-<span><span class="va">dummy_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">coordinates</span>, <span class="va">attributes</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create a SpatVector from the data.frame</span></span>
-<span><span class="va">dummy_spatvector</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">dummy_data</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># DuckDB</span></span>
-<span><span class="va">duckdb_conn</span> <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">db_points</span> <span class="op">=</span> <span class="fu"><a href="../reference/dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
-<span>                      name <span class="op">=</span> <span class="st">"spatVector_proxy"</span>,</span>
-<span>                      value <span class="op">=</span> <span class="va">dummy_spatvector</span>,</span>
-<span>                      overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Preview points table</span></span>
-<span><span class="va">db_points</span></span>
+<span><span class="co"># Sample points</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dbSpatial.html">dbSpatial</a></span><span class="op">(</span></span>
+<span>  conn <span class="op">=</span> <span class="va">con</span>, name <span class="op">=</span> <span class="st">"pts"</span>, value <span class="op">=</span> <span class="va">df</span>,</span>
+<span>  x_colName <span class="op">=</span> <span class="st">"x"</span>, y_colName <span class="op">=</span> <span class="st">"y"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">pts</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   table&lt;spatVector_proxy&gt; [?? x 3]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.0 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]</span></span></span>
-<span><span class="co">#&gt;       id name  geom      </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 A_1   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2 A_2   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3 A_3   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 A_4   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5 A_5   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6 A_6   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7 A_7   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8 A_8   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9 A_9   <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10 A_10  <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ more rows</span></span></span></code></pre></div>
-<div class="section level4">
-<h4 id="extent">Extent<a class="anchor" aria-label="anchor" href="#extent"></a>
-</h4>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;      id     x     y geom         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    10    10 POINT (10 10)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    20    20 POINT (20 20)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="geometry-operations">Geometry Operations<a class="anchor" aria-label="anchor" href="#geometry-operations"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># terra</span></span>
-<span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/ext.html" class="external-link">ext</a></span><span class="op">(</span><span class="va">dummy_spatvector</span><span class="op">)</span></span>
-<span><span class="co">#&gt; SpatExtent : 1, 1000, 1, 1000 (xmin, xmax, ymin, ymax)</span></span>
-<span></span>
-<span><span class="co"># dbSpatial</span></span>
-<span><span class="fu">dbSpatial</span><span class="fu">::</span><span class="fu"><a href="../reference/st_extent.html">st_extent</a></span><span class="op">(</span>dbSpatial <span class="op">=</span> <span class="va">db_points</span>, geom <span class="op">=</span> <span class="st">"geom"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Missing values are always removed in SQL aggregation functions.</span></span>
-<span><span class="co">#&gt; Use `na.rm = TRUE` to silence this warning</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">#&gt; xmin xmax ymin ymax </span></span>
-<span><span class="co">#&gt;    1 1000    1 1000</span></span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="is-valid">Is.Valid<a class="anchor" aria-label="anchor" href="#is-valid"></a>
-</h4>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># terra</span></span>
-<span><span class="fu"><a href="../reference/head.html">head</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/geometry.html" class="external-link">geom</a></span><span class="op">(</span><span class="va">dummy_spatvector</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      geom part x y hole</span></span>
-<span><span class="co">#&gt; [1,]    1    1 1 1    0</span></span>
-<span><span class="co">#&gt; [2,]    2    1 2 2    0</span></span>
-<span><span class="co">#&gt; [3,]    3    1 3 3    0</span></span>
-<span><span class="co">#&gt; [4,]    4    1 4 4    0</span></span>
-<span><span class="co">#&gt; [5,]    5    1 5 5    0</span></span>
-<span><span class="co">#&gt; [6,]    6    1 6 6    0</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/head.html">head</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/is.valid.html" class="external-link">is.valid</a></span><span class="op">(</span><span class="va">dummy_spatvector</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE TRUE TRUE</span></span>
-<span></span>
-<span><span class="fu">dbSpatial</span><span class="fu">::</span><span class="fu"><a href="../reference/st_isvalid.html">st_isvalid</a></span><span class="op">(</span>dbSpatial <span class="op">=</span> <span class="va">db_points</span>, geomName <span class="op">=</span> <span class="st">"geom"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Buffer</span></span>
+<span><span class="fu"><a href="../reference/st_buffer.html">st_buffer</a></span><span class="op">(</span><span class="va">pts</span>, dist <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 1]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.0 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]</span></span></span>
-<span><span class="co">#&gt;    geom </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ more rows</span></span></span></code></pre></div>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;      id     x     y geom                             </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POLYGON ((5 0, 4.9931476737728...</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    10    10 POLYGON ((15 10, 14.9931476737...</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    20    20 POLYGON ((25 20, 24.9931476737...</span></span>
+<span></span>
+<span><span class="co"># Centroid</span></span>
+<span><span class="fu"><a href="../reference/st_centroid.html">st_centroid</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;      id     x     y geom         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    10    10 POINT (10 10)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    20    20 POINT (20 20)</span></span>
+<span></span>
+<span><span class="co"># Simplify</span></span>
+<span><span class="fu"><a href="../reference/st_simplify.html">st_simplify</a></span><span class="op">(</span><span class="va">pts</span>, dTolerance <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;      id     x     y geom         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    10    10 POINT (10 10)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    20    20 POINT (20 20)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="y-x-max">Y, X Max<a class="anchor" aria-label="anchor" href="#y-x-max"></a>
-</h4>
+<div class="section level2">
+<h2 id="measurements">Measurements<a class="anchor" aria-label="anchor" href="#measurements"></a>
+</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Bounding box</span></span>
+<span><span class="fu"><a href="../reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; xmin ymin xmax ymax </span></span>
+<span><span class="co">#&gt;    0    0   20   20</span></span>
+<span></span>
+<span><span class="co"># Check validity</span></span>
+<span><span class="fu"><a href="../reference/st_is_valid.html">st_is_valid</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;      id     x     y geom </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    10    10 TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    20    20 TRUE</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="spatial-predicates">Spatial Predicates<a class="anchor" aria-label="anchor" href="#spatial-predicates"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># terra</span></span>
-<span><span class="fu"><a href="../reference/head.html">head</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/geometry.html" class="external-link">geom</a></span><span class="op">(</span><span class="va">dummy_spatvector</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      geom part x y hole</span></span>
-<span><span class="co">#&gt; [1,]    1    1 1 1    0</span></span>
-<span><span class="co">#&gt; [2,]    2    1 2 2    0</span></span>
-<span><span class="co">#&gt; [3,]    3    1 3 3    0</span></span>
-<span><span class="co">#&gt; [4,]    4    1 4 4    0</span></span>
-<span><span class="co">#&gt; [5,]    5    1 5 5    0</span></span>
-<span><span class="co">#&gt; [6,]    6    1 6 6    0</span></span>
-<span></span>
-<span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/xmin.html" class="external-link">ymax</a></span><span class="op">(</span><span class="va">dummy_spatvector</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1000</span></span>
-<span></span>
-<span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/xmin.html" class="external-link">xmax</a></span><span class="op">(</span><span class="va">dummy_spatvector</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1000</span></span>
-<span></span>
-<span><span class="co"># dbSpatial</span></span>
-<span><span class="fu">dbSpatial</span><span class="fu">::</span><span class="fu"><a href="../reference/st_ymax.html">st_ymax</a></span><span class="op">(</span><span class="va">db_points</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1000</span></span>
-<span></span>
-<span><span class="fu">dbSpatial</span><span class="fu">::</span><span class="fu"><a href="../reference/st_xmax.html">st_xmax</a></span><span class="op">(</span><span class="va">db_points</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1000</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Self-intersection (returns joined table)</span></span>
+<span><span class="fu"><a href="../reference/st_intersects.html">st_intersects</a></span><span class="op">(</span><span class="va">pts</span>, <span class="va">pts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 8]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt;      id     x     y geom           id_1   x_1   y_1 geom_1    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)       1     0     0 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    10    10 POINT (10 10)     2    10    10 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    20    20 POINT (20 20)     3    20    20 <span style="color: #949494;">&lt;raw [32]&gt;</span></span></span></code></pre></div>
 </div>
-</div>
+<div class="section level2">
+<h2 id="convert-to-sf">Convert to sf<a class="anchor" aria-label="anchor" href="#convert-to-sf"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sf_pts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
+<span><span class="va">sf_pts</span></span>
+<span><span class="co">#&gt; Simple feature collection with 3 features and 3 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POINT</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 20 ymax: 20</span></span>
+<span><span class="co">#&gt; CRS:           NA</span></span>
+<span><span class="co">#&gt;   id  x  y          geom</span></span>
+<span><span class="co">#&gt; 1  1  0  0   POINT (0 0)</span></span>
+<span><span class="co">#&gt; 2  2 10 10 POINT (10 10)</span></span>
+<span><span class="co">#&gt; 3  3 20 20 POINT (20 20)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -226,7 +209,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
