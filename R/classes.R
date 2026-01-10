@@ -10,6 +10,7 @@
 #' @slot name \code{character}. Name of table in the database.
 #' @slot value value representing the table in the database.
 #' @noRd
+#' @exportClass dbSpatial
 #' @export
 dbSpatial = setClass(
   Class = 'dbSpatial',
