@@ -14,4 +14,5 @@
 #' }
 #' @name dbSpatial_options
 #' @aliases dbSpatial-options
+#' @concept options
 NULL

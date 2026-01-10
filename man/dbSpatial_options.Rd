@@ -26,3 +26,4 @@ options(dbSpatial.max_mem_convert = 16 * 1024^3)
 options(dbSpatial.verbose = FALSE)
 }
 }
+\concept{options}
