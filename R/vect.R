@@ -10,8 +10,10 @@ NULL
 #' @family dbSpatial
 #'
 #' @examples
+#' \dontrun{
 #' dbs <- .sim_dbSpatial()
 #' vect(dbs)
+#' }
 #'
 #' @export
 setMethod(

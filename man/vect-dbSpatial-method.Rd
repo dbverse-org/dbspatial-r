@@ -17,8 +17,10 @@
 Create SpatVector objects
 }
 \examples{
+\dontrun{
 dbs <- .sim_dbSpatial()
 vect(dbs)
+}
 
 }
 \seealso{
