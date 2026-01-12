@@ -28,3 +28,19 @@ setMethod('tail', signature(x = 'dbSpatial'), function(x, n = 6L, ...) {
 
   return(x)
 })
+
+
+# $ ####
+#' @title Column extraction for dbSpatial
+#' @name $,dbSpatial-method
+#' @description Extract a column from a dbSpatial object
+#' @param x A dbSpatial object
+#' @param name Column name to extract
+#' @returns A vector of values from the specified column
+#' @export
+setMethod('$', signature(x = 'dbSpatial'), function(x, name) {
+  x[] |>
+    dplyr::select(dplyr::all_of(name)) |>
+    dplyr::collect() |>
+    dplyr::pull(name)
+})
