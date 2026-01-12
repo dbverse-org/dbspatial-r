@@ -47,8 +47,6 @@ db_points = dbSpatial(conn = con,
                       name = "foo",
                       overwrite = TRUE)
 
-st_extent(dbSpatial = db_points)
-
 st_xmax(dbSpatial = db_points)
 }
 \seealso{

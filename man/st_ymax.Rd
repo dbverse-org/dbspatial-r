@@ -46,8 +46,6 @@ db_points = dbSpatial(conn = con,
                       name = "foo",
                       overwrite = TRUE)
 
-st_bbox(obj = db_points)
-
 st_ymax(dbSpatial = db_points)
 }
 \seealso{

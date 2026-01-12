@@ -29,8 +29,6 @@
 #'                       name = "foo",
 #'                       overwrite = TRUE)
 #'
-#' st_extent(dbSpatial = db_points)
-#'
 #' st_xmax(dbSpatial = db_points)
 setGeneric(
   "st_xmax",
@@ -68,8 +66,6 @@ setGeneric(
 #'                       y_colName = "y",
 #'                       name = "foo",
 #'                       overwrite = TRUE)
-#'
-#' st_bbox(obj = db_points)
 #'
 #' st_ymax(dbSpatial = db_points)
 setGeneric(
