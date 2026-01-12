@@ -15,4 +15,10 @@ A dbSpatial object
 \description{
 Simulate basic dbSpatial object
 }
+\details{
+Polygon data is created dynamically using sf rather than loading
+from inst/extdata/polygon.geojson. This avoids issues with system.file()
+returning an empty string when called from dependent packages during
+R CMD check (before dbSpatial is fully installed to the test library).
+}
 \keyword{internal}
