@@ -53,8 +53,9 @@ test_that("basic spatial functions work", {
   expect_equal(as.numeric(bb["xmax"]), 20)
 })
 
-test_that("spatial predicates work", {
+test_that("st_join works with different predicates", {
   skip_if_not_installed("duckdb")
+
 
   con <- DBI::dbConnect(duckdb::duckdb())
   on.exit(DBI::dbDisconnect(con, shutdown = TRUE))
@@ -69,8 +70,8 @@ test_that("spatial predicates work", {
     overwrite = TRUE
   )
 
-  # self-intersect returns 3 rows (each point intersects itself)
-  res <- st_intersects(pts, pts)
+  # st_join with st_intersects - self-join returns 3 rows (each point intersects itself)
+  res <- st_join(pts, pts, join = sf::st_intersects)
   expect_s4_class(res, "dbSpatial")
   expect_equal(nrow(dplyr::collect(res[])), 3)
 })

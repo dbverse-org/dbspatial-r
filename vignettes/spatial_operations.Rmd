@@ -54,11 +54,13 @@ st_bbox(pts)
 st_is_valid(pts)
 ```
 
-## Spatial Predicates
+## Spatial Joins
+
+Use `st_join()` to perform spatial joins with various predicates:
 
 ```{r}
-# Self-intersection (returns joined table)
-st_intersects(pts, pts)
+# Self-join using intersection predicate (returns joined table)
+st_join(pts, pts, join = st_intersects)
 ```
 
 ## Convert to sf
