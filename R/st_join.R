@@ -77,7 +77,10 @@ st_join.dbSpatial <- function(x, y, join = st_intersects,
   }
 
   # Generate output table name based on predicate
-  out_name <- paste0(tolower(gsub("ST_", "", st_predicate)), "_result")
+  out_name <- paste0(tolower(sub("^ST_", "", st_predicate)), "_result")
+  vals <- c(letters, LETTERS, 0:9)
+  suffix <- paste0(sample(vals, 10, replace = TRUE), collapse = "")
+  out_name <- paste0(out_name, "_", suffix)
 
   # Call internal spatial join
   .st_spatial_join(
