@@ -12,6 +12,7 @@ NULL
 #' @param ... Additional arguments (ignored).
 #'
 #' @return A lazy tibble with a single column `geom_type`.
+#' @concept geom_scalar
 #' @export
 st_geometrytype <- function(dbSpatial, geomName = "geom", ...) {
   tbl <- dbSpatial[]

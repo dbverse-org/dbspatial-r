@@ -20,3 +20,4 @@ A lazy tibble with a single column \code{geom_type}.
 Returns the geometry type for each row in a \link{dbSpatial} object using DuckDB's
 spatial function \code{ST_GeometryType()}.
 }
+\concept{geom_scalar}
