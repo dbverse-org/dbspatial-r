@@ -61,6 +61,7 @@ Collate:
     'st_as_sf.R'
     'st_bbox.R'
     'st_geometry_type.R'
+    'st_geometrytype.R'
     'st_is_valid.R'
     'st_spatial_join.R'
     'st_join.R'

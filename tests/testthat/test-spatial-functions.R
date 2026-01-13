@@ -53,6 +53,34 @@ test_that("basic spatial functions work", {
   expect_equal(as.numeric(bb["xmax"]), 20)
 })
 
+test_that("st_geometrytype returns expected types lazily", {
+  skip_if_not_installed("duckdb")
+
+  con <- DBI::dbConnect(duckdb::duckdb())
+  on.exit(DBI::dbDisconnect(con, shutdown = TRUE))
+
+  df <- data.frame(id = 1:3, x = c(0, 10, 20), y = c(0, 10, 20))
+  pts <- dbSpatial(
+    conn = con,
+    name = "test_pts",
+    value = df,
+    x_colName = "x",
+    y_colName = "y",
+    overwrite = TRUE
+  )
+
+  gt_tbl <- st_geometrytype(pts)
+  expect_true(inherits(gt_tbl, "tbl"))
+
+  first_type <- gt_tbl |>
+    head(n = 1) |>
+    dplyr::collect() |>
+    dplyr::pull(geom_type) |>
+    as.character()
+
+  expect_true(grepl("POINT", first_type))
+})
+
 test_that("st_join works with different predicates", {
   skip_if_not_installed("duckdb")
 
