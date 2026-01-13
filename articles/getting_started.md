@@ -91,7 +91,7 @@ a
 ``` r
 # load terra package
 library(terra)
-#> terra 1.8.86
+#> terra 1.8.93
 
 # Create a SpatVector from the data.frame
 dummy_spatvector <- terra::vect(test_data, geom = c("x", "y"))

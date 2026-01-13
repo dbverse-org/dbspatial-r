@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9109</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9110</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,7 +157,7 @@
 <span><span class="co">#&gt;    0    0   20   20</span></span>
 <span></span>
 <span><span class="co"># Check validity</span></span>
-<span><span class="fu"><a href="../reference/st_is_valid.html">st_is_valid</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_is_valid</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
 <span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
@@ -168,11 +168,13 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    20    20 TRUE</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="spatial-predicates">Spatial Predicates<a class="anchor" aria-label="anchor" href="#spatial-predicates"></a>
+<h2 id="spatial-joins">Spatial Joins<a class="anchor" aria-label="anchor" href="#spatial-joins"></a>
 </h2>
+<p>Use <code><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join()</a></code> to perform spatial joins with various
+predicates:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Self-intersection (returns joined table)</span></span>
-<span><span class="fu"><a href="../reference/st_intersects.html">st_intersects</a></span><span class="op">(</span><span class="va">pts</span>, <span class="va">pts</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Self-join using intersection predicate (returns joined table)</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join</a></span><span class="op">(</span><span class="va">pts</span>, <span class="va">pts</span>, join <span class="op">=</span> <span class="va">st_intersects</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
 <span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 8]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>

@@ -65,9 +65,6 @@ db_points = dbSpatial(conn = con,
                       name = "foo",
                       overwrite = TRUE)
 
-st_bbox(obj = db_points)
-#> Error in st_bbox(obj = db_points): could not find function "st_bbox"
-
 st_ymax(dbSpatial = db_points)
 #> [1] 700
 ```

@@ -15,13 +15,13 @@ Source:
 [`DESCRIPTION`](https://github.com/dbverse-org/dbspatial-r/blob/dev/DESCRIPTION)
 
 C. Ruiz E, George Chen J, Dries R (2026). *dbSpatial: dbSpatial*. R
-package version 0.0.0.9109,
+package version 0.0.0.9110,
 <https://github.com/dbverse-org/dbspatial-r>.
 
     @Manual{,
       title = {dbSpatial: dbSpatial},
       author = {Edward {C. Ruiz} and Jiaji {George Chen} and Ruben Dries},
       year = {2026},
-      note = {R package version 0.0.0.9109},
+      note = {R package version 0.0.0.9110},
       url = {https://github.com/dbverse-org/dbspatial-r},
     }

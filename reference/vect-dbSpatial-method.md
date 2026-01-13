@@ -39,8 +39,8 @@ Other dbSpatial:
 ## Examples
 
 ``` r
+if (FALSE) { # \dontrun{
 dbs <- .sim_dbSpatial()
-#> Error in .sim_dbSpatial(): could not find function ".sim_dbSpatial"
 vect(dbs)
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'vect': object 'dbs' not found
+} # }
 ```

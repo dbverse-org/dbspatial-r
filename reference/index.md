@@ -28,56 +28,8 @@ Functions and methods for `dbSpatial` objects
 Functions and methods that perform a spatial join between `dbSpatial`
 objects.
 
-- [`st_contains`](https://dbverse-org.github.io/dbspatial-r/reference/st_contains.md)
-  :
-
-  Determine if geometries in two `dbSpatial` objects contain each other
-
-- [`st_covered_by`](https://dbverse-org.github.io/dbspatial-r/reference/st_covered_by.md)
-  :
-
-  Determine if geometries in two `dbSpatial` objects are covered by each
-  other
-
-- [`st_covers`](https://dbverse-org.github.io/dbspatial-r/reference/st_covers.md)
-  :
-
-  Determine if geometries in two `dbSpatial` objects cover each other
-
-- [`st_crosses`](https://dbverse-org.github.io/dbspatial-r/reference/st_crosses.md)
-  :
-
-  Determine if geometries in two `dbSpatial` objects cross each other
-
-- [`st_disjoint`](https://dbverse-org.github.io/dbspatial-r/reference/st_disjoint.md)
-  :
-
-  Determine if geometries in two `dbSpatial` objects are disjoint
-
-- [`st_equals`](https://dbverse-org.github.io/dbspatial-r/reference/st_equals.md)
-  :
-
-  Determine if geometries in two `dbSpatial` objects are equal
-
-- [`st_intersects`](https://dbverse-org.github.io/dbspatial-r/reference/st_intersects.md)
-  :
-
-  Determine if geometries between two `dbSpatial` objects are
-  intersecting
-
-- [`st_is_within_distance`](https://dbverse-org.github.io/dbspatial-r/reference/st_is_within_distance.md)
-  : Check if geometries are within a certain distance
-
-- [`st_overlaps`](https://dbverse-org.github.io/dbspatial-r/reference/st_overlaps.md)
-  : Check if geometries overlap
-
-- [`st_touches`](https://dbverse-org.github.io/dbspatial-r/reference/st_touches.md)
-  :
-
-  Determine if geometries in two `dbSpatial` objects touch each other
-
-- [`st_within`](https://dbverse-org.github.io/dbspatial-r/reference/st_within.md)
-  : Check if geometry A is within geometry B
+- [`st_join(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_join.dbSpatial.md)
+  : Spatial join for dbSpatial objects
 
 ## Spatial Summary
 
@@ -96,10 +48,8 @@ object.
 Functions and methods that return a single vector about a geometry in a
 `dbSpatial` object.
 
-- [`st_geometry_type`](https://dbverse-org.github.io/dbspatial-r/reference/st_geometry_type.md)
-  : Return geometry type
-- [`st_is_valid`](https://dbverse-org.github.io/dbspatial-r/reference/st_is_valid.md)
-  : Determine if geometry is valid
+- [`st_geometrytype()`](https://dbverse-org.github.io/dbspatial-r/reference/st_geometrytype.md)
+  : Get geometry types (DuckDB-native)
 
 ## Geometry construction
 
@@ -155,6 +105,8 @@ Functions that compute metric measurements of geometries.
 
 Functions that extract coordinates or properties.
 
+- [`` `$`( ``*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/cash-dbSpatial-method.md)
+  : Column extraction for dbSpatial
 - [`st_npoints()`](https://dbverse-org.github.io/dbspatial-r/reference/st_npoints.md)
   : Get number of points
 - [`st_x()`](https://dbverse-org.github.io/dbspatial-r/reference/st_x.md)

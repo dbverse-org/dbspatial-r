@@ -94,11 +94,14 @@ st_is_valid(pts)
 #> 3     3    20    20 TRUE
 ```
 
-## Spatial Predicates
+## Spatial Joins
+
+Use [`st_join()`](https://r-spatial.github.io/sf/reference/st_join.html)
+to perform spatial joins with various predicates:
 
 ``` r
-# Self-intersection (returns joined table)
-st_intersects(pts, pts)
+# Self-join using intersection predicate (returns joined table)
+st_join(pts, pts, join = st_intersects)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 8]
 #> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]

@@ -17,3 +17,10 @@ Simulate basic dbSpatial object
 ## Value
 
 A dbSpatial object
+
+## Details
+
+Polygon data is created dynamically using sf rather than loading from
+inst/extdata/polygon.geojson. This avoids issues with system.file()
+returning an empty string when called from dependent packages during R
+CMD check (before dbSpatial is fully installed to the test library).

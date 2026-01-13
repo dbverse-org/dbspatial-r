@@ -65,9 +65,6 @@ db_points = dbSpatial(conn = con,
                       name = "foo",
                       overwrite = TRUE)
 
-st_extent(dbSpatial = db_points)
-#> Error in st_extent(dbSpatial = db_points): could not find function "st_extent"
-
 st_xmax(dbSpatial = db_points)
 #> [1] 300
 ```

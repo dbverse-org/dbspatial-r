@@ -1,5 +1,161 @@
 # Changelog
 
+## dbSpatial 0.0.0.9110 (2026-01-13)
+
+### Bug fixes
+
+- Make st_join VIEW names unique.
+
+- Generate polygons for sim_dbSpatial.
+
+- Add `options` concept to pkgdown.
+
+- Export dbSpatial S4 Class.
+
+- .st_spatial_join internal.
+
+- Remove double geometry columns in dbSpatial-casted objects.
+
+### Features
+
+- Sf::st_geometrytype().
+
+- Add \$ method for dbSpatial.
+
+- Refactor spatial predicates via st_join.
+
+- Suport for select `sf` generics.
+
+- Add measurement methods (st_area, st_length, st_perimeter).
+
+  - st_area (sf generic): compute area of polygons
+  - st_length (sf generic): compute length of linestrings
+  - st_perimeter (sf generic): compute perimeter of polygons
+
+- Add geometry operation methods (st_buffer, st_centroid, st_simplify).
+
+  - st_buffer (sf generic): compute buffer zones around geometries
+  - st_centroid (sf generic): compute geometry centroids
+  - st_simplify (sf generic): simplify geometries
+  - Warn on unsupported sf arguments
+
+- Add geometry output format methods (st_as_text, st_as_geojson).
+
+  - Add st_as_text to convert geometry to WKT string
+  - Add st_as_geojson to convert geometry to GeoJSON
+
+- Add coordinate accessor methods (st_x, st_y, st_npoints).
+
+  - Add st_x, st_y to extract point coordinates
+  - Add st_npoints to count geometry points
+  - Add shared .st_mutate_geom utility for accessor pattern
+
+- Add show function for dbSpatial.
+
+- Add coerce methods from dbSpatial to `SpatVector` and `sf`.
+
+- `dbProject` and `dbData` integration.
+
+- Vect().
+
+- St_as_sf.
+
+### Chore
+
+- Clean up predicate docs and roxygen concepts.
+
+- Breaking change: remove st_difference and st_distance.
+
+- Add `methods` to Imports and update Collates.
+
+- Remove redundant slots in dbSpatial class definition.
+
+- Remove docs/ from version control.
+
+- Bump version to 0.0.0.9109.
+
+- Fix `gh_pages`.
+
+- Require duckdb \>= 1.4.0.
+
+- Remove dbData references.
+
+- Migrate to dbverse-org.
+
+- Update URLs to dbverse-org organization.
+
+- Add testthat.
+
+- Update imports.
+
+- Include `dev` in gha.
+
+- Update docs.
+
+- Update license.
+
+### Documentation
+
+- Add missing topics to pkgdown reference.
+
+- Wrap vect examples in dontrun.
+
+- Fix broken example calls.
+
+- Update spatial_operations.Rmd vignette.
+
+- Update pkgdown config.
+
+- Add global options.
+
+- Update global options documentation.
+
+- Rebuild roxygen.
+
+- Add package global options.
+
+- Document global package options.
+
+- Update.
+
+### Code style
+
+- Apply air formatting to dbspatial-r.
+
+### Refactoring
+
+- Clean up constructor logic and add missing documentation.
+
+- Simplify st_translate implementation.
+
+- Rename scalar functions.
+
+  - st_extent → st_bbox (sf generic)
+  - st_geometrytype → st_geometry_type (sf generic)
+  - st_isvalid → st_is_valid (sf generic)
+
+- Consolidate spatial predicates.
+
+- Centralize internal type check funcs in `dbProject`a.
+
+- Remove unused extract methods for dbSpatial.
+
+- S3 method
+  [`st_as_sf()`](https://r-spatial.github.io/sf/reference/st_as_sf.html)
+  for `dbSpatial` obj.
+
+- Update st_as_sf method to S3.
+
+### Testing
+
+- Switch predicate usage to st_join.
+
+- Add basic tests.
+
+### Breaking changes
+
+- Breaking change: remove st_difference and st_distance.
+
 ## dbSpatial 0.0.0.9109 (2025-10-07)
 
 ### Breaking Changes

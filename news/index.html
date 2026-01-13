@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9109</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9110</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,116 @@
       <small>Source: <a href="https://github.com/dbverse-org/dbspatial-r/blob/dev/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.0.9110" id="dbspatial-0009110-2026-01-13">dbSpatial 0.0.0.9110 (2026-01-13)<a class="anchor" aria-label="anchor" href="#dbspatial-0009110-2026-01-13"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-0-0-9110">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-0-0-9110"></a></h3>
+<ul><li><p>Make st_join VIEW names unique.</p></li>
+<li><p>Generate polygons for sim_dbSpatial.</p></li>
+<li><p>Add <code>options</code> concept to pkgdown.</p></li>
+<li><p>Export dbSpatial S4 Class.</p></li>
+<li><p>.st_spatial_join internal.</p></li>
+<li><p>Remove double geometry columns in dbSpatial-casted objects.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-0-0-0-9110">Features<a class="anchor" aria-label="anchor" href="#features-0-0-0-9110"></a></h3>
+<ul><li><p>Sf::st_geometrytype().</p></li>
+<li><p>Add $ method for dbSpatial.</p></li>
+<li><p>Refactor spatial predicates via st_join.</p></li>
+<li><p>Suport for select <code>sf</code> generics.</p></li>
+<li>
+<p>Add measurement methods (st_area, st_length, st_perimeter).</p>
+<ul><li>st_area (sf generic): compute area of polygons</li>
+<li>st_length (sf generic): compute length of linestrings</li>
+<li>st_perimeter (sf generic): compute perimeter of polygons</li>
+</ul></li>
+<li>
+<p>Add geometry operation methods (st_buffer, st_centroid, st_simplify).</p>
+<ul><li>st_buffer (sf generic): compute buffer zones around geometries</li>
+<li>st_centroid (sf generic): compute geometry centroids</li>
+<li>st_simplify (sf generic): simplify geometries</li>
+<li>Warn on unsupported sf arguments</li>
+</ul></li>
+<li>
+<p>Add geometry output format methods (st_as_text, st_as_geojson).</p>
+<ul><li>Add st_as_text to convert geometry to WKT string</li>
+<li>Add st_as_geojson to convert geometry to GeoJSON</li>
+</ul></li>
+<li>
+<p>Add coordinate accessor methods (st_x, st_y, st_npoints).</p>
+<ul><li>Add st_x, st_y to extract point coordinates</li>
+<li>Add st_npoints to count geometry points</li>
+<li>Add shared .st_mutate_geom utility for accessor pattern</li>
+</ul></li>
+<li><p>Add show function for dbSpatial.</p></li>
+<li><p>Add coerce methods from dbSpatial to <code>SpatVector</code> and <code>sf</code>.</p></li>
+<li><p><code>dbProject</code> and <code>dbData</code> integration.</p></li>
+<li><p>Vect().</p></li>
+<li><p>St_as_sf.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-0-0-0-9110">Chore<a class="anchor" aria-label="anchor" href="#chore-0-0-0-9110"></a></h3>
+<ul><li><p>Clean up predicate docs and roxygen concepts.</p></li>
+<li><p>Breaking change: remove st_difference and st_distance.</p></li>
+<li><p>Add <code>methods</code> to Imports and update Collates.</p></li>
+<li><p>Remove redundant slots in dbSpatial class definition.</p></li>
+<li><p>Remove docs/ from version control.</p></li>
+<li><p>Bump version to 0.0.0.9109.</p></li>
+<li><p>Fix <code>gh_pages</code>.</p></li>
+<li><p>Require duckdb &gt;= 1.4.0.</p></li>
+<li><p>Remove dbData references.</p></li>
+<li><p>Migrate to dbverse-org.</p></li>
+<li><p>Update URLs to dbverse-org organization.</p></li>
+<li><p>Add testthat.</p></li>
+<li><p>Update imports.</p></li>
+<li><p>Include <code>dev</code> in gha.</p></li>
+<li><p>Update docs.</p></li>
+<li><p>Update license.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-0-0-0-9110">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-0-0-9110"></a></h3>
+<ul><li><p>Add missing topics to pkgdown reference.</p></li>
+<li><p>Wrap vect examples in dontrun.</p></li>
+<li><p>Fix broken example calls.</p></li>
+<li><p>Update spatial_operations.Rmd vignette.</p></li>
+<li><p>Update pkgdown config.</p></li>
+<li><p>Add global options.</p></li>
+<li><p>Update global options documentation.</p></li>
+<li><p>Rebuild roxygen.</p></li>
+<li><p>Add package global options.</p></li>
+<li><p>Document global package options.</p></li>
+<li><p>Update.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="code-style-0-0-0-9110">Code style<a class="anchor" aria-label="anchor" href="#code-style-0-0-0-9110"></a></h3>
+<ul><li>Apply air formatting to dbspatial-r.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="refactoring-0-0-0-9110">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-0-0-0-9110"></a></h3>
+<ul><li><p>Clean up constructor logic and add missing documentation.</p></li>
+<li><p>Simplify st_translate implementation.</p></li>
+<li>
+<p>Rename scalar functions.</p>
+<ul><li>st_extent → st_bbox (sf generic)</li>
+<li>st_geometrytype → st_geometry_type (sf generic)</li>
+<li>st_isvalid → st_is_valid (sf generic)</li>
+</ul></li>
+<li><p>Consolidate spatial predicates.</p></li>
+<li><p>Centralize internal type check funcs in <code>dbProject</code>a.</p></li>
+<li><p>Remove unused extract methods for dbSpatial.</p></li>
+<li><p>S3 method <code><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf()</a></code> for <code>dbSpatial</code> obj.</p></li>
+<li><p>Update st_as_sf method to S3.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-0-0-0-9110">Testing<a class="anchor" aria-label="anchor" href="#testing-0-0-0-9110"></a></h3>
+<ul><li><p>Switch predicate usage to st_join.</p></li>
+<li><p>Add basic tests.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="breaking-changes-0-0-0-9110">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-0-9110"></a></h3>
+<ul><li>Breaking change: remove st_difference and st_distance.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9109" id="dbspatial-0009109-2025-10-07">dbSpatial 0.0.0.9109 (2025-10-07)<a class="anchor" aria-label="anchor" href="#dbspatial-0009109-2025-10-07"></a></h2>
 <div class="section level3">

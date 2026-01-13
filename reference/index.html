@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9109</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9110</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,80 +99,10 @@
 
       <dl><dt>
 
-          <code><a href="st_contains.html">st_contains</a></code>
+          <code><a href="st_join.dbSpatial.html">st_join(<i>&lt;dbSpatial&gt;</i>)</a></code>
 
         </dt>
-        <dd>Determine if geometries in two <code>dbSpatial</code> objects contain each other</dd>
-
-        <dt>
-
-          <code><a href="st_covered_by.html">st_covered_by</a></code>
-
-        </dt>
-        <dd>Determine if geometries in two <code>dbSpatial</code> objects are covered by each other</dd>
-
-        <dt>
-
-          <code><a href="st_covers.html">st_covers</a></code>
-
-        </dt>
-        <dd>Determine if geometries in two <code>dbSpatial</code> objects cover each other</dd>
-
-        <dt>
-
-          <code><a href="st_crosses.html">st_crosses</a></code>
-
-        </dt>
-        <dd>Determine if geometries in two <code>dbSpatial</code> objects cross each other</dd>
-
-        <dt>
-
-          <code><a href="st_disjoint.html">st_disjoint</a></code>
-
-        </dt>
-        <dd>Determine if geometries in two <code>dbSpatial</code> objects are disjoint</dd>
-
-        <dt>
-
-          <code><a href="st_equals.html">st_equals</a></code>
-
-        </dt>
-        <dd>Determine if geometries in two <code>dbSpatial</code> objects are equal</dd>
-
-        <dt>
-
-          <code><a href="st_intersects.html">st_intersects</a></code>
-
-        </dt>
-        <dd>Determine if geometries between two <code>dbSpatial</code> objects are intersecting</dd>
-
-        <dt>
-
-          <code><a href="st_is_within_distance.html">st_is_within_distance</a></code>
-
-        </dt>
-        <dd>Check if geometries are within a certain distance</dd>
-
-        <dt>
-
-          <code><a href="st_overlaps.html">st_overlaps</a></code>
-
-        </dt>
-        <dd>Check if geometries overlap</dd>
-
-        <dt>
-
-          <code><a href="st_touches.html">st_touches</a></code>
-
-        </dt>
-        <dd>Determine if geometries in two <code>dbSpatial</code> objects touch each other</dd>
-
-        <dt>
-
-          <code><a href="st_within.html">st_within</a></code>
-
-        </dt>
-        <dd>Check if geometry A is within geometry B</dd>
+        <dd>Spatial join for dbSpatial objects</dd>
       </dl></div><div class="section level2">
       <h2 id="spatial-summary">Spatial Summary<a class="anchor" aria-label="anchor" href="#spatial-summary"></a></h2>
 
@@ -215,17 +145,10 @@
 
       <dl><dt>
 
-          <code><a href="st_geometry_type.html">st_geometry_type</a></code>
+          <code><a href="st_geometrytype.html">st_geometrytype()</a></code>
 
         </dt>
-        <dd>Return geometry type</dd>
-
-        <dt>
-
-          <code><a href="st_is_valid.html">st_is_valid</a></code>
-
-        </dt>
-        <dd>Determine if geometry is valid</dd>
+        <dd>Get geometry types (DuckDB-native)</dd>
       </dl></div><div class="section level2">
       <h2 id="geometry-construction">Geometry construction<a class="anchor" aria-label="anchor" href="#geometry-construction"></a></h2>
 
@@ -366,6 +289,13 @@
 
 
       <dl><dt>
+
+          <code><a href="cash-dbSpatial-method.html">`$`(<i>&lt;dbSpatial&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Column extraction for dbSpatial</dd>
+
+        <dt>
 
           <code><a href="st_npoints.html">st_npoints()</a></code>
 
