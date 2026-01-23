@@ -72,11 +72,7 @@ test_that("st_geometrytype returns expected types lazily", {
   gt_tbl <- st_geometrytype(pts)
   expect_true(inherits(gt_tbl, "tbl"))
 
-  first_type <- gt_tbl |>
-    head(n = 1) |>
-    dplyr::collect() |>
-    dplyr::pull(geom_type) |>
-    as.character()
+  first_type <- st_geometrytype(pts, collect = TRUE, n = 1)
 
   expect_true(grepl("POINT", first_type))
 })
