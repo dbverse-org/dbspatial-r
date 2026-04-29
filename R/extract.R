@@ -8,7 +8,11 @@
 
 # head ####
 #' @title head method for dbSpatial
-#' @name head
+#' @param x A `dbSpatial` object.
+#' @param n Number of rows to return.
+#' @param ... Additional arguments.
+#' @rdname head
+#' @aliases head,dbSpatial-method
 #' @family dbData
 #' @export
 setMethod('head', signature(x = 'dbSpatial'), function(x, n = 6L, ...) {
@@ -20,7 +24,11 @@ setMethod('head', signature(x = 'dbSpatial'), function(x, n = 6L, ...) {
 
 # tail ####
 #' @title tail method for dbSpatial
-#' @name tail
+#' @param x A `dbSpatial` object.
+#' @param n Number of rows to return.
+#' @param ... Additional arguments.
+#' @rdname tail
+#' @aliases tail,dbSpatial-method
 #' @family dbData
 #' @export
 setMethod('tail', signature(x = 'dbSpatial'), function(x, n = 6L, ...) {

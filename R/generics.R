@@ -3,7 +3,7 @@
 #' @description
 #' This function returns the maximum x coordinate in each `geometry` in
 #' the specified \code{\link{dbSpatial}} object.
-#' @param \code{\link{dbSpatial}}  object
+#' @param dbSpatial \code{\link{dbSpatial}} object.
 #' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
 #' @param ... additional arguments passed to methods
 #' @return numerical column vector in database
@@ -41,7 +41,7 @@ setGeneric(
 #' @name st_ymax
 #' @description
 #' This function returns the maximum y coordinate of the geometries in the specified \code{\link{dbSpatial}}  object.
-#' @param \code{\link{dbSpatial}}  object
+#' @param dbSpatial \code{\link{dbSpatial}} object.
 #' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
 #' @param ... additional arguments passed to methods
 #' @return numerical column vector in database
@@ -80,11 +80,10 @@ setGeneric(
 #' @name st_translate
 #' @description
 #' This function translates point geometries by the specified delta x and delta y values.
-#' @param \code{\link{dbSpatial}}  object
+#' @param dbSpatial \code{\link{dbSpatial}} object.
 #' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
 #' @param dx \code{numeric}.value to shift x coordinates by
 #' @param dy \code{numeric}. value to shift y coordinates by
-#' @param name \code{string.} name of table to add to \code{\link{dbSpatial}} object.
 #' @param ... additional arguments passed to methods
 #' @return \code{\link{dbSpatial}} object
 #' @family geom_construction

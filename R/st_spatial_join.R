@@ -15,7 +15,7 @@
 #' @param overwrite \code{logical}. If \code{TRUE}, overwrite existing table. Default: \code{FALSE}.
 #' @param name \code{character}. The name of the output table.
 #' @param st_name \code{character}. The name of the spatial join function to use.
-#' @param ... Additional arguments passed to \code{\link{duckdb::dbSendQuery}}.
+#' @param ... Additional arguments passed to `duckdb::dbSendQuery()`.
 #'
 #' @return `dbSpatial` object
 #' @keywords internal
@@ -48,7 +48,7 @@
   .check_name(name = name)
 
   # Load the DuckDB Spatial extension
-  suppressMessages(loadSpatial(con = con1))
+  suppressMessages(loadSpatial(conn = con1))
 
   # Update SQL statement depending on g1_cols_keep and g2_cols_keep
   tblName_g1 <- dbplyr::remote_name(g1[])

@@ -1,14 +1,14 @@
-#' @title Convert an {sf} or {terra} object to a `dbSpatial` object
+#' @title Convert an sf or terra object to a `dbSpatial` object
 #' @description
 #' Create a \code{\link{dbSpatial}} object from an \code{sf} or \code{terra} object.
 #'
 #' @details
-#' Writes out the `rSpatial` object to temporary .parquet file and
-#' computes the VIEW in the database with the specified `name` and the geometry
-#' column as `geom`.
+#' Writes the `rSpatial` object to a temporary DuckDB table and computes the
+#' table in the database with the specified `name` and the geometry column as
+#' `geom`.
 #'
 #' @param rSpatial \code{sf} or \code{terra} object.
-#' @param conn A \code{\link{DBIConnection}} object, as returned by \code{\link{DBI::dbConnect}}.
+#' @param conn A DBI connection object, as returned by `DBI::dbConnect()`.
 #' @param name \code{a character string} with the unquoted DBMS table name, e.g. "table_name"
 #' @param overwrite \code{logical}. Overwrite existing table. default = FALSE.
 #' @param ... Additional arguments to be passed
@@ -50,34 +50,34 @@ as_dbSpatial <- function(rSpatial, conn, name, overwrite = FALSE, ...) {
     stop("Support for {terra} SpatRaster objects not yet implemented.")
   }
 
-  temp_file <- tempfile(tmpdir = getwd(), fileext = ".parquet")
-
-  to_parquet <- function(rSpatial) {
-    suppressWarnings(sfarrow::write_sf_dataset(
-      obj = rSpatial,
-      path = temp_file
-    ))
+  sf_obj <- if (inherits(rSpatial, "sf")) {
+    rSpatial
+  } else {
+    sf::st_as_sf(rSpatial)
   }
 
-  if (inherits(rSpatial, "sf")) {
-    to_parquet(rSpatial)
-  } else if (
-    inherits(rSpatial, "SpatVector") || inherits(rSpatial, "SpatRaster")
-  ) {
-    rSpatial |>
-      sf::st_as_sf() |> # workaround for lack of arrow support in terra v1.7.78
-      to_parquet()
-  }
+  temp_name <- paste0(
+    "__dbspatial_",
+    gsub("[^A-Za-z0-9_]", "_", name),
+    "_",
+    sample.int(.Machine$integer.max, 1)
+  )
+  on.exit({
+    if (DBI::dbExistsTable(conn, temp_name)) {
+      DBI::dbRemoveTable(conn, temp_name)
+    }
+  }, add = TRUE)
 
-  tbl <- arrow::open_dataset(temp_file) |>
-    arrow::to_duckdb(con = conn) |>
-    dplyr::mutate(geom = st_geomfromwkb(geometry)) |>
+  spatial_df <- sf::st_drop_geometry(sf_obj)
+  spatial_df$geometry <- sf::st_as_text(sf::st_geometry(sf_obj))
+  DBI::dbWriteTable(conn, temp_name, spatial_df, temporary = TRUE)
+
+  tbl <- dplyr::tbl(conn, temp_name) |>
+    dplyr::mutate(geom = dbplyr::sql("ST_GeomFromText(geometry)")) |>
     dplyr::select(-geometry) |>
     dplyr::compute(overwrite = overwrite, name = name)
 
   res <- dbSpatial(value = tbl, name = name)
-
-  unlink(temp_file, recursive = TRUE, force = TRUE) # delete temp file
 
   return(res)
 }

@@ -16,3 +16,8 @@
 #' @aliases dbSpatial-options
 #' @concept options
 NULL
+
+utils::globalVariables(c(
+  ":=", "geom_type", "geometry", "n", "ST_AsWKB", "ST_GeometryType",
+  "st_xmin", "st_ymin", "x", "y"
+))

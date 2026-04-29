@@ -4,17 +4,24 @@
 \alias{st_geometrytype}
 \title{Get geometry types (DuckDB-native)}
 \usage{
-st_geometrytype(dbSpatial, geomName = "geom", ...)
+st_geometrytype(dbSpatial, geomName = "geom", collect = FALSE, n = NULL, ...)
 }
 \arguments{
 \item{dbSpatial}{A \link{dbSpatial} object.}
 
 \item{geomName}{Geometry column name. Default: \code{"geom"}.}
 
+\item{collect}{Logical (default = \code{FALSE}). If \code{TRUE}, collect results into
+a character vector.}
+
+\item{n}{Optional integer. If provided alongside \code{collect = TRUE}, limits the
+query to the first \code{n} rows before collecting.}
+
 \item{...}{Additional arguments (ignored).}
 }
 \value{
-A lazy tibble with a single column \code{geom_type}.
+If \code{collect = FALSE} (default), a lazy tibble with a single column
+\code{geom_type}. If \code{collect = TRUE}, a character vector of geometry type(s).
 }
 \description{
 Returns the geometry type for each row in a \link{dbSpatial} object using DuckDB's

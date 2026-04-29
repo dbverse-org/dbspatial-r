@@ -34,7 +34,7 @@ This method handles conversion of \code{\link{dbSpatial}} to \code{\link[sf:sf]{
 Other dbSpatial: 
 \code{\link{as_dbSpatial}()},
 \code{\link{dbSpatial}},
-\code{\link{show}()},
+\code{\link{show,dbSpatial-method}},
 \code{\link{vect,dbSpatial-method}}
 }
 \concept{dbSpatial}

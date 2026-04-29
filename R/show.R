@@ -1,6 +1,8 @@
 #' Show method for dbSpatial
 #' @title show method for dbSpatial
-#' @name show
+#' @param object A `dbSpatial` object.
+#' @rdname show
+#' @aliases show,dbSpatial-method
 #' @family dbSpatial
 setMethod('show', signature(object = 'dbSpatial'), function(object) {
   # Header

@@ -10,11 +10,11 @@ st_ymax(dbSpatial, geomName = "geom", ...)
 \S4method{st_ymax}{dbSpatial}(dbSpatial, geomName = "geom", ...)
 }
 \arguments{
+\item{dbSpatial}{\code{\link{dbSpatial}} object.}
+
 \item{geomName}{\code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: \code{"geom"}.}
 
 \item{...}{additional arguments passed to methods}
-
-\item{\code{\link{dbSpatial}}}{object}
 }
 \value{
 numerical column vector in database

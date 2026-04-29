@@ -2,14 +2,14 @@
 % Please edit documentation in R/as_dbSpatial.R
 \name{as_dbSpatial}
 \alias{as_dbSpatial}
-\title{Convert an {sf} or {terra} object to a \code{dbSpatial} object}
+\title{Convert an sf or terra object to a \code{dbSpatial} object}
 \usage{
 as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, ...)
 }
 \arguments{
 \item{rSpatial}{\code{sf} or \code{terra} object.}
 
-\item{conn}{A \code{\link{DBIConnection}} object, as returned by \code{\link{DBI::dbConnect}}.}
+\item{conn}{A DBI connection object, as returned by \code{DBI::dbConnect()}.}
 
 \item{name}{\code{a character string} with the unquoted DBMS table name, e.g. "table_name"}
 
@@ -21,9 +21,9 @@ as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, ...)
 Create a \code{\link{dbSpatial}} object from an \code{sf} or \code{terra} object.
 }
 \details{
-Writes out the \code{rSpatial} object to temporary .parquet file and
-computes the VIEW in the database with the specified \code{name} and the geometry
-column as \code{geom}.
+Writes the \code{rSpatial} object to a temporary DuckDB table and computes the
+table in the database with the specified \code{name} and the geometry column as
+\code{geom}.
 }
 \examples{
 coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
@@ -47,7 +47,7 @@ dbSpatial
 \seealso{
 Other dbSpatial: 
 \code{\link{dbSpatial}},
-\code{\link{show}()},
+\code{\link{show,dbSpatial-method}},
 \code{\link{st_as_sf.dbSpatial}()},
 \code{\link{vect,dbSpatial-method}}
 }

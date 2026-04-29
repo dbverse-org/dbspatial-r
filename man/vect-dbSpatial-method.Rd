@@ -27,7 +27,7 @@ vect(dbs)
 Other dbSpatial: 
 \code{\link{as_dbSpatial}()},
 \code{\link{dbSpatial}},
-\code{\link{show}()},
+\code{\link{show,dbSpatial-method}},
 \code{\link{st_as_sf.dbSpatial}()}
 }
 \concept{dbSpatial}

@@ -2,6 +2,7 @@
 % Please edit documentation in R/dbSpatial.R
 \name{dbSpatial}
 \alias{dbSpatial}
+\alias{dbSpatial-class}
 \title{Create a \code{\link{dbSpatial}} object with geometry data type}
 \usage{
 dbSpatial(
@@ -16,23 +17,14 @@ dbSpatial(
 )
 }
 \arguments{
-\item{value}{\code{\link{data.frame}}, \code{tbl_duckdb_connection},
-\code{character} (valid file path), \code{\link{sf}} object, or \code{\link{terra}} object.
+\item{value}{\code{data.frame}, \code{tbl_duckdb_connection}, \code{character}
+(valid file path), \code{sf} object, or \code{terra} object.
 Data to construct \code{\link{dbSpatial}} object with geometry data type.
 See details for more information.}
 
-\item{name}{The table name, passed on to \code{\link[DBI:dbQuoteIdentifier]{dbQuoteIdentifier()}}. Options are:
-\itemize{
-\item a character string with the unquoted DBMS table name,
-e.g. \code{"table_name"},
-\item a call to \code{\link[DBI:Id]{Id()}} with components to the fully qualified table name,
-e.g. \code{Id(schema = "my_schema", table = "table_name")}
-\item a call to \code{\link[DBI:SQL]{SQL()}} with the quoted and fully qualified table name
-given verbatim, e.g. \code{SQL('"my_schema"."table_name"')}
-}}
+\item{name}{Table name.}
 
-\item{conn}{A \linkS4class{DBIConnection} object, as returned by
-\code{\link[DBI:dbConnect]{dbConnect()}}.}
+\item{conn}{A DBI connection object.}
 
 \item{x_colName}{\code{character}. Name of column containing numerical X coordinates. default = \code{NULL}.}
 
@@ -67,7 +59,8 @@ duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 # test value
 test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
-write.csv(test_data, "test_data.csv", row.names = FALSE)
+test_file <- tempfile(fileext = ".csv")
+write.csv(test_data, test_file, row.names = FALSE)
 
 # read data.frame and create point geometry
 dbSpatial(conn = duckdb_conn,
@@ -80,15 +73,16 @@ dbSpatial(conn = duckdb_conn,
 # read csv
 dbSpatial(conn = duckdb_conn,
           name = "test_points",
-          value = 'test_data.csv',
+          value = test_file,
           x_colName = "x",
           y_colName = "y",
           overwrite = TRUE)
+unlink(test_file)
 }
 \seealso{
 Other dbSpatial: 
 \code{\link{as_dbSpatial}()},
-\code{\link{show}()},
+\code{\link{show,dbSpatial-method}},
 \code{\link{st_as_sf.dbSpatial}()},
 \code{\link{vect,dbSpatial-method}}
 }

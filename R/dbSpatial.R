@@ -1,10 +1,12 @@
 ## Constructor ####
 #' Create a \code{\link{dbSpatial}} object with geometry data type
-#' @inheritParams DBI::dbWriteTable
-#' @param value \code{\link{data.frame}}, `tbl_duckdb_connection`,
-#' \code{character} (valid file path), \code{\link{sf}} object, or \code{\link{terra}} object.
+#' @aliases dbSpatial-class
+#' @param value `data.frame`, `tbl_duckdb_connection`, \code{character}
+#' (valid file path), `sf` object, or `terra` object.
 #' Data to construct \code{\link{dbSpatial}} object with geometry data type.
 #' See details for more information.
+#' @param name Table name.
+#' @param conn A DBI connection object.
 #' @param x_colName \code{character}. Name of column containing numerical X coordinates. default = `NULL`.
 #' @param y_colName \code{character}. Name of column containing numerical Y coordinates. default = `NULL`.
 #' @param geomName \code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: `"geom"`.
@@ -37,7 +39,8 @@
 #' # test value
 #' test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 #'
-#' write.csv(test_data, "test_data.csv", row.names = FALSE)
+#' test_file <- tempfile(fileext = ".csv")
+#' write.csv(test_data, test_file, row.names = FALSE)
 #'
 #' # read data.frame and create point geometry
 #' dbSpatial(conn = duckdb_conn,
@@ -50,10 +53,11 @@
 #' # read csv
 #' dbSpatial(conn = duckdb_conn,
 #'           name = "test_points",
-#'           value = 'test_data.csv',
+#'           value = test_file,
 #'           x_colName = "x",
 #'           y_colName = "y",
 #'           overwrite = TRUE)
+#' unlink(test_file)
 dbSpatial <- function(
   value,
   name,

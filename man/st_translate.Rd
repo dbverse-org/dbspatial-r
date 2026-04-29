@@ -10,6 +10,8 @@ st_translate(dbSpatial, geomName = "geom", dx, dy, ...)
 \S4method{st_translate}{dbSpatial}(dbSpatial, geomName = "geom", dx, dy, ...)
 }
 \arguments{
+\item{dbSpatial}{\code{\link{dbSpatial}} object.}
+
 \item{geomName}{\code{character string}. The geometry column name in the  \code{\link{dbSpatial}}  object. Default: \code{"geom"}.}
 
 \item{dx}{\code{numeric}.value to shift x coordinates by}
@@ -17,10 +19,6 @@ st_translate(dbSpatial, geomName = "geom", dx, dy, ...)
 \item{dy}{\code{numeric}. value to shift y coordinates by}
 
 \item{...}{additional arguments passed to methods}
-
-\item{\code{\link{dbSpatial}}}{object}
-
-\item{name}{\code{string.} name of table to add to \code{\link{dbSpatial}} object.}
 }
 \value{
 \code{\link{dbSpatial}} object

@@ -37,7 +37,7 @@
 
 \item{st_name}{\code{character}. The name of the spatial join function to use.}
 
-\item{...}{Additional arguments passed to \code{\link{duckdb::dbSendQuery}}.}
+\item{...}{Additional arguments passed to \code{duckdb::dbSendQuery()}.}
 }
 \value{
 \code{dbSpatial} object
