@@ -12,3 +12,4 @@
 ^docs$
 ^pkgdown$
 ^test_data\.csv$
+^CRAN-SUBMISSION$
