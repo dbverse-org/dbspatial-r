@@ -20,10 +20,8 @@ Use \code{options()} to set the below options.
 }
 
 \examples{
-\dontrun{
 options(dbSpatial.max_print = 50)
 options(dbSpatial.max_mem_convert = 16 * 1024^3)
 options(dbSpatial.verbose = FALSE)
-}
 }
 \concept{options}

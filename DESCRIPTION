@@ -7,9 +7,11 @@ Authors@R:
     person("Jiaji", "George Chen", email = "jiajic@bu.edu", role = c("aut")),
     person("Ruben", "Dries", email = "rubendries@gmail.com",role = c("aut", "rev")))
 Description: Provides database-backed spatial geometry classes and methods for
-    working with vector spatial data in DuckDB. Supports loading, converting,
-    querying, and measuring spatial geometries through familiar sf-style
-    interfaces.
+    working with vector spatial data in 'DuckDB'. The package supports loading,
+    converting, querying, joining, and measuring spatial geometries through
+    familiar 'sf'-style interfaces while keeping geometry columns lazy inside
+    the database. It integrates with 'dbProject' to preserve database paths,
+    live connections, and spatial table metadata across interactive sessions.
 License: GPL-3 | MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -10,10 +10,9 @@ NULL
 #' @family dbSpatial
 #'
 #' @examples
-#' \dontrun{
-#' dbs <- .sim_dbSpatial()
-#' vect(dbs)
-#' }
+#' dbs <- dbSpatial:::.sim_dbSpatial()
+#' terra::vect(dbs)
+#' DBI::dbDisconnect(dbProject::conn(dbs), shutdown = TRUE)
 #'
 #' @export
 setMethod(
