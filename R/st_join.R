@@ -27,6 +27,7 @@ NULL
 #' @examples
 #' if (requireNamespace("duckdb", quietly = TRUE)) {
 #'   con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(con, "SET threads = 1")
 #'
 #'   df1 <- data.frame(id = 1:3, x = c(0, 10, 20), y = c(0, 10, 20))
 #'   pts1 <- dbSpatial(conn = con, name = "pts1", value = df1,

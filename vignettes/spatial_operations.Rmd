@@ -23,6 +23,7 @@ library(dplyr)
 
 ```{r}
 con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+DBI::dbExecute(con, "SET threads = 1")
 
 # Sample points
 df <- data.frame(id = 1:3, x = c(0, 10, 20), y = c(0, 10, 20))

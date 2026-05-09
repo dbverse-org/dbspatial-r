@@ -34,6 +34,7 @@ This function translates point geometries by the specified delta x and delta y v
 \examples{
 if (requireNamespace("duckdb", quietly = TRUE)) {
   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(con, "SET threads = 1")
 
   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))

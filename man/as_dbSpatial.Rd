@@ -38,9 +38,10 @@ if (requireNamespace("duckdb", quietly = TRUE)) {
 
   # Set db connection
   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(duckdb_conn, "SET threads = 1")
 
   dbSpatial <- as_dbSpatial(rSpatial = dummy_spatvector,
-                           conn = duckdb_conn,
+                            conn = duckdb_conn,
                            name = "dummy_spatvector",
                            overwrite = TRUE)
   dbSpatial

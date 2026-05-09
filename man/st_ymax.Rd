@@ -38,6 +38,7 @@ if (requireNamespace("duckdb", quietly = TRUE)) {
 
   # Create a duckdb connection
   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(con, "SET threads = 1")
 
   # Create a duckdb table with spatial points
   db_points = dbSpatial(conn = con,

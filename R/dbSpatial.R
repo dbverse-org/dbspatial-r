@@ -36,6 +36,7 @@
 #' if (requireNamespace("duckdb", quietly = TRUE)) {
 #'   # create in-memory DuckDB db
 #'   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
 #'
 #'   # test value
 #'   test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)

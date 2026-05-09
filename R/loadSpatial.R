@@ -8,6 +8,7 @@
 #' @examples
 #' if (requireNamespace("duckdb", quietly = TRUE)) {
 #'   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
 #'   loadSpatial(conn = duckdb_conn)
 #'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
 #' }

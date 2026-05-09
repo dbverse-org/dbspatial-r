@@ -1,5 +1,5 @@
 Package: dbSpatial
-Title: Spatial Data Operations in DuckDB
+Title: Spatial Data Operations for Database-Backed Geometries
 Version: 0.1.0
 Authors@R: 
     c(person("Edward", "C. Ruiz", , "ecr7407@gmail.com", role = c("aut", "cre"),

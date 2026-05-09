@@ -8,6 +8,7 @@
 #' @keywords internal
 .sim_dbSpatial <- function(geom = c("point", "polygon")) {
   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(con, "SET threads = 1")
   geom <- match.arg(geom)
   loadSpatial(con)
 
@@ -57,4 +58,3 @@
 
   return(res)
 }
-

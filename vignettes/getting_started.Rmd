@@ -31,6 +31,7 @@ available in the check environment.
 ```{r}
 # create db connection in memory
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+DBI::dbExecute(duckdb_conn, "SET threads = 1")
 ```
 
 ## Reading in spatial data from various sources
@@ -84,4 +85,3 @@ dbSpatial(conn = duckdb_conn,
           value = dummy_spatvector,
           overwrite = TRUE)
 ```
-

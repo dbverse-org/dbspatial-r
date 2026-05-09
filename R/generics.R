@@ -21,6 +21,7 @@
 #'
 #'   # Create a duckdb connection
 #'   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(con, "SET threads = 1")
 #'
 #'   # Create a duckdb table with spatial points
 #'   db_points = dbSpatial(conn = con,
@@ -62,6 +63,7 @@ setGeneric(
 #'
 #'   # Create a duckdb connection
 #'   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(con, "SET threads = 1")
 #'
 #'   # Create a duckdb table with spatial points
 #'   db_points = dbSpatial(conn = con,
@@ -98,6 +100,7 @@ setGeneric(
 #' @examples
 #' if (requireNamespace("duckdb", quietly = TRUE)) {
 #'   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(con, "SET threads = 1")
 #'
 #'   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
 #'   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
