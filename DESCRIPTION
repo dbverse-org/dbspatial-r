@@ -27,6 +27,8 @@ Imports:
     dbplyr,
     terra,
     sf,
+    e1071,
+    lifecycle,
     crayon,
     checkmate,
     cli,

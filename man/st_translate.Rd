@@ -32,25 +32,28 @@ This function translates point geometries by the specified delta x and delta y v
 
 }}
 \examples{
-con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+if (requireNamespace("duckdb", quietly = TRUE)) {
+  con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 
-coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
+  coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+  attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 
-# Combine the coordinates and attributes
-dummy_data <- cbind(coordinates, attributes)
+  # Combine the coordinates and attributes
+  dummy_data <- cbind(coordinates, attributes)
 
-points <- dbSpatial(conn = con,
-                    name = "points",
-                    value = dummy_data,
-                    overwrite = TRUE,
-                    x_colName = "x",
-                    y_colName = "y")
+  points <- dbSpatial(conn = con,
+                      name = "points",
+                      value = dummy_data,
+                      overwrite = TRUE,
+                      x_colName = "x",
+                      y_colName = "y")
 
-points
+  points
 
-points_translated <- st_translate(dbSpatial = points, dx = 100, dy = -20)
+  points_translated <- st_translate(dbSpatial = points, dx = 100, dy = -20)
 
-points_translated
+  points_translated
+  DBI::dbDisconnect(con, shutdown = TRUE)
+}
 }
 \concept{geom_construction}

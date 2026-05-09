@@ -13,6 +13,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   output.lines = 10
 )
+has_duckdb <- requireNamespace("duckdb", quietly = TRUE)
+knitr::opts_chunk$set(eval = has_duckdb)
 ```
 
 ```{r setup}
@@ -21,6 +23,9 @@ library(dbSpatial)
 
 ## Introduction
 This vignette demonstrates how to use the `{dbSpatial}` package to create a DuckDB database with spatial points and polygons starting from various data sources.
+
+All code chunks below are evaluated only when the `duckdb` package is
+available in the check environment.
 
 ## Creating a DuckDB connection
 ```{r}
@@ -79,5 +84,4 @@ dbSpatial(conn = duckdb_conn,
           value = dummy_spatvector,
           overwrite = TRUE)
 ```
-
 

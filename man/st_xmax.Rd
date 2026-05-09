@@ -29,25 +29,28 @@ the specified \code{\link{dbSpatial}} object.
 
 }}
 \examples{
-# Create a data.frame with x and y coordinates and attributes
-coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
+if (requireNamespace("duckdb", quietly = TRUE)) {
+  # Create a data.frame with x and y coordinates and attributes
+  coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+  attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 
-# Combine the coordinates and attributes
-dummy_data <- cbind(coordinates, attributes)
+  # Combine the coordinates and attributes
+  dummy_data <- cbind(coordinates, attributes)
 
-# Create a duckdb connection
-con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  # Create a duckdb connection
+  con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 
-# Create a duckdb table with spatial points
-db_points = dbSpatial(conn = con,
-                      value = dummy_data,
-                      x_colName = "x",
-                      y_colName = "y",
-                      name = "foo",
-                      overwrite = TRUE)
+  # Create a duckdb table with spatial points
+  db_points = dbSpatial(conn = con,
+                        value = dummy_data,
+                        x_colName = "x",
+                        y_colName = "y",
+                        name = "foo",
+                        overwrite = TRUE)
 
-st_xmax(dbSpatial = db_points)
+  st_xmax(dbSpatial = db_points)
+  DBI::dbDisconnect(con, shutdown = TRUE)
+}
 }
 \seealso{
 Other geom_summary: 

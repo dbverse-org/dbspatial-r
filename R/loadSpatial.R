@@ -6,8 +6,11 @@
 #' @export
 #' @family duckdb-ext
 #' @examples
-#' duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
-#' loadSpatial(conn = duckdb_conn)
+#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#'   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   loadSpatial(conn = duckdb_conn)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 loadSpatial <- function(conn) {
   # input validation
   .check_con(conn)

@@ -11,25 +11,28 @@
 #' @concept geom_summary
 #' @export
 #' @examples
-#' # Create a data.frame with x and y coordinates and attributes
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
+#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#'   # Create a data.frame with x and y coordinates and attributes
+#'   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+#'   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 #'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
+#'   # Combine the coordinates and attributes
+#'   dummy_data <- cbind(coordinates, attributes)
 #'
-#' # Create a duckdb connection
-#' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   # Create a duckdb connection
+#'   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
-#' # Create a duckdb table with spatial points
-#' db_points = dbSpatial(conn = con,
-#'                       value = dummy_data,
-#'                       x_colName = "x",
-#'                       y_colName = "y",
-#'                       name = "foo",
-#'                       overwrite = TRUE)
+#'   # Create a duckdb table with spatial points
+#'   db_points = dbSpatial(conn = con,
+#'                         value = dummy_data,
+#'                         x_colName = "x",
+#'                         y_colName = "y",
+#'                         name = "foo",
+#'                         overwrite = TRUE)
 #'
-#' st_xmax(dbSpatial = db_points)
+#'   st_xmax(dbSpatial = db_points)
+#'   DBI::dbDisconnect(con, shutdown = TRUE)
+#' }
 setGeneric(
   "st_xmax",
   function(dbSpatial, geomName = "geom", ...) {
@@ -49,25 +52,28 @@ setGeneric(
 #' @concept geom_summary
 #' @export
 #' @examples
-#' # Create a data.frame with x and y coordinates and attributes
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
+#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#'   # Create a data.frame with x and y coordinates and attributes
+#'   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+#'   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 #'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
+#'   # Combine the coordinates and attributes
+#'   dummy_data <- cbind(coordinates, attributes)
 #'
-#' # Create a duckdb connection
-#' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   # Create a duckdb connection
+#'   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
-#' # Create a duckdb table with spatial points
-#' db_points = dbSpatial(conn = con,
-#'                       value = dummy_data,
-#'                       x_colName = "x",
-#'                       y_colName = "y",
-#'                       name = "foo",
-#'                       overwrite = TRUE)
+#'   # Create a duckdb table with spatial points
+#'   db_points = dbSpatial(conn = con,
+#'                         value = dummy_data,
+#'                         x_colName = "x",
+#'                         y_colName = "y",
+#'                         name = "foo",
+#'                         overwrite = TRUE)
 #'
-#' st_ymax(dbSpatial = db_points)
+#'   st_ymax(dbSpatial = db_points)
+#'   DBI::dbDisconnect(con, shutdown = TRUE)
+#' }
 setGeneric(
   "st_ymax",
   function(dbSpatial, geomName = "geom", ...) {
@@ -90,26 +96,29 @@ setGeneric(
 #' @concept geom_construction
 #' @export
 #' @examples
-#' con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#'   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
+#'   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+#'   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 #'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
+#'   # Combine the coordinates and attributes
+#'   dummy_data <- cbind(coordinates, attributes)
 #'
-#' points <- dbSpatial(conn = con,
-#'                     name = "points",
-#'                     value = dummy_data,
-#'                     overwrite = TRUE,
-#'                     x_colName = "x",
-#'                     y_colName = "y")
+#'   points <- dbSpatial(conn = con,
+#'                       name = "points",
+#'                       value = dummy_data,
+#'                       overwrite = TRUE,
+#'                       x_colName = "x",
+#'                       y_colName = "y")
 #'
-#' points
+#'   points
 #'
-#' points_translated <- st_translate(dbSpatial = points, dx = 100, dy = -20)
+#'   points_translated <- st_translate(dbSpatial = points, dx = 100, dy = -20)
 #'
-#' points_translated
+#'   points_translated
+#'   DBI::dbDisconnect(con, shutdown = TRUE)
+#' }
 setGeneric(
   "st_translate",
   function(dbSpatial, geomName = "geom", dx, dy, ...) {

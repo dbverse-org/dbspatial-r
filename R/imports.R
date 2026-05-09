@@ -28,3 +28,6 @@ NULL
 
 # sf geometry functions ----
 
+# extra imports for Windows CRAN dependency checks ----
+#' @import e1071 lifecycle
+NULL

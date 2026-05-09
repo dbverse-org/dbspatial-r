@@ -15,23 +15,26 @@
 #' @family dbSpatial
 #' @export
 #' @examples
-#' coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-#' attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
+#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#'   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+#'   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 #'
-#' # Combine the coordinates and attributes
-#' dummy_data <- cbind(coordinates, attributes)
+#'   # Combine the coordinates and attributes
+#'   dummy_data <- cbind(coordinates, attributes)
 #'
-#' # Create a SpatVector from the data.frame
-#' dummy_spatvector <- terra::vect(dummy_data, geom = c("x", "y"))
+#'   # Create a SpatVector from the data.frame
+#'   dummy_spatvector <- terra::vect(dummy_data, geom = c("x", "y"))
 #'
-#' # Set db connection
-#' duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   # Set db connection
+#'   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
-#' dbSpatial <- as_dbSpatial(rSpatial = dummy_spatvector,
-#'                          conn = duckdb_conn,
-#'                          name = "dummy_spatvector",
-#'                          overwrite = TRUE)
-#' dbSpatial
+#'   dbSpatial <- as_dbSpatial(rSpatial = dummy_spatvector,
+#'                            conn = duckdb_conn,
+#'                            name = "dummy_spatvector",
+#'                            overwrite = TRUE)
+#'   dbSpatial
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 as_dbSpatial <- function(rSpatial, conn, name, overwrite = FALSE, ...) {
   # input validation
   .check_con(conn = conn)

@@ -33,31 +33,34 @@
 #' @family dbSpatial
 #'
 #' @examples
-#' # create in-memory DuckDB db
-#' duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#'   # create in-memory DuckDB db
+#'   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'
-#' # test value
-#' test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
+#'   # test value
+#'   test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 #'
-#' test_file <- tempfile(fileext = ".csv")
-#' write.csv(test_data, test_file, row.names = FALSE)
+#'   test_file <- tempfile(fileext = ".csv")
+#'   write.csv(test_data, test_file, row.names = FALSE)
 #'
-#' # read data.frame and create point geometry
-#' dbSpatial(conn = duckdb_conn,
-#'           name = "test_points",
-#'           value = test_data,
-#'           x_colName = "x",
-#'           y_colName = "y",
-#'           overwrite = TRUE)
+#'   # read data.frame and create point geometry
+#'   dbSpatial(conn = duckdb_conn,
+#'             name = "test_points",
+#'             value = test_data,
+#'             x_colName = "x",
+#'             y_colName = "y",
+#'             overwrite = TRUE)
 #'
-#' # read csv
-#' dbSpatial(conn = duckdb_conn,
-#'           name = "test_points",
-#'           value = test_file,
-#'           x_colName = "x",
-#'           y_colName = "y",
-#'           overwrite = TRUE)
-#' unlink(test_file)
+#'   # read csv
+#'   dbSpatial(conn = duckdb_conn,
+#'             name = "test_points",
+#'             value = test_file,
+#'             x_colName = "x",
+#'             y_colName = "y",
+#'             overwrite = TRUE)
+#'   unlink(test_file)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 dbSpatial <- function(
   value,
   name,

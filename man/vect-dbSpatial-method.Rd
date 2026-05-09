@@ -17,9 +17,11 @@
 Create SpatVector objects
 }
 \examples{
-dbs <- dbSpatial:::.sim_dbSpatial()
-terra::vect(dbs)
-DBI::dbDisconnect(dbProject::conn(dbs), shutdown = TRUE)
+if (requireNamespace("duckdb", quietly = TRUE)) {
+  dbs <- dbSpatial:::.sim_dbSpatial()
+  terra::vect(dbs)
+  DBI::dbDisconnect(dbProject::conn(dbs), shutdown = TRUE)
+}
 
 }
 \seealso{
