@@ -13,7 +13,7 @@ loadSpatial(conn)
 Install and/or load DuckDB spatial extension
 }
 \examples{
-if (requireNamespace("duckdb", quietly = TRUE)) {
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
   DBI::dbExecute(duckdb_conn, "SET threads = 1")
   loadSpatial(conn = duckdb_conn)

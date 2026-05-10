@@ -26,7 +26,7 @@ table in the database with the specified \code{name} and the geometry column as
 \code{geom}.
 }
 \examples{
-if (requireNamespace("duckdb", quietly = TRUE)) {
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 

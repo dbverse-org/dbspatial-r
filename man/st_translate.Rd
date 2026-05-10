@@ -32,7 +32,7 @@ This function translates point geometries by the specified delta x and delta y v
 
 }}
 \examples{
-if (requireNamespace("duckdb", quietly = TRUE)) {
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
   DBI::dbExecute(con, "SET threads = 1")
 

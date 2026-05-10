@@ -10,7 +10,7 @@ NULL
 #' @family dbSpatial
 #'
 #' @examples
-#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
 #'   dbs <- dbSpatial:::.sim_dbSpatial()
 #'   terra::vect(dbs)
 #'   DBI::dbDisconnect(dbProject::conn(dbs), shutdown = TRUE)

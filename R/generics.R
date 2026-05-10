@@ -11,7 +11,7 @@
 #' @concept geom_summary
 #' @export
 #' @examples
-#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
 #'   # Create a data.frame with x and y coordinates and attributes
 #'   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
 #'   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
@@ -53,7 +53,7 @@ setGeneric(
 #' @concept geom_summary
 #' @export
 #' @examples
-#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
 #'   # Create a data.frame with x and y coordinates and attributes
 #'   coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
 #'   attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
@@ -98,7 +98,7 @@ setGeneric(
 #' @concept geom_construction
 #' @export
 #' @examples
-#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
 #'   con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'   DBI::dbExecute(con, "SET threads = 1")
 #'

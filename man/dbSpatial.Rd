@@ -53,7 +53,7 @@ For list of files supported see link below.
 \url{https://DuckDB.org/docs/extensions/spatial.html#st_read---read-spatial-value-from-files}
 }
 \examples{
-if (requireNamespace("duckdb", quietly = TRUE)) {
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
   # create in-memory DuckDB db
   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
   DBI::dbExecute(duckdb_conn, "SET threads = 1")

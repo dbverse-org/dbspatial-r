@@ -33,7 +33,7 @@
 #' @family dbSpatial
 #'
 #' @examples
-#' if (requireNamespace("duckdb", quietly = TRUE)) {
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
 #'   # create in-memory DuckDB db
 #'   duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #'   DBI::dbExecute(duckdb_conn, "SET threads = 1")

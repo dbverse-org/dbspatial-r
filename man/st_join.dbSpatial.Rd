@@ -34,7 +34,7 @@ This function follows the \code{sf} pattern where spatial predicates are passed
 as the \code{join} argument.
 }
 \examples{
-if (requireNamespace("duckdb", quietly = TRUE)) {
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
   con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
   DBI::dbExecute(con, "SET threads = 1")
 
