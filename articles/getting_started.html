@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Getting Started • dbSpatial</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9110</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,13 +83,17 @@
 <p>This vignette demonstrates how to use the <a href="https://github.com/dbverse-org/dbspatial-r" class="external-link">dbSpatial</a>
 package to create a DuckDB database with spatial points and polygons
 starting from various data sources.</p>
+<p>All code chunks below are evaluated only when the <code>duckdb</code>
+package is available in the check environment.</p>
 </div>
 <div class="section level2">
 <h2 id="creating-a-duckdb-connection">Creating a DuckDB connection<a class="anchor" aria-label="anchor" href="#creating-a-duckdb-connection"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create db connection in memory</span></span>
-<span><span class="va">duckdb_conn</span> <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">duckdb_conn</span> <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
+<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html" class="external-link">dbExecute</a></span><span class="op">(</span><span class="va">duckdb_conn</span>, <span class="st">"SET threads = 1"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="reading-in-spatial-data-from-various-sources">Reading in spatial data from various sources<a class="anchor" aria-label="anchor" href="#reading-in-spatial-data-from-various-sources"></a>
@@ -112,7 +116,7 @@ starting from various data sources.</p>
 <span><span class="va">a</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
 <span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;        x     y    id geom         </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     1     1 POINT (1 1)  </span></span>
@@ -145,20 +149,20 @@ starting from various data sources.</p>
 <span>               overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">a</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
-<span><span class="co">#&gt;    x     y     id    geom         </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1     1     1     POINT (1 1)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2     2     2     POINT (2 2)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 3     3     3     POINT (3 3)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 4     4     4     POINT (4 4)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 5     5     5     POINT (5 5)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 6     6     6     POINT (6 6)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 7     7     7     POINT (7 7)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8     8     8     POINT (8 8)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9     9     9     POINT (9 9)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10    10    10    POINT (10 10)</span></span></code></pre></div>
+<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 5]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co">#&gt;    OGC_FID x     y     id    geom         </span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       1 1     1     1     POINT (1 1)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       2 2     2     2     POINT (2 2)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       3 3     3     3     POINT (3 3)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       4 4     4     4     POINT (4 4)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       5 5     5     5     POINT (5 5)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       6 6     6     6     POINT (6 6)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       7 7     7     7     POINT (7 7)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       8 8     8     8     POINT (8 8)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       9 9     9     9     POINT (9 9)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>      10 10    10    10    POINT (10 10)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="from-terra-objects-spatvector">From {terra} objects: SpatVector<a class="anchor" aria-label="anchor" href="#from-terra-objects-spatvector"></a>
@@ -166,7 +170,7 @@ starting from various data sources.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load terra package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; terra 1.8.93</span></span>
+<span><span class="co">#&gt; terra 1.9.27</span></span>
 <span></span>
 <span><span class="co"># Create a SpatVector from the data.frame</span></span>
 <span><span class="va">dummy_spatvector</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">test_data</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span>
@@ -178,7 +182,7 @@ starting from various data sources.</p>
 <span>          overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
 <span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 2]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;       id geom         </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 POINT (1 1)  </span></span>

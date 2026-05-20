@@ -1,6 +1,7 @@
 # Getting Started
 
 ``` r
+
 library(dbSpatial)
 ```
 
@@ -11,11 +12,17 @@ This vignette demonstrates how to use the
 create a DuckDB database with spatial points and polygons starting from
 various data sources.
 
+All code chunks below are evaluated only when the `duckdb` package is
+available in the check environment.
+
 ## Creating a DuckDB connection
 
 ``` r
+
 # create db connection in memory
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#> [1] 0
 ```
 
 ## Reading in spatial data from various sources
@@ -23,6 +30,7 @@ duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 ### From data.frames
 
 ``` r
+
 # test data
 test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
@@ -37,7 +45,7 @@ a <- dbSpatial(conn = duckdb_conn,
 a
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>        x     y    id geom         
 #>    <int> <int> <int> <chr>        
 #>  1     1     1     1 POINT (1 1)  
@@ -55,6 +63,7 @@ a
 ### From .csv file
 
 ``` r
+
 # test data
 test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
@@ -70,28 +79,29 @@ a <- dbSpatial(conn = duckdb_conn,
                overwrite = TRUE)
 a
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
-#>    x     y     id    geom         
-#>    <chr> <chr> <chr> <chr>        
-#>  1 1     1     1     POINT (1 1)  
-#>  2 2     2     2     POINT (2 2)  
-#>  3 3     3     3     POINT (3 3)  
-#>  4 4     4     4     POINT (4 4)  
-#>  5 5     5     5     POINT (5 5)  
-#>  6 6     6     6     POINT (6 6)  
-#>  7 7     7     7     POINT (7 7)  
-#>  8 8     8     8     POINT (8 8)  
-#>  9 9     9     9     POINT (9 9)  
-#> 10 10    10    10    POINT (10 10)
+#> # Source:   SQL [?? x 5]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
+#>    OGC_FID x     y     id    geom         
+#>      <dbl> <chr> <chr> <chr> <chr>        
+#>  1       1 1     1     1     POINT (1 1)  
+#>  2       2 2     2     2     POINT (2 2)  
+#>  3       3 3     3     3     POINT (3 3)  
+#>  4       4 4     4     4     POINT (4 4)  
+#>  5       5 5     5     5     POINT (5 5)  
+#>  6       6 6     6     6     POINT (6 6)  
+#>  7       7 7     7     7     POINT (7 7)  
+#>  8       8 8     8     8     POINT (8 8)  
+#>  9       9 9     9     9     POINT (9 9)  
+#> 10      10 10    10    10    POINT (10 10)
 ```
 
 ### From {terra} objects: SpatVector
 
 ``` r
+
 # load terra package
 library(terra)
-#> terra 1.8.93
+#> terra 1.9.27
 
 # Create a SpatVector from the data.frame
 dummy_spatvector <- terra::vect(test_data, geom = c("x", "y"))
@@ -103,7 +113,7 @@ dbSpatial(conn = duckdb_conn,
           overwrite = TRUE)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 2]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>       id geom         
 #>    <int> <chr>        
 #>  1     1 POINT (1 1)  

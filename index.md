@@ -19,6 +19,7 @@ You can install the development version of dbSpatial from Github like
 so:
 
 ``` r
+
 # install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::pak("dbverse-org/dbspatial-r")
 ```
@@ -31,6 +32,7 @@ functions, or SQL queries to a DuckDB database connection containing
 `ST_*()` functions.
 
 ``` r
+
 library(dbSpatial)
 
 # create duckdb db in memory

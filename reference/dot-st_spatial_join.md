@@ -64,7 +64,7 @@ Internal base function for spatial joins.
 
 - ...:
 
-  Additional arguments passed to `duckdb::dbSendQuery`.
+  Additional arguments passed to `duckdb::dbSendQuery()`.
 
 ## Value
 

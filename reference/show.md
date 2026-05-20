@@ -9,6 +9,12 @@ Show method for dbSpatial
 show(object)
 ```
 
+## Arguments
+
+- object:
+
+  A `dbSpatial` object.
+
 ## See also
 
 Other dbSpatial:

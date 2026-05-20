@@ -14,10 +14,18 @@ loadSpatial(conn)
 
   duckdb connection
 
+## Value
+
+No return value, called for side effects. Installs and loads the DuckDB
+spatial extension for `conn`.
+
 ## Examples
 
 ``` r
-duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
-loadSpatial(conn = duckdb_conn)
-#> DuckDB spatial extension installed and loaded
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+  duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(duckdb_conn, "SET threads = 1")
+  loadSpatial(conn = duckdb_conn)
+  DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+}
 ```

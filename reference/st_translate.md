@@ -14,6 +14,11 @@ st_translate(dbSpatial, geomName = "geom", dx, dy, ...)
 
 ## Arguments
 
+- dbSpatial:
+
+  [`dbSpatial`](https://dbverse-org.github.io/dbspatial-r/reference/dbSpatial.md)
+  object.
+
 - geomName:
 
   `character string`. The geometry column name in the
@@ -32,16 +37,6 @@ st_translate(dbSpatial, geomName = "geom", dx, dy, ...)
 
   additional arguments passed to methods
 
-- [`dbSpatial`](https://dbverse-org.github.io/dbspatial-r/reference/dbSpatial.md):
-
-  object
-
-- name:
-
-  `string.` name of table to add to
-  [`dbSpatial`](https://dbverse-org.github.io/dbspatial-r/reference/dbSpatial.md)
-  object.
-
 ## Value
 
 [`dbSpatial`](https://dbverse-org.github.io/dbspatial-r/reference/dbSpatial.md)
@@ -54,40 +49,28 @@ object
 ## Examples
 
 ``` r
-con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+  con = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(con, "SET threads = 1")
 
-coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
-attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
+  coordinates <- data.frame(x = c(100, 200, 300), y = c(500, 600, 700))
+  attributes <- data.frame(id = 1:3, name = c("A", "B", "C"))
 
-# Combine the coordinates and attributes
-dummy_data <- cbind(coordinates, attributes)
+  # Combine the coordinates and attributes
+  dummy_data <- cbind(coordinates, attributes)
 
-points <- dbSpatial(conn = con,
-                    name = "points",
-                    value = dummy_data,
-                    overwrite = TRUE,
-                    x_colName = "x",
-                    y_colName = "y")
+  points <- dbSpatial(conn = con,
+                      name = "points",
+                      value = dummy_data,
+                      overwrite = TRUE,
+                      x_colName = "x",
+                      y_colName = "y")
 
-points
-#> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 5]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
-#>       x     y    id name  geom           
-#>   <dbl> <dbl> <int> <chr> <chr>          
-#> 1   100   500     1 A     POINT (100 500)
-#> 2   200   600     2 B     POINT (200 600)
-#> 3   300   700     3 C     POINT (300 700)
+  points
 
-points_translated <- st_translate(dbSpatial = points, dx = 100, dy = -20)
+  points_translated <- st_translate(dbSpatial = points, dx = 100, dy = -20)
 
-points_translated
-#> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 5]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
-#>       x     y    id name  geom           
-#>   <dbl> <dbl> <int> <chr> <chr>          
-#> 1   100   500     1 A     POINT (200 480)
-#> 2   200   600     2 B     POINT (300 580)
-#> 3   300   700     3 C     POINT (400 680)
+  points_translated
+  DBI::dbDisconnect(con, shutdown = TRUE)
+}
 ```

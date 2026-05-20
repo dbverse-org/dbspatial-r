@@ -1,5 +1,19 @@
 # Changelog
 
+## dbSpatial 0.1.1 (2026-05-20)
+
+### Documentation
+
+- Add method references to `DESCRIPTION`.
+
+- Add missing `\value{}` sections for exported conversion and accessor
+  methods.
+
+- Remove internal `:::` usage from user-facing examples.
+
+- Replace inappropriate `\dontrun{}` examples with `\donttest{}`
+  examples.
+
 ## dbSpatial 0.0.0.9110 (2026-01-13)
 
 ### Bug fixes
@@ -198,9 +212,8 @@
 
 ### Features
 
-- Add
-  [`show()`](https://dbverse-org.github.io/dbspatial-r/reference/show.md)
-  method for `dbSpatial` objects.
+- Add [`show()`](https://rdrr.io/r/methods/show.html) method for
+  `dbSpatial` objects.
 
 - Add new `to_dbSpatial()` function for
   [sf](https://r-spatial.github.io/sf/) and

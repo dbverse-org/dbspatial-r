@@ -1,6 +1,7 @@
 # Spatial Operations
 
 ``` r
+
 library(dbSpatial)
 library(sf)
 #> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE
@@ -18,7 +19,10 @@ library(dplyr)
 ## Setup
 
 ``` r
+
 con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+DBI::dbExecute(con, "SET threads = 1")
+#> [1] 0
 
 # Sample points
 df <- data.frame(id = 1:3, x = c(0, 10, 20), y = c(0, 10, 20))
@@ -29,7 +33,7 @@ pts <- dbSpatial(
 pts
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -40,11 +44,12 @@ pts
 ## Geometry Operations
 
 ``` r
+
 # Buffer
 st_buffer(pts, dist = 5)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>      id     x     y geom                             
 #>   <int> <dbl> <dbl> <chr>                            
 #> 1     1     0     0 POLYGON ((5 0, 4.9931476737728...
@@ -55,7 +60,7 @@ st_buffer(pts, dist = 5)
 st_centroid(pts)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -66,7 +71,7 @@ st_centroid(pts)
 st_simplify(pts, dTolerance = 1)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -77,6 +82,7 @@ st_simplify(pts, dTolerance = 1)
 ## Measurements
 
 ``` r
+
 # Bounding box
 st_bbox(pts)
 #> xmin ymin xmax ymax 
@@ -86,7 +92,7 @@ st_bbox(pts)
 st_is_valid(pts)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>      id     x     y geom 
 #>   <int> <dbl> <dbl> <lgl>
 #> 1     1     0     0 TRUE 
@@ -100,21 +106,23 @@ Use [`st_join()`](https://r-spatial.github.io/sf/reference/st_join.html)
 to perform spatial joins with various predicates:
 
 ``` r
+
 # Self-join using intersection predicate (returns joined table)
 st_join(pts, pts, join = st_intersects)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 8]
-#> # Database: DuckDB 1.4.3 [unknown@Linux 6.11.0-1018-azure:R 4.5.2/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
 #>      id     x     y geom           id_1   x_1   y_1 geom_1    
 #>   <int> <dbl> <dbl> <chr>         <int> <dbl> <dbl> <list>    
-#> 1     1     0     0 POINT (0 0)       1     0     0 <raw [32]>
-#> 2     2    10    10 POINT (10 10)     2    10    10 <raw [32]>
-#> 3     3    20    20 POINT (20 20)     3    20    20 <raw [32]>
+#> 1     1     0     0 POINT (0 0)       1     0     0 <raw [21]>
+#> 2     2    10    10 POINT (10 10)     2    10    10 <raw [21]>
+#> 3     3    20    20 POINT (20 20)     3    20    20 <raw [21]>
 ```
 
 ## Convert to sf
 
 ``` r
+
 sf_pts <- st_as_sf(pts)
 sf_pts
 #> Simple feature collection with 3 features and 3 fields

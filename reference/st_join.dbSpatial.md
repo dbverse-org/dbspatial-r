@@ -54,23 +54,24 @@ passed as the `join` argument.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+  con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(con, "SET threads = 1")
 
-df1 <- data.frame(id = 1:3, x = c(0, 10, 20), y = c(0, 10, 20))
-pts1 <- dbSpatial(conn = con, name = "pts1", value = df1,
-                  x_colName = "x", y_colName = "y", overwrite = TRUE)
+  df1 <- data.frame(id = 1:3, x = c(0, 10, 20), y = c(0, 10, 20))
+  pts1 <- dbSpatial(conn = con, name = "pts1", value = df1,
+                    x_colName = "x", y_colName = "y", overwrite = TRUE)
 
-df2 <- data.frame(id = 4:6, x = c(0, 15, 25), y = c(0, 15, 25))
-pts2 <- dbSpatial(conn = con, name = "pts2", value = df2,
-                  x_colName = "x", y_colName = "y", overwrite = TRUE)
+  df2 <- data.frame(id = 4:6, x = c(0, 15, 25), y = c(0, 15, 25))
+  pts2 <- dbSpatial(conn = con, name = "pts2", value = df2,
+                    x_colName = "x", y_colName = "y", overwrite = TRUE)
 
-# Spatial join using intersection
-result <- st_join(pts1, pts2, join = st_intersects)
+  # Spatial join using intersection
+  result <- sf::st_join(pts1, pts2, join = sf::st_intersects)
 
-# Spatial join using within predicate
-result <- st_join(pts1, pts2, join = st_within)
+  # Spatial join using within predicate
+  result <- sf::st_join(pts1, pts2, join = sf::st_within)
 
-DBI::dbDisconnect(con, shutdown = TRUE)
-} # }
+  DBI::dbDisconnect(con, shutdown = TRUE)
+}
 ```

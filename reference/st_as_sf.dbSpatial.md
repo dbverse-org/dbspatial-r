@@ -55,5 +55,5 @@ using:
 Other dbSpatial:
 [`as_dbSpatial()`](https://dbverse-org.github.io/dbspatial-r/reference/as_dbSpatial.md),
 [`dbSpatial`](https://dbverse-org.github.io/dbspatial-r/reference/dbSpatial.md),
-[`show()`](https://dbverse-org.github.io/dbspatial-r/reference/show.md),
+[`show,dbSpatial-method`](https://dbverse-org.github.io/dbspatial-r/reference/show.md),
 [`vect,dbSpatial-method`](https://dbverse-org.github.io/dbspatial-r/reference/vect-dbSpatial-method.md)
