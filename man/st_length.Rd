@@ -17,8 +17,21 @@
 Returns the length of the geometry column.
 }
 \examples{
-\dontrun{
-st_length(x)
+\donttest{
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+  line <- sf::st_sf(
+    id = 1,
+    geom = sf::st_sfc(
+      sf::st_linestring(rbind(c(0, 0), c(1, 1), c(2, 1)))
+    )
+  )
+  duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(duckdb_conn, "SET threads = 1")
+  x <- as_dbSpatial(line, conn = duckdb_conn, name = "line",
+                    overwrite = TRUE)
+  st_length(x)
+  DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+}
 }
 }
 \seealso{

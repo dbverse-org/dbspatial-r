@@ -1,6 +1,6 @@
 Package: dbSpatial
 Title: Spatial Data Operations for Database-Backed Geometries
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person("Edward", "C. Ruiz", , "ecr7407@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9174-5387")),
@@ -12,6 +12,9 @@ Description: Provides database-backed spatial geometry classes and methods for
     familiar 'sf'-style interfaces while keeping geometry columns lazy inside
     the database. It integrates with 'dbProject' to preserve database paths,
     live connections, and spatial table metadata across interactive sessions.
+    The package follows the Simple Features framework described by Pebesma
+    (2018) <doi:10.32614/RJ-2018-009> and uses DuckDB's spatial extension
+    <https://duckdb.org/docs/stable/core_extensions/spatial/overview.html>.
 License: GPL-3 | MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

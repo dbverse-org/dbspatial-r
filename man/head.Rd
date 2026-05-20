@@ -13,6 +13,9 @@
 
 \item{...}{Additional arguments.}
 }
+\value{
+A \code{dbSpatial} object containing the first \code{n} rows of \code{x}.
+}
 \description{
 head method for dbSpatial
 }

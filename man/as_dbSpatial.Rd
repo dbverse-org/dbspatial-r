@@ -17,6 +17,10 @@ as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, ...)
 
 \item{...}{Additional arguments to be passed}
 }
+\value{
+A \code{\link{dbSpatial}} object backed by table \code{name} in \code{conn}, with the
+geometry column stored as \code{geom}.
+}
 \description{
 Create a \code{\link{dbSpatial}} object from an \code{sf} or \code{terra} object.
 }
@@ -41,7 +45,7 @@ if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
   DBI::dbExecute(duckdb_conn, "SET threads = 1")
 
   dbSpatial <- as_dbSpatial(rSpatial = dummy_spatvector,
-                            conn = duckdb_conn,
+                           conn = duckdb_conn,
                            name = "dummy_spatvector",
                            overwrite = TRUE)
   dbSpatial

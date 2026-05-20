@@ -17,8 +17,23 @@
 Returns the area of the geometry column.
 }
 \examples{
-\dontrun{
-st_area(x)
+\donttest{
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+  square <- sf::st_sf(
+    id = 1,
+    geom = sf::st_sfc(
+      sf::st_polygon(list(rbind(
+        c(0, 0), c(1, 0), c(1, 1), c(0, 1), c(0, 0)
+      )))
+    )
+  )
+  duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(duckdb_conn, "SET threads = 1")
+  x <- as_dbSpatial(square, conn = duckdb_conn, name = "square",
+                    overwrite = TRUE)
+  st_area(x)
+  DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+}
 }
 }
 \seealso{

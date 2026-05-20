@@ -12,6 +12,8 @@
 #' @param name \code{a character string} with the unquoted DBMS table name, e.g. "table_name"
 #' @param overwrite \code{logical}. Overwrite existing table. default = FALSE.
 #' @param ... Additional arguments to be passed
+#' @return A [`dbSpatial`] object backed by table `name` in `conn`, with the
+#'   geometry column stored as `geom`.
 #' @family dbSpatial
 #' @export
 #' @examples

@@ -11,6 +11,7 @@
 #' @param x A `dbSpatial` object.
 #' @param n Number of rows to return.
 #' @param ... Additional arguments.
+#' @return A `dbSpatial` object containing the first `n` rows of `x`.
 #' @rdname head
 #' @aliases head,dbSpatial-method
 #' @family dbData
@@ -27,6 +28,7 @@ setMethod('head', signature(x = 'dbSpatial'), function(x, n = 6L, ...) {
 #' @param x A `dbSpatial` object.
 #' @param n Number of rows to return.
 #' @param ... Additional arguments.
+#' @return A `dbSpatial` object containing the last `n` rows of `x`.
 #' @rdname tail
 #' @aliases tail,dbSpatial-method
 #' @family dbData

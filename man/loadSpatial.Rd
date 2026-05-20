@@ -9,6 +9,10 @@ loadSpatial(conn)
 \arguments{
 \item{conn}{duckdb connection}
 }
+\value{
+No return value, called for side effects. Installs and loads the
+DuckDB spatial extension for \code{conn}.
+}
 \description{
 Install and/or load DuckDB spatial extension
 }

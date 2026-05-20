@@ -2,7 +2,8 @@
 #'
 #' @param conn duckdb connection
 #'
-#' @return NULL
+#' @return No return value, called for side effects. Installs and loads the
+#'   DuckDB spatial extension for `conn`.
 #' @export
 #' @family duckdb-ext
 #' @examples

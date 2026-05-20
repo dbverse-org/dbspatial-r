@@ -13,6 +13,9 @@
 
 \item{...}{Additional arguments.}
 }
+\value{
+A \code{dbSpatial} object containing the last \code{n} rows of \code{x}.
+}
 \description{
 tail method for dbSpatial
 }

@@ -144,8 +144,23 @@ setGeneric(
 #' @importFrom sf st_area
 
 #' @examples
-#' \dontrun{
-#' st_area(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   square <- sf::st_sf(
+#'     id = 1,
+#'     geom = sf::st_sfc(
+#'       sf::st_polygon(list(rbind(
+#'         c(0, 0), c(1, 0), c(1, 1), c(0, 1), c(0, 0)
+#'       )))
+#'     )
+#'   )
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(square, conn = duckdb_conn, name = "square",
+#'                     overwrite = TRUE)
+#'   st_area(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 NULL
 
@@ -164,8 +179,21 @@ NULL
 #' @importFrom sf st_length
 
 #' @examples
-#' \dontrun{
-#' st_length(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   line <- sf::st_sf(
+#'     id = 1,
+#'     geom = sf::st_sfc(
+#'       sf::st_linestring(rbind(c(0, 0), c(1, 1), c(2, 1)))
+#'     )
+#'   )
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(line, conn = duckdb_conn, name = "line",
+#'                     overwrite = TRUE)
+#'   st_length(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 NULL
 
@@ -184,8 +212,23 @@ NULL
 #' @importFrom sf st_perimeter
 
 #' @examples
-#' \dontrun{
-#' st_perimeter(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   square <- sf::st_sf(
+#'     id = 1,
+#'     geom = sf::st_sfc(
+#'       sf::st_polygon(list(rbind(
+#'         c(0, 0), c(1, 0), c(1, 1), c(0, 1), c(0, 0)
+#'       )))
+#'     )
+#'   )
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(square, conn = duckdb_conn, name = "square",
+#'                     overwrite = TRUE)
+#'   st_perimeter(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 NULL
 
@@ -204,8 +247,16 @@ NULL
 #' @importFrom sf st_buffer
 
 #' @examples
-#' \dontrun{
-#' st_buffer(x, dist = 1)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   point <- sf::st_sf(id = 1, geom = sf::st_sfc(sf::st_point(c(0, 0))))
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(point, conn = duckdb_conn, name = "point",
+#'                     overwrite = TRUE)
+#'   st_buffer(x, dist = 1)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 NULL
 
@@ -222,8 +273,23 @@ NULL
 #' @importFrom sf st_centroid
 
 #' @examples
-#' \dontrun{
-#' st_centroid(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   square <- sf::st_sf(
+#'     id = 1,
+#'     geom = sf::st_sfc(
+#'       sf::st_polygon(list(rbind(
+#'         c(0, 0), c(1, 0), c(1, 1), c(0, 1), c(0, 0)
+#'       )))
+#'     )
+#'   )
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(square, conn = duckdb_conn, name = "square",
+#'                     overwrite = TRUE)
+#'   st_centroid(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 NULL
 
@@ -241,8 +307,23 @@ NULL
 #' @importFrom sf st_simplify
 
 #' @examples
-#' \dontrun{
-#' st_simplify(x, dTolerance = 0.1)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   line <- sf::st_sf(
+#'     id = 1,
+#'     geom = sf::st_sfc(
+#'       sf::st_linestring(rbind(
+#'         c(0, 0), c(0.5, 0.2), c(1, 0), c(1.5, 0.1), c(2, 0)
+#'       ))
+#'     )
+#'   )
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(line, conn = duckdb_conn, name = "line",
+#'                     overwrite = TRUE)
+#'   st_simplify(x, dTolerance = 0.1)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 NULL
 
@@ -259,8 +340,16 @@ NULL
 #' @concept accessors
 #' @export
 #' @examples
-#' \dontrun{
-#' st_x(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   point <- sf::st_sf(id = 1, geom = sf::st_sfc(sf::st_point(c(1, 2))))
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(point, conn = duckdb_conn, name = "point",
+#'                     overwrite = TRUE)
+#'   st_x(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 setGeneric("st_x", function(x, ...) standardGeneric("st_x"))
 
@@ -274,8 +363,16 @@ setGeneric("st_x", function(x, ...) standardGeneric("st_x"))
 #' @concept accessors
 #' @export
 #' @examples
-#' \dontrun{
-#' st_y(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   point <- sf::st_sf(id = 1, geom = sf::st_sfc(sf::st_point(c(1, 2))))
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(point, conn = duckdb_conn, name = "point",
+#'                     overwrite = TRUE)
+#'   st_y(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 setGeneric("st_y", function(x, ...) standardGeneric("st_y"))
 
@@ -289,8 +386,19 @@ setGeneric("st_y", function(x, ...) standardGeneric("st_y"))
 #' @concept accessors
 #' @export
 #' @examples
-#' \dontrun{
-#' st_npoints(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   line <- sf::st_sf(
+#'     id = 1,
+#'     geom = sf::st_sfc(sf::st_linestring(rbind(c(0, 0), c(1, 1), c(2, 1))))
+#'   )
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(line, conn = duckdb_conn, name = "line",
+#'                     overwrite = TRUE)
+#'   st_npoints(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 setGeneric("st_npoints", function(x, ...) standardGeneric("st_npoints"))
 
@@ -306,8 +414,16 @@ setGeneric("st_npoints", function(x, ...) standardGeneric("st_npoints"))
 #' @importFrom sf st_as_text
 
 #' @examples
-#' \dontrun{
-#' st_as_text(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   point <- sf::st_sf(id = 1, geom = sf::st_sfc(sf::st_point(c(1, 2))))
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(point, conn = duckdb_conn, name = "point",
+#'                     overwrite = TRUE)
+#'   st_as_text(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 NULL
 
@@ -323,7 +439,15 @@ NULL
 #' @concept constructors
 #' @export
 #' @examples
-#' \dontrun{
-#' st_as_geojson(x)
+#' \donttest{
+#' if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+#'   point <- sf::st_sf(id = 1, geom = sf::st_sfc(sf::st_point(c(1, 2))))
+#'   duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#'   DBI::dbExecute(duckdb_conn, "SET threads = 1")
+#'   x <- as_dbSpatial(point, conn = duckdb_conn, name = "point",
+#'                     overwrite = TRUE)
+#'   st_as_geojson(x)
+#'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+#' }
 #' }
 setGeneric("st_as_geojson", function(x, ...) standardGeneric("st_as_geojson"))

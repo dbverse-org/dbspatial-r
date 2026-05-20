@@ -1,5 +1,17 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# dbSpatial 0.1.1 (2026-05-20)
+
+## Documentation
+
+- Add method references to `DESCRIPTION`.
+
+- Add missing `\value{}` sections for exported conversion and accessor methods.
+
+- Remove internal `:::` usage from user-facing examples.
+
+- Replace inappropriate `\dontrun{}` examples with `\donttest{}` examples.
+
 # dbSpatial 0.0.0.9110 (2026-01-13)
 
 ## Bug fixes

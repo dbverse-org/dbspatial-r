@@ -17,8 +17,23 @@
 Returns a simplified version of the given geometry using the Douglas-Peucker algorithm.
 }
 \examples{
-\dontrun{
-st_simplify(x, dTolerance = 0.1)
+\donttest{
+if (interactive() && requireNamespace("duckdb", quietly = TRUE)) {
+  line <- sf::st_sf(
+    id = 1,
+    geom = sf::st_sfc(
+      sf::st_linestring(rbind(
+        c(0, 0), c(0.5, 0.2), c(1, 0), c(1.5, 0.1), c(2, 0)
+      ))
+    )
+  )
+  duckdb_conn <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+  DBI::dbExecute(duckdb_conn, "SET threads = 1")
+  x <- as_dbSpatial(line, conn = duckdb_conn, name = "line",
+                    overwrite = TRUE)
+  st_simplify(x, dTolerance = 0.1)
+  DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
+}
 }
 }
 \seealso{
