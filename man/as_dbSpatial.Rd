@@ -4,7 +4,14 @@
 \alias{as_dbSpatial}
 \title{Convert an sf or terra object to a \code{dbSpatial} object}
 \usage{
-as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, ...)
+as_dbSpatial(
+  rSpatial,
+  conn,
+  name,
+  overwrite = FALSE,
+  temporary = TRUE,
+  ...
+)
 }
 \arguments{
 \item{rSpatial}{\code{sf} or \code{terra} object.}
@@ -14,6 +21,8 @@ as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, ...)
 \item{name}{\code{a character string} with the unquoted DBMS table name, e.g. "table_name"}
 
 \item{overwrite}{\code{logical}. Overwrite existing table. default = FALSE.}
+
+\item{temporary}{\code{logical}. Create a temporary table. default = TRUE.}
 
 \item{...}{Additional arguments to be passed}
 }

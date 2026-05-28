@@ -11,6 +11,7 @@
 #' @param conn A DBI connection object, as returned by `DBI::dbConnect()`.
 #' @param name \code{a character string} with the unquoted DBMS table name, e.g. "table_name"
 #' @param overwrite \code{logical}. Overwrite existing table. default = FALSE.
+#' @param temporary \code{logical}. Create a temporary table. default = TRUE.
 #' @param ... Additional arguments to be passed
 #' @return A [`dbSpatial`] object backed by table `name` in `conn`, with the
 #'   geometry column stored as `geom`.
@@ -38,7 +39,14 @@
 #'   dbSpatial
 #'   DBI::dbDisconnect(duckdb_conn, shutdown = TRUE)
 #' }
-as_dbSpatial <- function(rSpatial, conn, name, overwrite = FALSE, ...) {
+as_dbSpatial <- function(
+  rSpatial,
+  conn,
+  name,
+  overwrite = FALSE,
+  temporary = TRUE,
+  ...
+) {
   # input validation
   .check_con(conn = conn)
   .check_name(name = name)
@@ -81,7 +89,7 @@ as_dbSpatial <- function(rSpatial, conn, name, overwrite = FALSE, ...) {
   tbl <- dplyr::tbl(conn, temp_name) |>
     dplyr::mutate(geom = dbplyr::sql("ST_GeomFromText(geometry)")) |>
     dplyr::select(-geometry) |>
-    dplyr::compute(overwrite = overwrite, name = name)
+    dplyr::compute(overwrite = overwrite, name = name, temporary = temporary)
 
   res <- dbSpatial(value = tbl, name = name)
 
