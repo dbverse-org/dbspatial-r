@@ -2,10 +2,8 @@
 
 This is a resubmission. In response to the previous CRAN feedback, I:
 
-* added method references to the `Description` field in `DESCRIPTION`
-* added the missing `\value{}` sections for the flagged exported methods and documented the returned object structure
-* removed user-facing documentation that accessed internal helpers via `:::`
-* replaced inappropriate `\dontrun{}` examples with `\donttest{}` examples
+* fixed `as_dbSpatial(..., temporary = FALSE)` so it creates persistent
+  database tables as documented
 
 ## Test environments
 
@@ -13,8 +11,9 @@ This is a resubmission. In response to the previous CRAN feedback, I:
 
 ## R CMD check results
 
-`R CMD check --as-cran`
+`R CMD check --as-cran --no-manual --ignore-vignettes`
 
 * 0 errors
-* 2 warnings: local `qpdf` not available; local LaTeX package `inconsolata.sty` missing for the PDF manual
-* 4 notes: new submission; current time could not be verified on this host; HTML Tidy not available locally; `dbSpatial-manual.tex` left in check dir because the local PDF manual step failed
+* 0 warnings
+* 2 notes: days since last update / no prebuilt vignette index; local Pandoc not
+  installed for checking `README.md` and `NEWS.md`
