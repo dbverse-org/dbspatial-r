@@ -1,5 +1,12 @@
 # Changelog
 
+## dbSpatial 0.1.2 (2026-05-27)
+
+### Bug fixes
+
+- Allow `as_dbSpatial(..., temporary = FALSE)` to create persistent
+  tables.
+
 ## dbSpatial 0.1.1 (2026-05-20)
 
 CRAN release: 2026-05-27

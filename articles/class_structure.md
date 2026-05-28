@@ -50,7 +50,7 @@ class(pts)
 pts
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
 #>      id     x     y geom       
 #>   <int> <dbl> <dbl> <chr>      
 #> 1     1     0     0 POINT (0 0)

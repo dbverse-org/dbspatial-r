@@ -45,7 +45,7 @@ a <- dbSpatial(conn = duckdb_conn,
 a
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
 #>        x     y    id geom         
 #>    <int> <int> <int> <chr>        
 #>  1     1     1     1 POINT (1 1)  
@@ -80,7 +80,7 @@ a <- dbSpatial(conn = duckdb_conn,
 a
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 5]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
 #>    OGC_FID x     y     id    geom         
 #>      <dbl> <chr> <chr> <chr> <chr>        
 #>  1       1 1     1     1     POINT (1 1)  
@@ -113,7 +113,7 @@ dbSpatial(conn = duckdb_conn,
           overwrite = TRUE)
 #> # Class:    dbSpatial 
 #> # Source:   SQL [?? x 2]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1013-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
 #>       id geom         
 #>    <int> <chr>        
 #>  1     1 POINT (1 1)  
