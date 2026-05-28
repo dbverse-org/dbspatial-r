@@ -2,6 +2,8 @@
 
 ## dbSpatial 0.1.1 (2026-05-20)
 
+CRAN release: 2026-05-27
+
 ### Documentation
 
 - Add method references to `DESCRIPTION`.

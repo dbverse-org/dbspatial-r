@@ -7,7 +7,14 @@ object from an `sf` or `terra` object.
 ## Usage
 
 ``` r
-as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, ...)
+as_dbSpatial(
+  rSpatial,
+  conn,
+  name,
+  overwrite = FALSE,
+  temporary = TRUE,
+  ...
+)
 ```
 
 ## Arguments
@@ -29,6 +36,10 @@ as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, ...)
 - overwrite:
 
   `logical`. Overwrite existing table. default = FALSE.
+
+- temporary:
+
+  `logical`. Create a temporary table. default = TRUE.
 
 - ...:
 
