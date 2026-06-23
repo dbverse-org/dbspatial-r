@@ -5,7 +5,11 @@ Install and/or load DuckDB spatial extension
 ## Usage
 
 ``` r
-loadSpatial(conn)
+loadSpatial(
+  conn,
+  extension_directory = getOption("dbSpatial.extension_directory", file.path(tempdir(),
+    "dbSpatial-duckdb-extensions"))
+)
 ```
 
 ## Arguments
@@ -13,6 +17,12 @@ loadSpatial(conn)
 - conn:
 
   duckdb connection
+
+- extension_directory:
+
+  Directory where DuckDB should install extensions. Defaults to a
+  directory in the R session temporary directory. Set the
+  `dbSpatial.extension_directory` option to use a different location.
 
 ## Value
 

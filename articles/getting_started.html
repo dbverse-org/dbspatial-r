@@ -115,8 +115,8 @@ package is available in the check environment.</p>
 <span>               overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">a</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;        x     y    id geom         </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     1     1 POINT (1 1)  </span></span>
@@ -138,19 +138,20 @@ package is available in the check environment.</p>
 <span><span class="va">test_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># write to file</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">test_data</span>, <span class="st">"test_data.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">test_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">test_data</span>, <span class="va">test_file</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># load file in db</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dbSpatial.html">dbSpatial</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">duckdb_conn</span>,</span>
 <span>               name <span class="op">=</span> <span class="st">"test_points"</span>,</span>
-<span>               value <span class="op">=</span> <span class="st">'test_data.csv'</span>,</span>
+<span>               value <span class="op">=</span> <span class="va">test_file</span>,</span>
 <span>               x_colName <span class="op">=</span> <span class="st">"x"</span>,</span>
 <span>               y_colName <span class="op">=</span> <span class="st">"y"</span>,</span>
 <span>               overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">a</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 5]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;    OGC_FID x     y     id    geom         </span></span>
 <span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       1 1     1     1     POINT (1 1)  </span></span>
@@ -170,7 +171,7 @@ package is available in the check environment.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load terra package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; terra 1.9.27</span></span>
+<span><span class="co">#&gt; terra 1.9.34</span></span>
 <span></span>
 <span><span class="co"># Create a SpatVector from the data.frame</span></span>
 <span><span class="va">dummy_spatvector</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html" class="external-link">vect</a></span><span class="op">(</span><span class="va">test_data</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span>
@@ -181,8 +182,8 @@ package is available in the check environment.</p>
 <span>          value <span class="op">=</span> <span class="va">dummy_spatvector</span>,</span>
 <span>          overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 2]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;       id geom         </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 POINT (1 1)  </span></span>

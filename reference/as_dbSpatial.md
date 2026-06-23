@@ -7,14 +7,7 @@ object from an `sf` or `terra` object.
 ## Usage
 
 ``` r
-as_dbSpatial(
-  rSpatial,
-  conn,
-  name,
-  overwrite = FALSE,
-  temporary = TRUE,
-  ...
-)
+as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, temporary = TRUE, ...)
 ```
 
 ## Arguments

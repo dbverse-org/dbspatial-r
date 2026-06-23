@@ -44,8 +44,8 @@ a <- dbSpatial(conn = duckdb_conn,
                overwrite = TRUE)
 a
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 4
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>        x     y    id geom         
 #>    <int> <int> <int> <chr>        
 #>  1     1     1     1 POINT (1 1)  
@@ -68,19 +68,20 @@ a
 test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
 # write to file
-write.csv(test_data, "test_data.csv", row.names = FALSE)
+test_file <- tempfile(fileext = ".csv")
+write.csv(test_data, test_file, row.names = FALSE)
 
 # load file in db
 a <- dbSpatial(conn = duckdb_conn,
                name = "test_points",
-               value = 'test_data.csv',
+               value = test_file,
                x_colName = "x",
                y_colName = "y",
                overwrite = TRUE)
 a
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 5]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 5
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>    OGC_FID x     y     id    geom         
 #>      <dbl> <chr> <chr> <chr> <chr>        
 #>  1       1 1     1     1     POINT (1 1)  
@@ -101,7 +102,7 @@ a
 
 # load terra package
 library(terra)
-#> terra 1.9.27
+#> terra 1.9.34
 
 # Create a SpatVector from the data.frame
 dummy_spatvector <- terra::vect(test_data, geom = c("x", "y"))
@@ -112,8 +113,8 @@ dbSpatial(conn = duckdb_conn,
           value = dummy_spatvector,
           overwrite = TRUE)
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 2]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 2
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>       id geom         
 #>    <int> <chr>        
 #>  1     1 POINT (1 1)  

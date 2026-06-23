@@ -104,8 +104,8 @@
 <span><span class="op">)</span></span>
 <span><span class="va">pts</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;      id     x     y geom         </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)  </span></span>
@@ -119,8 +119,8 @@
 <code class="sourceCode R"><span><span class="co"># Buffer</span></span>
 <span><span class="fu"><a href="../reference/st_buffer.html">st_buffer</a></span><span class="op">(</span><span class="va">pts</span>, dist <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;      id     x     y geom                             </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POLYGON ((5 0, 4.9931476737728...</span></span>
@@ -130,8 +130,8 @@
 <span><span class="co"># Centroid</span></span>
 <span><span class="fu"><a href="../reference/st_centroid.html">st_centroid</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;      id     x     y geom         </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)  </span></span>
@@ -141,8 +141,8 @@
 <span><span class="co"># Simplify</span></span>
 <span><span class="fu"><a href="../reference/st_simplify.html">st_simplify</a></span><span class="op">(</span><span class="va">pts</span>, dTolerance <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;      id     x     y geom         </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)  </span></span>
@@ -161,8 +161,8 @@
 <span><span class="co"># Check validity</span></span>
 <span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/valid.html" class="external-link">st_is_valid</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 4]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;      id     x     y geom </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 TRUE </span></span>
@@ -178,8 +178,8 @@ predicates:</p>
 <code class="sourceCode R"><span><span class="co"># Self-join using intersection predicate (returns joined table)</span></span>
 <span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join</a></span><span class="op">(</span><span class="va">pts</span>, <span class="va">pts</span>, join <span class="op">=</span> <span class="va">st_intersects</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Class:    dbSpatial </span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Source:   SQL [?? x 8]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]</span></span></span>
+<span><span class="co"><span style="color: #949494;">#&gt; # A query:  ?? x 8</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]</span></span></span>
 <span><span class="co">#&gt;      id     x     y geom           id_1   x_1   y_1 geom_1    </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0     0 POINT (0 0)       1     0     0 <span style="color: #949494;">&lt;raw [21]&gt;</span></span></span>

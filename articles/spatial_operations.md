@@ -32,8 +32,8 @@ pts <- dbSpatial(
 )
 pts
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 4
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -48,8 +48,8 @@ pts
 # Buffer
 st_buffer(pts, dist = 5)
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 4
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>      id     x     y geom                             
 #>   <int> <dbl> <dbl> <chr>                            
 #> 1     1     0     0 POLYGON ((5 0, 4.9931476737728...
@@ -59,8 +59,8 @@ st_buffer(pts, dist = 5)
 # Centroid
 st_centroid(pts)
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 4
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -70,8 +70,8 @@ st_centroid(pts)
 # Simplify
 st_simplify(pts, dTolerance = 1)
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 4
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -91,8 +91,8 @@ st_bbox(pts)
 # Check validity
 st_is_valid(pts)
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 4]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 4
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>      id     x     y geom 
 #>   <int> <dbl> <dbl> <lgl>
 #> 1     1     0     0 TRUE 
@@ -110,8 +110,8 @@ to perform spatial joins with various predicates:
 # Self-join using intersection predicate (returns joined table)
 st_join(pts, pts, join = st_intersects)
 #> # Class:    dbSpatial 
-#> # Source:   SQL [?? x 8]
-#> # Database: DuckDB 1.5.2 [unknown@Linux 6.17.0-1015-azure:R 4.6.0/:memory:]
+#> # A query:  ?? x 8
+#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
 #>      id     x     y geom           id_1   x_1   y_1 geom_1    
 #>   <int> <dbl> <dbl> <chr>         <int> <dbl> <dbl> <list>    
 #> 1     1     0     0 POINT (0 0)       1     0     0 <raw [21]>
