@@ -45,10 +45,19 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.2" id="dbspatial-012-2026-05-27">dbSpatial 0.1.2 (2026-05-27)<a class="anchor" aria-label="anchor" href="#dbspatial-012-2026-05-27"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.2" id="dbspatial-012-2026-06-23">dbSpatial 0.1.2 (2026-06-23)<a class="anchor" aria-label="anchor" href="#dbspatial-012-2026-06-23"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-1-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-1-2"></a></h3>
-<ul><li>Allow <code>as_dbSpatial(..., temporary = FALSE)</code> to create persistent tables.</li>
+<ul><li><p>Allow <code>as_dbSpatial(..., temporary = FALSE)</code> to create persistent tables.</p></li>
+<li><p>Install DuckDB spatial extensions in the R session temporary directory to avoid writes to read-only package libraries.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-0-1-2">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-1-2"></a></h3>
+<ul><li>Avoid executing DuckDB spatial vignette chunks on CRAN and write vignette CSV examples to temporary files.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-0-1-2">Testing<a class="anchor" aria-label="anchor" href="#testing-0-1-2"></a></h3>
+<ul><li>Skip DuckDB spatial runtime checks on CRAN to avoid native extension loader instability.</li>
 </ul></div>
 </div>
     <div class="section level2">

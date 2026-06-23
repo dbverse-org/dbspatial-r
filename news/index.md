@@ -1,11 +1,24 @@
 # Changelog
 
-## dbSpatial 0.1.2 (2026-05-27)
+## dbSpatial 0.1.2 (2026-06-23)
 
 ### Bug fixes
 
 - Allow `as_dbSpatial(..., temporary = FALSE)` to create persistent
   tables.
+
+- Install DuckDB spatial extensions in the R session temporary directory
+  to avoid writes to read-only package libraries.
+
+### Documentation
+
+- Avoid executing DuckDB spatial vignette chunks on CRAN and write
+  vignette CSV examples to temporary files.
+
+### Testing
+
+- Skip DuckDB spatial runtime checks on CRAN to avoid native extension
+  loader instability.
 
 ## dbSpatial 0.1.1 (2026-05-20)
 
