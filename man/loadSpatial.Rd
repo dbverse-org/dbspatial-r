@@ -4,10 +4,18 @@
 \alias{loadSpatial}
 \title{Install and/or load DuckDB spatial extension}
 \usage{
-loadSpatial(conn)
+loadSpatial(
+  conn,
+  extension_directory = getOption("dbSpatial.extension_directory", file.path(tempdir(),
+    "dbSpatial-duckdb-extensions"))
+)
 }
 \arguments{
 \item{conn}{duckdb connection}
+
+\item{extension_directory}{Directory where DuckDB should install extensions.
+Defaults to a directory in the R session temporary directory. Set the
+\code{dbSpatial.extension_directory} option to use a different location.}
 }
 \value{
 No return value, called for side effects. Installs and loads the
