@@ -1,3 +1,5 @@
+skip_on_cran()
+
 test_that("$ extracts column values", {
   skip_if_not_installed("duckdb")
 

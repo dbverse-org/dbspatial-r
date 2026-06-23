@@ -1,3 +1,20 @@
+skip_on_cran()
+
+test_that("loadSpatial uses a temporary extension directory by default", {
+  skip_if_not_installed("duckdb")
+
+  con <- DBI::dbConnect(duckdb::duckdb())
+  on.exit(DBI::dbDisconnect(con, shutdown = TRUE))
+
+  suppressMessages(loadSpatial(con))
+
+  extension_files <- list.files(
+    file.path(tempdir(), "dbSpatial-duckdb-extensions"),
+    recursive = TRUE
+  )
+  expect_true(any(grepl("spatial\\.duckdb_extension$", extension_files)))
+})
+
 test_that("dbSpatial constructor works", {
   skip_if_not_installed("duckdb")
 
