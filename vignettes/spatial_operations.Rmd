@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 has_duckdb <- requireNamespace("duckdb", quietly = TRUE)
-knitr::opts_chunk$set(eval = has_duckdb)
+knitr::opts_chunk$set(
+  eval = has_duckdb && !identical(Sys.getenv("NOT_CRAN"), "false")
+)
 ```
 
 ```{r setup}

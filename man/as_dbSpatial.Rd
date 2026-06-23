@@ -4,14 +4,7 @@
 \alias{as_dbSpatial}
 \title{Convert an sf or terra object to a \code{dbSpatial} object}
 \usage{
-as_dbSpatial(
-  rSpatial,
-  conn,
-  name,
-  overwrite = FALSE,
-  temporary = TRUE,
-  ...
-)
+as_dbSpatial(rSpatial, conn, name, overwrite = FALSE, temporary = TRUE, ...)
 }
 \arguments{
 \item{rSpatial}{\code{sf} or \code{terra} object.}

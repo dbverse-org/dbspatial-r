@@ -14,7 +14,9 @@ knitr::opts_chunk$set(
   output.lines = 10
 )
 has_duckdb <- requireNamespace("duckdb", quietly = TRUE)
-knitr::opts_chunk$set(eval = has_duckdb)
+knitr::opts_chunk$set(
+  eval = has_duckdb && !identical(Sys.getenv("NOT_CRAN"), "false")
+)
 ```
 
 ```{r setup}
@@ -58,12 +60,13 @@ a
 test_data = data.frame(x = 1:10, y = 1:10, id = 1:10)
 
 # write to file
-write.csv(test_data, "test_data.csv", row.names = FALSE)
+test_file <- tempfile(fileext = ".csv")
+write.csv(test_data, test_file, row.names = FALSE)
 
 # load file in db
 a <- dbSpatial(conn = duckdb_conn,
                name = "test_points",
-               value = 'test_data.csv',
+               value = test_file,
                x_colName = "x",
                y_colName = "y",
                overwrite = TRUE)
