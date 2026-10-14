@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 has_duckdb <- requireNamespace("duckdb", quietly = TRUE)
 knitr::opts_chunk$set(
-  eval = has_duckdb && !identical(Sys.getenv("NOT_CRAN"), "false")
+  eval = has_duckdb && identical(Sys.getenv("NOT_CRAN"), "true")
 )
 ```
 
@@ -27,7 +27,7 @@ library(dbSpatial)
 This vignette demonstrates how to use the `{dbSpatial}` package to create a DuckDB database with spatial points and polygons starting from various data sources.
 
 All code chunks below are evaluated only when the `duckdb` package is
-available in the check environment.
+available and `NOT_CRAN` is `"true"`, so they are skipped on CRAN.
 
 ## Creating a DuckDB connection
 ```{r}
