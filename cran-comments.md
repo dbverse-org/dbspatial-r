@@ -1,13 +1,14 @@
-## Resubmission
+## Submission
 
-This is a resubmission. In response to the previous CRAN feedback, I:
+This is a patch release fixing the ERROR shown on the CRAN check page for
+dbSpatial 0.1.2 on r-devel-linux-x86_64-fedora-clang. In this version I:
 
-* fixed `as_dbSpatial(..., temporary = FALSE)` so it creates persistent
-  database tables as documented
-* changed DuckDB spatial extension loading so extension files are installed
-  into the R session temporary directory rather than the user/package library
-* skipped DuckDB spatial extension runtime checks and vignette execution on
-  CRAN
+* fixed the vignette evaluation guard so DuckDB spatial chunks are skipped on
+  CRAN; the previous guard evaluated them when `NOT_CRAN` was unset, which
+  failed where DuckDB extension loading is disabled
+* added `\usage` sections to the `st_*` method help topics, resolving the
+  "Rd files without \usage" NOTE on r-devel-linux-x86_64-debian-clang and
+  r-devel-linux-x86_64-debian-gcc
 
 ## Test environments
 
@@ -15,12 +16,12 @@ This is a resubmission. In response to the previous CRAN feedback, I:
 
 ## R CMD check results
 
-`NOT_CRAN=false R CMD check --as-cran --no-manual`
+`R CMD check --as-cran --no-manual` with `NOT_CRAN` unset
 
 * 0 errors
 * 0 warnings
 * 0 notes
 
-Full `R CMD check --as-cran` was also run locally. It reached the PDF manual
-step with all package checks passing, then failed because `pdflatex` is not
-available in the local WSL2 environment.
+## Reverse dependencies
+
+There are no reverse dependencies on CRAN.
