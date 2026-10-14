@@ -2,11 +2,15 @@
 % Please edit documentation in R/generics.R
 \name{st_as_text}
 \alias{st_as_text}
+\alias{st_as_text.dbSpatial}
 \title{Convert to WKT}
+\usage{
+\method{st_as_text}{dbSpatial}(x, ...)
+}
 \arguments{
 \item{x}{\code{\link{dbSpatial}} object}
 
-\item{...}{additional arguments}
+\item{...}{ignored, with a warning}
 }
 \value{
 \code{\link{dbSpatial}} object with WKT column

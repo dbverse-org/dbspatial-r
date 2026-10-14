@@ -2,13 +2,20 @@
 % Please edit documentation in R/generics.R
 \name{st_simplify}
 \alias{st_simplify}
+\alias{st_simplify.dbSpatial}
 \title{Simplify geometry}
+\usage{
+\method{st_simplify}{dbSpatial}(x, preserveTopology = FALSE, dTolerance = 0, ...)
+}
 \arguments{
 \item{x}{\code{\link{dbSpatial}} object}
 
+\item{preserveTopology}{not supported by DuckDB \code{ST_Simplify}; \code{TRUE} is
+ignored with a warning.}
+
 \item{dTolerance}{numeric tolerance}
 
-\item{...}{additional arguments}
+\item{...}{ignored, with a warning}
 }
 \value{
 \code{\link{dbSpatial}} object with simplified geometry

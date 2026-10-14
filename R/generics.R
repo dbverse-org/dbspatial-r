@@ -133,11 +133,12 @@ setGeneric(
 ## Measurements ####
 #' Get area of geometries
 #' @name st_area
+#' @aliases st_area.dbSpatial
 #' @description
 #' Returns the area of the geometry column.
+#' @usage \method{st_area}{dbSpatial}(x, ...)
 #' @param x \code{\link{dbSpatial}} object
-#' @param geomName \code{character string}. The geometry column name. Default: `"geom"`.
-#' @param ... additional arguments passed to methods
+#' @param ... ignored, with a warning
 #' @return \code{\link{dbSpatial}} object (lazy tibble with area column)
 #' @family measurements
 #' @concept measurements
@@ -168,11 +169,12 @@ NULL
 
 #' Get length of geometries
 #' @name st_length
+#' @aliases st_length.dbSpatial
 #' @description
 #' Returns the length of the geometry column.
+#' @usage \method{st_length}{dbSpatial}(x, ...)
 #' @param x \code{\link{dbSpatial}} object
-#' @param geomName \code{character string}. The geometry column name. Default: `"geom"`.
-#' @param ... additional arguments passed to methods
+#' @param ... ignored, with a warning
 #' @return \code{\link{dbSpatial}} object (lazy tibble with length column)
 #' @family measurements
 #' @concept measurements
@@ -201,11 +203,12 @@ NULL
 
 #' Get perimeter of geometries
 #' @name st_perimeter
+#' @aliases st_perimeter.dbSpatial
 #' @description
 #' Returns the perimeter of the geometry column.
+#' @usage \method{st_perimeter}{dbSpatial}(x, ...)
 #' @param x \code{\link{dbSpatial}} object
-#' @param geomName \code{character string}. The geometry column name. Default: `"geom"`.
-#' @param ... additional arguments passed to methods
+#' @param ... ignored, with a warning
 #' @return \code{\link{dbSpatial}} object (lazy tibble with perimeter column)
 #' @family measurements
 #' @concept measurements
@@ -237,10 +240,27 @@ NULL
 ## Geometry Operations ####
 #' Compute buffer around geometry
 #' @name st_buffer
+#' @aliases st_buffer.dbSpatial
 #' @description Returns a geometry that represents all points whose distance from this Geometry is less than or equal to distance.
+#' @usage
+#' \method{st_buffer}{dbSpatial}(
+#'   x,
+#'   dist,
+#'   nQuadSegs = 30,
+#'   endCapStyle = "ROUND",
+#'   joinStyle = "ROUND",
+#'   mitreLimit = 1,
+#'   singleSide = FALSE,
+#'   ...
+#' )
 #' @param x \code{\link{dbSpatial}} object
 #' @param dist numeric distance
-#' @param ... additional arguments
+#' @param nQuadSegs integer number of segments used to approximate a quarter
+#'   circle.
+#' @param endCapStyle,joinStyle,mitreLimit,singleSide accepted for
+#'   compatibility with [sf::st_buffer()]; DuckDB `ST_Buffer` always uses
+#'   round caps and joins, so non-default values are ignored with a warning.
+#' @param ... ignored, with a warning
 #' @return \code{\link{dbSpatial}} object with buffered geometry
 #' @family geometry_ops
 #' @concept geometry_ops
@@ -264,9 +284,13 @@ NULL
 
 #' Compute centroid of geometry
 #' @name st_centroid
+#' @aliases st_centroid.dbSpatial
 #' @description Returns the geometric center of a geometry.
+#' @usage \method{st_centroid}{dbSpatial}(x, ..., of_largest_polygon = FALSE)
 #' @param x \code{\link{dbSpatial}} object
-#' @param ... additional arguments
+#' @param ... ignored, with a warning
+#' @param of_largest_polygon not supported by DuckDB `ST_Centroid`; `TRUE` is
+#'   ignored with a warning.
 #' @return \code{\link{dbSpatial}} object with centroid geometry
 #' @family geometry_ops
 #' @concept geometry_ops
@@ -297,10 +321,15 @@ NULL
 
 #' Simplify geometry
 #' @name st_simplify
+#' @aliases st_simplify.dbSpatial
 #' @description Returns a simplified version of the given geometry using the Douglas-Peucker algorithm.
+#' @usage
+#' \method{st_simplify}{dbSpatial}(x, preserveTopology = FALSE, dTolerance = 0, ...)
 #' @param x \code{\link{dbSpatial}} object
+#' @param preserveTopology not supported by DuckDB `ST_Simplify`; `TRUE` is
+#'   ignored with a warning.
 #' @param dTolerance numeric tolerance
-#' @param ... additional arguments
+#' @param ... ignored, with a warning
 #' @return \code{\link{dbSpatial}} object with simplified geometry
 #' @family geometry_ops
 #' @concept geometry_ops
@@ -405,9 +434,11 @@ setGeneric("st_npoints", function(x, ...) standardGeneric("st_npoints"))
 ## Constructors ####
 #' Convert to WKT
 #' @name st_as_text
+#' @aliases st_as_text.dbSpatial
 #' @description Returns the Well-Known Text (WKT) representation of the geometry.
+#' @usage \method{st_as_text}{dbSpatial}(x, ...)
 #' @param x \code{\link{dbSpatial}} object
-#' @param ... additional arguments
+#' @param ... ignored, with a warning
 #' @return \code{\link{dbSpatial}} object with WKT column
 #' @family constructors
 #' @concept constructors

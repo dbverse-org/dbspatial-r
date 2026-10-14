@@ -2,13 +2,15 @@
 % Please edit documentation in R/generics.R
 \name{st_perimeter}
 \alias{st_perimeter}
+\alias{st_perimeter.dbSpatial}
 \title{Get perimeter of geometries}
+\usage{
+\method{st_perimeter}{dbSpatial}(x, ...)
+}
 \arguments{
 \item{x}{\code{\link{dbSpatial}} object}
 
-\item{geomName}{\code{character string}. The geometry column name. Default: \code{"geom"}.}
-
-\item{...}{additional arguments passed to methods}
+\item{...}{ignored, with a warning}
 }
 \value{
 \code{\link{dbSpatial}} object (lazy tibble with perimeter column)

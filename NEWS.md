@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# dbSpatial 0.1.3 (2026-10-14)
+
+## Bug fixes
+
+- Skip DuckDB spatial vignette chunks on CRAN. Chunks are now evaluated only when `NOT_CRAN` is `"true"`, fixing vignette re-building on platforms where DuckDB extension loading is disabled.
+
+## Documentation
+
+- Add `\usage` sections to the `st_area()`, `st_as_text()`, `st_buffer()`, `st_centroid()`, `st_length()`, `st_perimeter()` and `st_simplify()` method topics and document their actual arguments.
+
+
 # dbSpatial 0.1.2 (2026-06-23)
 
 ## Bug fixes
