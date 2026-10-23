@@ -70,12 +70,12 @@ as_dbSpatial <- function(
     sf::st_as_sf(rSpatial)
   }
 
-  temp_name <- paste0(
+  # tempfile() makes unique names without touching the user's random seed
+  temp_name <- basename(tempfile(paste0(
     "__dbspatial_",
     gsub("[^A-Za-z0-9_]", "_", name),
-    "_",
-    sample.int(.Machine$integer.max, 1)
-  )
+    "_"
+  )))
   spatial_df <- sf::st_drop_geometry(sf_obj)
   # WKB (binary) keeps coordinates exact; WKT text rounds them to 7 digits
   spatial_df$geometry <- unclass(sf::st_as_binary(sf::st_geometry(sf_obj)))
