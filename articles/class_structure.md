@@ -21,7 +21,7 @@ files](https://duckdb.org/docs/extensions/spatial.html#st_read--read-spatial-dat
 that are supported by the DuckDB spatial extension.
 
 The runnable example below is evaluated only when the `duckdb` package
-is available in the check environment.
+is available and `NOT_CRAN` is `"true"`, so it is skipped on CRAN.
 
 ### Minimal example
 
@@ -30,6 +30,14 @@ is available in the check environment.
 library(dbSpatial)
 
 con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#> duckdb keeps downloaded extensions and secrets in a temporary directory:
+#> ℹ /tmp/RtmpwrbDxI/duckdb
+#> This is removed when the R session ends.
+#> • Extensions are re-downloaded each session.
+#> • Secrets are lost.
+#> ℹ Run duckdb(shared_home = TRUE) (or create ~/.duckdb) to keep them (suitable for most users).
+#> ℹ Run duckdb(shared_home = FALSE) to accept the temporary directory (and silence this message).
+#> ℹ See ?duckdb_storage for details and alternatives.
 DBI::dbExecute(con, "SET threads = 1")
 #> [1] 0
 coords <- data.frame(id = 1:3, x = c(0, 1, 2), y = c(0, 1, 2))
@@ -50,7 +58,7 @@ class(pts)
 pts
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom       
 #>   <int> <dbl> <dbl> <chr>      
 #> 1     1     0     0 POINT (0 0)

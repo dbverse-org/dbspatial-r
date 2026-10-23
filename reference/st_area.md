@@ -2,6 +2,13 @@
 
 Returns the area of the geometry column.
 
+## Usage
+
+``` r
+# S3 method for class 'dbSpatial'
+st_area(x, ...)
+```
+
 ## Arguments
 
 - x:
@@ -9,13 +16,9 @@ Returns the area of the geometry column.
   [`dbSpatial`](https://dbverse-org.github.io/dbspatial-r/reference/dbSpatial.md)
   object
 
-- geomName:
-
-  `character string`. The geometry column name. Default: `"geom"`.
-
 - ...:
 
-  additional arguments passed to methods
+  ignored, with a warning
 
 ## Value
 

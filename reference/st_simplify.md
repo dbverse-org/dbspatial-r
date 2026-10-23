@@ -3,6 +3,13 @@
 Returns a simplified version of the given geometry using the
 Douglas-Peucker algorithm.
 
+## Usage
+
+``` r
+# S3 method for class 'dbSpatial'
+st_simplify(x, preserveTopology = FALSE, dTolerance = 0, ...)
+```
+
 ## Arguments
 
 - x:
@@ -10,13 +17,18 @@ Douglas-Peucker algorithm.
   [`dbSpatial`](https://dbverse-org.github.io/dbspatial-r/reference/dbSpatial.md)
   object
 
+- preserveTopology:
+
+  not supported by DuckDB `ST_Simplify`; `TRUE` is ignored with a
+  warning.
+
 - dTolerance:
 
   numeric tolerance
 
 - ...:
 
-  additional arguments
+  ignored, with a warning
 
 ## Value
 

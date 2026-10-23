@@ -1,6 +1,31 @@
 # Changelog
 
+## dbSpatial 0.1.3 (2026-10-14)
+
+CRAN release: 2026-10-14
+
+### Bug fixes
+
+- Skip DuckDB spatial vignette chunks on CRAN. Chunks are now evaluated
+  only when `NOT_CRAN` is `"true"`, fixing vignette re-building on
+  platforms where DuckDB extension loading is disabled.
+
+### Documentation
+
+- Add `\usage` sections to the
+  [`st_area()`](https://dbverse-org.github.io/dbspatial-r/reference/st_area.md),
+  [`st_as_text()`](https://dbverse-org.github.io/dbspatial-r/reference/st_as_text.md),
+  [`st_buffer()`](https://dbverse-org.github.io/dbspatial-r/reference/st_buffer.md),
+  [`st_centroid()`](https://dbverse-org.github.io/dbspatial-r/reference/st_centroid.md),
+  [`st_length()`](https://dbverse-org.github.io/dbspatial-r/reference/st_length.md),
+  [`st_perimeter()`](https://dbverse-org.github.io/dbspatial-r/reference/st_perimeter.md)
+  and
+  [`st_simplify()`](https://dbverse-org.github.io/dbspatial-r/reference/st_simplify.md)
+  method topics and document their actual arguments.
+
 ## dbSpatial 0.1.2 (2026-06-23)
+
+CRAN release: 2026-06-23
 
 ### Bug fixes
 

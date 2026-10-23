@@ -3,6 +3,22 @@
 Returns a geometry that represents all points whose distance from this
 Geometry is less than or equal to distance.
 
+## Usage
+
+``` r
+# S3 method for class 'dbSpatial'
+st_buffer(
+  x,
+  dist,
+  nQuadSegs = 30,
+  endCapStyle = "ROUND",
+  joinStyle = "ROUND",
+  mitreLimit = 1,
+  singleSide = FALSE,
+  ...
+)
+```
+
 ## Arguments
 
 - x:
@@ -14,9 +30,20 @@ Geometry is less than or equal to distance.
 
   numeric distance
 
+- nQuadSegs:
+
+  integer number of segments used to approximate a quarter circle.
+
+- endCapStyle, joinStyle, mitreLimit, singleSide:
+
+  accepted for compatibility with
+  [`sf::st_buffer()`](https://r-spatial.github.io/sf/reference/geos_unary.html);
+  DuckDB `ST_Buffer` always uses round caps and joins, so non-default
+  values are ignored with a warning.
+
 - ...:
 
-  additional arguments
+  ignored, with a warning
 
 ## Value
 

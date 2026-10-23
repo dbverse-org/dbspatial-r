@@ -2,6 +2,13 @@
 
 Returns the geometric center of a geometry.
 
+## Usage
+
+``` r
+# S3 method for class 'dbSpatial'
+st_centroid(x, ..., of_largest_polygon = FALSE)
+```
+
 ## Arguments
 
 - x:
@@ -11,7 +18,12 @@ Returns the geometric center of a geometry.
 
 - ...:
 
-  additional arguments
+  ignored, with a warning
+
+- of_largest_polygon:
+
+  not supported by DuckDB `ST_Centroid`; `TRUE` is ignored with a
+  warning.
 
 ## Value
 

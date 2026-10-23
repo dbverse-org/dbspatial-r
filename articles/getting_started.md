@@ -13,7 +13,7 @@ create a DuckDB database with spatial points and polygons starting from
 various data sources.
 
 All code chunks below are evaluated only when the `duckdb` package is
-available in the check environment.
+available and `NOT_CRAN` is `"true"`, so they are skipped on CRAN.
 
 ## Creating a DuckDB connection
 
@@ -21,6 +21,14 @@ available in the check environment.
 
 # create db connection in memory
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#> duckdb keeps downloaded extensions and secrets in a temporary directory:
+#> ℹ /tmp/Rtmpl5FLBZ/duckdb
+#> This is removed when the R session ends.
+#> • Extensions are re-downloaded each session.
+#> • Secrets are lost.
+#> ℹ Run duckdb(shared_home = TRUE) (or create ~/.duckdb) to keep them (suitable for most users).
+#> ℹ Run duckdb(shared_home = FALSE) to accept the temporary directory (and silence this message).
+#> ℹ See ?duckdb_storage for details and alternatives.
 DBI::dbExecute(duckdb_conn, "SET threads = 1")
 #> [1] 0
 ```
@@ -45,7 +53,7 @@ a <- dbSpatial(conn = duckdb_conn,
 a
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>        x     y    id geom         
 #>    <int> <int> <int> <chr>        
 #>  1     1     1     1 POINT (1 1)  
@@ -81,7 +89,7 @@ a <- dbSpatial(conn = duckdb_conn,
 a
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 5
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>    OGC_FID x     y     id    geom         
 #>      <dbl> <chr> <chr> <chr> <chr>        
 #>  1       1 1     1     1     POINT (1 1)  
@@ -102,7 +110,7 @@ a
 
 # load terra package
 library(terra)
-#> terra 1.9.34
+#> terra 1.9.50
 
 # Create a SpatVector from the data.frame
 dummy_spatvector <- terra::vect(test_data, geom = c("x", "y"))
@@ -114,7 +122,7 @@ dbSpatial(conn = duckdb_conn,
           overwrite = TRUE)
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 2
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>       id geom         
 #>    <int> <chr>        
 #>  1     1 POINT (1 1)  

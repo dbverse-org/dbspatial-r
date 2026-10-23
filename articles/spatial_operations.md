@@ -21,6 +21,14 @@ library(dplyr)
 ``` r
 
 con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
+#> duckdb keeps downloaded extensions and secrets in a temporary directory:
+#> ℹ /tmp/RtmplseatE/duckdb
+#> This is removed when the R session ends.
+#> • Extensions are re-downloaded each session.
+#> • Secrets are lost.
+#> ℹ Run duckdb(shared_home = TRUE) (or create ~/.duckdb) to keep them (suitable for most users).
+#> ℹ Run duckdb(shared_home = FALSE) to accept the temporary directory (and silence this message).
+#> ℹ See ?duckdb_storage for details and alternatives.
 DBI::dbExecute(con, "SET threads = 1")
 #> [1] 0
 
@@ -33,7 +41,7 @@ pts <- dbSpatial(
 pts
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -49,7 +57,7 @@ pts
 st_buffer(pts, dist = 5)
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom                             
 #>   <int> <dbl> <dbl> <chr>                            
 #> 1     1     0     0 POLYGON ((5 0, 4.9931476737728...
@@ -60,7 +68,7 @@ st_buffer(pts, dist = 5)
 st_centroid(pts)
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -71,7 +79,7 @@ st_centroid(pts)
 st_simplify(pts, dTolerance = 1)
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom         
 #>   <int> <dbl> <dbl> <chr>        
 #> 1     1     0     0 POINT (0 0)  
@@ -92,7 +100,7 @@ st_bbox(pts)
 st_is_valid(pts)
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom 
 #>   <int> <dbl> <dbl> <lgl>
 #> 1     1     0     0 TRUE 
@@ -111,7 +119,7 @@ to perform spatial joins with various predicates:
 st_join(pts, pts, join = st_intersects)
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 8
-#> # Database: DuckDB 1.5.4 [unknown@Linux 6.17.0-1018-azure:R 4.6.0/:memory:]
+#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom           id_1   x_1   y_1 geom_1    
 #>   <int> <dbl> <dbl> <chr>         <int> <dbl> <dbl> <list>    
 #> 1     1     0     0 POINT (0 0)       1     0     0 <raw [21]>

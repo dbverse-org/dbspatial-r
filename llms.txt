@@ -128,7 +128,7 @@ Functions and methods for constructing or modifying geometry in a
   : Translate x, y coordinates by delta x, delta y for point geometries
 - [`st_as_geojson()`](https://dbverse-org.github.io/dbspatial-r/reference/st_as_geojson.md)
   : Convert to GeoJSON
-- [`st_as_text`](https://dbverse-org.github.io/dbspatial-r/reference/st_as_text.md)
+- [`st_as_text(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_as_text.md)
   : Convert to WKT
 
 ## DuckDB Spatial Extension
@@ -151,22 +151,22 @@ dbData methods
 
 Functions that modify or transform geometries.
 
-- [`st_buffer`](https://dbverse-org.github.io/dbspatial-r/reference/st_buffer.md)
+- [`st_buffer(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_buffer.md)
   : Compute buffer around geometry
-- [`st_centroid`](https://dbverse-org.github.io/dbspatial-r/reference/st_centroid.md)
+- [`st_centroid(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_centroid.md)
   : Compute centroid of geometry
-- [`st_simplify`](https://dbverse-org.github.io/dbspatial-r/reference/st_simplify.md)
+- [`st_simplify(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_simplify.md)
   : Simplify geometry
 
 ## Measurements
 
 Functions that compute metric measurements of geometries.
 
-- [`st_area`](https://dbverse-org.github.io/dbspatial-r/reference/st_area.md)
+- [`st_area(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_area.md)
   : Get area of geometries
-- [`st_length`](https://dbverse-org.github.io/dbspatial-r/reference/st_length.md)
+- [`st_length(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_length.md)
   : Get length of geometries
-- [`st_perimeter`](https://dbverse-org.github.io/dbspatial-r/reference/st_perimeter.md)
+- [`st_perimeter(`*`<dbSpatial>`*`)`](https://dbverse-org.github.io/dbspatial-r/reference/st_perimeter.md)
   : Get perimeter of geometries
 
 ## Accessors

@@ -2,6 +2,13 @@
 
 Returns the Well-Known Text (WKT) representation of the geometry.
 
+## Usage
+
+``` r
+# S3 method for class 'dbSpatial'
+st_as_text(x, ...)
+```
+
 ## Arguments
 
 - x:
@@ -11,7 +18,7 @@ Returns the Well-Known Text (WKT) representation of the geometry.
 
 - ...:
 
-  additional arguments
+  ignored, with a warning
 
 ## Value
 
