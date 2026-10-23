@@ -76,16 +76,12 @@ as_dbSpatial <- function(
     "_",
     sample.int(.Machine$integer.max, 1)
   )
-  on.exit({
-    if (DBI::dbExistsTable(conn, temp_name)) {
-      DBI::dbRemoveTable(conn, temp_name)
-    }
-  }, add = TRUE)
-
   spatial_df <- sf::st_drop_geometry(sf_obj)
   # WKB (binary) keeps coordinates exact; WKT text rounds them to 7 digits
   spatial_df$geometry <- unclass(sf::st_as_binary(sf::st_geometry(sf_obj)))
-  DBI::dbWriteTable(conn, temp_name, spatial_df, temporary = TRUE)
+  # Let DuckDB read the data frame directly instead of copying it into a table
+  duckdb::duckdb_register(conn, temp_name, spatial_df)
+  on.exit(duckdb::duckdb_unregister(conn, temp_name), add = TRUE)
 
   tbl <- dplyr::tbl(conn, temp_name) |>
     dplyr::mutate(geom = dbplyr::sql("ST_GeomFromWKB(geometry)")) |>
