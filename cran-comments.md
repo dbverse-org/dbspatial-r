@@ -1,14 +1,16 @@
 ## Submission
 
-This is a patch release fixing the ERROR shown on the CRAN check page for
-dbSpatial 0.1.2 on r-devel-linux-x86_64-fedora-clang. In this version I:
+This is a patch release shortly after 0.1.3 because it fixes silently
+incorrect results. In this version I:
 
-* fixed the vignette evaluation guard so DuckDB spatial chunks are skipped on
-  CRAN; the previous guard evaluated them when `NOT_CRAN` was unset, which
-  failed where DuckDB extension loading is disabled
-* added `\usage` sections to the `st_*` method help topics, resolving the
-  "Rd files without \usage" NOTE on r-devel-linux-x86_64-debian-clang and
-  r-devel-linux-x86_64-debian-gcc
+* fixed `as_dbSpatial()` rounding coordinates to 7 significant digits
+  (for example 6840.2705 became 6840.27). This has affected every release
+  since 0.1.0 and changes computed areas and spatial joins. Geometries are
+  now passed to DuckDB as WKB, which is exact.
+* stopped `as_dbSpatial()` and `st_join()` from changing the user's random
+  number stream when naming temporary tables
+* reduced memory use in `as_dbSpatial()` by reading the data frame directly
+  instead of copying it into a temporary table
 
 ## Test environments
 
