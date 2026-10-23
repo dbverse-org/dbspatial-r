@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# dbSpatial 0.1.4 (2026-10-23)
+
+## Bug fixes
+
+- `as_dbSpatial()` keeps coordinates exact. Since 0.1.0 coordinates were rounded to 7 significant digits (for example 6840.2705 became 6840.27), which changed areas and which points fall inside polygons.
+
+- `as_dbSpatial()` and `st_join()` no longer change the random number stream after `set.seed()`.
+
+## Performance
+
+- `as_dbSpatial()` passes geometries to DuckDB without an intermediate table, using less memory and much less time for large inputs.
+
+
 # dbSpatial 0.1.3 (2026-10-14)
 
 ## Bug fixes
