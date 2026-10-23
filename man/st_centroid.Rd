@@ -2,11 +2,18 @@
 % Please edit documentation in R/generics.R
 \name{st_centroid}
 \alias{st_centroid}
+\alias{st_centroid.dbSpatial}
 \title{Compute centroid of geometry}
+\usage{
+\method{st_centroid}{dbSpatial}(x, ..., of_largest_polygon = FALSE)
+}
 \arguments{
 \item{x}{\code{\link{dbSpatial}} object}
 
-\item{...}{additional arguments}
+\item{...}{ignored, with a warning}
+
+\item{of_largest_polygon}{not supported by DuckDB \code{ST_Centroid}; \code{TRUE} is
+ignored with a warning.}
 }
 \value{
 \code{\link{dbSpatial}} object with centroid geometry

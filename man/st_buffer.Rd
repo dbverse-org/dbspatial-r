@@ -2,13 +2,33 @@
 % Please edit documentation in R/generics.R
 \name{st_buffer}
 \alias{st_buffer}
+\alias{st_buffer.dbSpatial}
 \title{Compute buffer around geometry}
+\usage{
+\method{st_buffer}{dbSpatial}(
+  x,
+  dist,
+  nQuadSegs = 30,
+  endCapStyle = "ROUND",
+  joinStyle = "ROUND",
+  mitreLimit = 1,
+  singleSide = FALSE,
+  ...
+)
+}
 \arguments{
 \item{x}{\code{\link{dbSpatial}} object}
 
 \item{dist}{numeric distance}
 
-\item{...}{additional arguments}
+\item{nQuadSegs}{integer number of segments used to approximate a quarter
+circle.}
+
+\item{endCapStyle, joinStyle, mitreLimit, singleSide}{accepted for
+compatibility with \code{\link[sf:geos_unary]{sf::st_buffer()}}; DuckDB \code{ST_Buffer} always uses
+round caps and joins, so non-default values are ignored with a warning.}
+
+\item{...}{ignored, with a warning}
 }
 \value{
 \code{\link{dbSpatial}} object with buffered geometry
