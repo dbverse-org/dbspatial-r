@@ -83,11 +83,12 @@ as_dbSpatial <- function(
   }, add = TRUE)
 
   spatial_df <- sf::st_drop_geometry(sf_obj)
-  spatial_df$geometry <- sf::st_as_text(sf::st_geometry(sf_obj))
+  # WKB (binary) keeps coordinates exact; WKT text rounds them to 7 digits
+  spatial_df$geometry <- unclass(sf::st_as_binary(sf::st_geometry(sf_obj)))
   DBI::dbWriteTable(conn, temp_name, spatial_df, temporary = TRUE)
 
   tbl <- dplyr::tbl(conn, temp_name) |>
-    dplyr::mutate(geom = dbplyr::sql("ST_GeomFromText(geometry)")) |>
+    dplyr::mutate(geom = dbplyr::sql("ST_GeomFromWKB(geometry)")) |>
     dplyr::select(-geometry) |>
     dplyr::compute(overwrite = overwrite, name = name, temporary = temporary)
 
