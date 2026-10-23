@@ -70,24 +70,21 @@ as_dbSpatial <- function(
     sf::st_as_sf(rSpatial)
   }
 
-  temp_name <- paste0(
+  # tempfile() makes unique names without touching the user's random seed
+  temp_name <- basename(tempfile(paste0(
     "__dbspatial_",
     gsub("[^A-Za-z0-9_]", "_", name),
-    "_",
-    sample.int(.Machine$integer.max, 1)
-  )
-  on.exit({
-    if (DBI::dbExistsTable(conn, temp_name)) {
-      DBI::dbRemoveTable(conn, temp_name)
-    }
-  }, add = TRUE)
-
+    "_"
+  )))
   spatial_df <- sf::st_drop_geometry(sf_obj)
-  spatial_df$geometry <- sf::st_as_text(sf::st_geometry(sf_obj))
-  DBI::dbWriteTable(conn, temp_name, spatial_df, temporary = TRUE)
+  # WKB (binary) keeps coordinates exact; WKT text rounds them to 7 digits
+  spatial_df$geometry <- unclass(sf::st_as_binary(sf::st_geometry(sf_obj)))
+  # Let DuckDB read the data frame directly instead of copying it into a table
+  duckdb::duckdb_register(conn, temp_name, spatial_df)
+  on.exit(duckdb::duckdb_unregister(conn, temp_name), add = TRUE)
 
   tbl <- dplyr::tbl(conn, temp_name) |>
-    dplyr::mutate(geom = dbplyr::sql("ST_GeomFromText(geometry)")) |>
+    dplyr::mutate(geom = dbplyr::sql("ST_GeomFromWKB(geometry)")) |>
     dplyr::select(-geometry) |>
     dplyr::compute(overwrite = overwrite, name = name, temporary = temporary)
 

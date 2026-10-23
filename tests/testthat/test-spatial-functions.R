@@ -169,3 +169,36 @@ test_that("unsupported args warn", {
   expect_warning(st_centroid(pts, garbage = 1))
   expect_warning(st_simplify(pts, preserveTopology = TRUE))
 })
+
+test_that("as_dbSpatial keeps coordinates exact", {
+  skip_if_not_installed("duckdb")
+  skip_if_not_installed("sf")
+
+  con <- DBI::dbConnect(duckdb::duckdb())
+  on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
+  pts <- sf::st_sf(
+    id = 1:2,
+    geometry = sf::st_sfc(sf::st_point(c(6840.2705, -5023.228)), sf::st_point(c(0.1 + 0.2, 1e7 / 3)))
+  )
+  x <- as_dbSpatial(pts, conn = con, name = "exact_points", overwrite = TRUE)
+
+  xy <- x@value |>
+    dplyr::mutate(px = dbplyr::sql("ST_X(geom)"), py = dbplyr::sql("ST_Y(geom)")) |>
+    dplyr::arrange(id) |>
+    dplyr::collect()
+  expect_identical(xy$px, c(6840.2705, 0.1 + 0.2))
+  expect_identical(xy$py, c(-5023.228, 1e7 / 3))
+})
+
+test_that("as_dbSpatial leaves the random seed alone", {
+  skip_if_not_installed("duckdb")
+  skip_if_not_installed("sf")
+  con <- DBI::dbConnect(duckdb::duckdb())
+  on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
+  pts <- sf::st_sf(id = 1, geometry = sf::st_sfc(sf::st_point(c(0, 1))))
+  set.seed(1)
+  expected <- runif(1)
+  set.seed(1)
+  as_dbSpatial(pts, conn = con, name = "seed_points", overwrite = TRUE)
+  expect_identical(runif(1), expected)
+})
