@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# dbSpatial 0.1.4.9000
+
+- Same as previous version.
+
+
 # dbSpatial 0.1.4 (2026-10-23)
 
 ## Bug fixes
