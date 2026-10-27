@@ -22,7 +22,7 @@ available and `NOT_CRAN` is `"true"`, so they are skipped on CRAN.
 # create db connection in memory
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #> duckdb keeps downloaded extensions and secrets in a temporary directory:
-#> ℹ /tmp/RtmpYsQQwQ/duckdb
+#> ℹ /tmp/RtmpGADKtN/duckdb
 #> This is removed when the R session ends.
 #> • Extensions are re-downloaded each session.
 #> • Secrets are lost.

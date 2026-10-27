@@ -1,5 +1,9 @@
 # Changelog
 
+## dbSpatial 0.1.4.9000
+
+- Same as previous version.
+
 ## dbSpatial 0.1.4 (2026-10-23)
 
 CRAN release: 2026-10-23
