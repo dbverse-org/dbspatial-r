@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">dbSpatial</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,19 @@
       <small>Source: <a href="https://github.com/dbverse-org/dbspatial-r/blob/dev/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.4" id="dbspatial-014-2026-10-23">dbSpatial 0.1.4 (2026-10-23)<a class="anchor" aria-label="anchor" href="#dbspatial-014-2026-10-23"></a></h2><p class="text-muted">CRAN release: 2026-10-23</p>
+<div class="section level3">
+<h3 id="bug-fixes-0-1-4">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-1-4"></a></h3>
+<ul><li><p><code><a href="../reference/as_dbSpatial.html">as_dbSpatial()</a></code> keeps coordinates exact. Since 0.1.0 coordinates were rounded to 7 significant digits (for example 6840.2705 became 6840.27), which changed areas and which points fall inside polygons.</p></li>
+<li><p><code><a href="../reference/as_dbSpatial.html">as_dbSpatial()</a></code> and <code><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join()</a></code> no longer change the random number stream after <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed()</a></code>.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="performance-0-1-4">Performance<a class="anchor" aria-label="anchor" href="#performance-0-1-4"></a></h3>
+<ul><li>
+<code><a href="../reference/as_dbSpatial.html">as_dbSpatial()</a></code> passes geometries to DuckDB without an intermediate table, using less memory and much less time for large inputs.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.3" id="dbspatial-013-2026-10-14">dbSpatial 0.1.3 (2026-10-14)<a class="anchor" aria-label="anchor" href="#dbspatial-013-2026-10-14"></a></h2><p class="text-muted">CRAN release: 2026-10-14</p>
 <div class="section level3">

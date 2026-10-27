@@ -22,7 +22,7 @@ available and `NOT_CRAN` is `"true"`, so they are skipped on CRAN.
 # create db connection in memory
 duckdb_conn = DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #> duckdb keeps downloaded extensions and secrets in a temporary directory:
-#> ℹ /tmp/RtmpzpNYRT/duckdb
+#> ℹ /tmp/RtmpYsQQwQ/duckdb
 #> This is removed when the R session ends.
 #> • Extensions are re-downloaded each session.
 #> • Secrets are lost.
@@ -53,7 +53,7 @@ a <- dbSpatial(conn = duckdb_conn,
 a
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
+#> # Database: DuckDB 2.0.0 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>        x     y    id geom         
 #>    <int> <int> <int> <chr>        
 #>  1     1     1     1 POINT (1 1)  
@@ -89,7 +89,7 @@ a <- dbSpatial(conn = duckdb_conn,
 a
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 5
-#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
+#> # Database: DuckDB 2.0.0 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>    OGC_FID x     y     id    geom         
 #>      <dbl> <chr> <chr> <chr> <chr>        
 #>  1       1 1     1     1     POINT (1 1)  
@@ -122,7 +122,7 @@ dbSpatial(conn = duckdb_conn,
           overwrite = TRUE)
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 2
-#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
+#> # Database: DuckDB 2.0.0 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>       id geom         
 #>    <int> <chr>        
 #>  1     1 POINT (1 1)  

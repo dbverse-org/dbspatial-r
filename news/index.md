@@ -1,5 +1,28 @@
 # Changelog
 
+## dbSpatial 0.1.4 (2026-10-23)
+
+CRAN release: 2026-10-23
+
+### Bug fixes
+
+- [`as_dbSpatial()`](https://dbverse-org.github.io/dbspatial-r/reference/as_dbSpatial.md)
+  keeps coordinates exact. Since 0.1.0 coordinates were rounded to 7
+  significant digits (for example 6840.2705 became 6840.27), which
+  changed areas and which points fall inside polygons.
+
+- [`as_dbSpatial()`](https://dbverse-org.github.io/dbspatial-r/reference/as_dbSpatial.md)
+  and
+  [`st_join()`](https://r-spatial.github.io/sf/reference/st_join.html)
+  no longer change the random number stream after
+  [`set.seed()`](https://rdrr.io/r/base/Random.html).
+
+### Performance
+
+- [`as_dbSpatial()`](https://dbverse-org.github.io/dbspatial-r/reference/as_dbSpatial.md)
+  passes geometries to DuckDB without an intermediate table, using less
+  memory and much less time for large inputs.
+
 ## dbSpatial 0.1.3 (2026-10-14)
 
 CRAN release: 2026-10-14

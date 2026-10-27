@@ -31,7 +31,7 @@ library(dbSpatial)
 
 con <- DBI::dbConnect(duckdb::duckdb(), ":memory:")
 #> duckdb keeps downloaded extensions and secrets in a temporary directory:
-#> ℹ /tmp/Rtmp4kTRSN/duckdb
+#> ℹ /tmp/RtmptMEHw5/duckdb
 #> This is removed when the R session ends.
 #> • Extensions are re-downloaded each session.
 #> • Secrets are lost.
@@ -58,7 +58,7 @@ class(pts)
 pts
 #> # Class:    dbSpatial 
 #> # A query:  ?? x 4
-#> # Database: DuckDB 1.5.6 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
+#> # Database: DuckDB 2.0.0 [unknown@Linux 6.17.0-1022-azure:R 4.6.1/:memory:]
 #>      id     x     y geom       
 #>   <int> <dbl> <dbl> <chr>      
 #> 1     1     0     0 POINT (0 0)
